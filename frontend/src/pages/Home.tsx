@@ -144,8 +144,10 @@ const Home = () => {
               <p className="text-sm mobile:text-base sm:text-lg md:text-xl lg:text-2xl mb-0 lg:mb-10 pt-[10px] text-white/90 font-medium max-w-xl drop-shadow-md leading-relaxed">
                 {homeContent.heroSubtitle}
               </p>
-              <Button size="lg" className="hidden lg:inline-flex bg-red-600 hover:bg-black text-white rounded-full px-5 mobile:px-6 sm:px-8 py-4 mobile:py-5 sm:py-6 text-xs mobile:text-sm sm:text-base shadow-xl transition-all hover:scale-105 font-extrabold uppercase mb-6 mobile:mb-8 lg:mb-0">
-                Explore Packages <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <Button asChild size="lg" className="hidden lg:inline-flex bg-red-600 hover:bg-black text-white rounded-full px-5 mobile:px-6 sm:px-8 py-4 mobile:py-5 sm:py-6 text-xs mobile:text-sm sm:text-base shadow-xl transition-all hover:scale-105 font-extrabold uppercase mb-6 mobile:mb-8 lg:mb-0">
+                <Link to="/packages">
+                  Explore Packages <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                </Link>
               </Button>
             </ScrollReveal>
           </div>
@@ -318,8 +320,10 @@ const Home = () => {
           </div>
           
           {/* Mobile Explore Packages Button */}
-          <Button size="lg" className="lg:hidden w-full bg-red-600 hover:bg-black text-white rounded-full px-5 py-4 text-xs mobile:text-sm shadow-xl transition-all hover:scale-105 font-extrabold uppercase mt-2">
-            Explore Packages <ArrowRight className="ml-2 h-4 w-4" />
+          <Button asChild size="lg" className="lg:hidden w-full bg-red-600 hover:bg-black text-white rounded-full px-5 py-4 text-xs mobile:text-sm shadow-xl transition-all hover:scale-105 font-extrabold uppercase mt-2">
+            <Link to="/packages">
+              Explore Packages <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
 

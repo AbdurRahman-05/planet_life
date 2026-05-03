@@ -104,11 +104,14 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-8 mobile:pt-12 flex flex-col md:flex-row justify-between items-center gap-4 mobile:gap-6">
-                    <p className="text-white/30 text-[11px] font-bold tracking-widest uppercase">
+                <div className="border-t border-white/5 pt-8 mobile:pt-12 flex flex-col md:flex-row items-center justify-between gap-4 mobile:gap-6">
+                    <p className="text-white/30 text-[11px] font-bold tracking-widest uppercase md:flex-1 text-center md:text-left">
                         &copy; {new Date().getFullYear()} PLANET LIFE. All rights reserved.
                     </p>
-                    <div className="flex gap-8">
+                    <p className="text-white/30 text-[11px] font-bold tracking-widest uppercase md:flex-1 text-center">
+                        Designed and Developed by <a href="https://innoaivators.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">innoaivators</a>
+                    </p>
+                    <div className="flex gap-8 md:flex-1 justify-center md:justify-end">
                         <Link to="/privacy" className="text-white/30 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest">Privacy Policy</Link>
                         <Link to="/terms" className="text-white/30 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest">Terms of Service</Link>
                     </div>

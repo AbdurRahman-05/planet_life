@@ -504,7 +504,7 @@ const Home = () => {
 
         <div className="text-center mt-12">
           <a 
-            href="https://www.google.com/search?q=planet+life+madurai+reviews" 
+            href="https://www.google.com/search?sca_esv=dc6fd344f330d302&sxsrf=ANbL-n5zNpmeznTGL4xiNvM06zRyYMJZQw:1777698875004&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOWFby6vVy3rIBrwEGiZbtZejsCvQeB_s5YGcdL2uzybV-Z3nyGcskvStqakj4-_IFb8ORs1KzVcaQL9_H1DHg0jsz_at&q=Planet+Life+Reviews&sa=X&ved=2ahUKEwjy_div7JmUAxUpR_EDHW32IO8Q0bkNegQILhAH&biw=1536&bih=730&dpr=1.25" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#3a0909] text-white font-extrabold uppercase text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-xl hover:scale-105 hover:bg-red-600 tracking-widest"

@@ -33,6 +33,51 @@ const queryClient = new QueryClient();
 // Minimal loading fallback
 const PageLoader = () => <LoadingScreen />;
 
+import { useAdmin } from "@/context/AdminContext";
+
+const AppContent = () => {
+  const { isLoading } = useAdmin();
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <BackToTop />
+      <WhatsAppWidget />
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              {/* Admin Routes - Placed first to ensure priority */}
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/" element={<AdminLogin />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+              <Route path="/" element={<Home />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/destination/:id" element={<DestinationDetail />} />
+              <Route path="/packages" element={<Packages />} />
+              <Route path="/booking/:packageId" element={<Booking />} />
+              <Route path="/quote" element={<Quote />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+};
+
 const App = () => {
   console.log("App component rendering");
   return (
@@ -41,38 +86,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <AdminProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <BackToTop />
-            <WhatsAppWidget />
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow">
-                <Suspense fallback={<PageLoader />}>
-                  <Routes>
-                    {/* Admin Routes - Placed first to ensure priority */}
-                    <Route path="/admin" element={<AdminLogin />} />
-                    <Route path="/admin/" element={<AdminLogin />} />
-                    <Route path="/admin/login" element={<AdminLogin />} />
-                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
-
-                    <Route path="/" element={<Home />} />
-                    <Route path="/destinations" element={<Destinations />} />
-                    <Route path="/destination/:id" element={<DestinationDetail />} />
-                    <Route path="/packages" element={<Packages />} />
-                    <Route path="/booking/:packageId" element={<Booking />} />
-                    <Route path="/quote" element={<Quote />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-
-                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </main>
-              <Footer />
-            </div>
-          </BrowserRouter>
+          <AppContent />
         </AdminProvider>
       </TooltipProvider>
     </QueryClientProvider>

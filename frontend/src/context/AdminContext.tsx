@@ -56,6 +56,7 @@ interface AdminContextType {
     updateContactContent: (content: ContactContent) => void;
     packagesContent: PackagesContent;
     updatePackagesContent: (content: PackagesContent) => void;
+    isLoading: boolean;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -100,6 +101,7 @@ const defaultPackagesContent: PackagesContent = {
 export const AdminProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [destinations, setDestinations] = useState<Destination[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Content State
     const [homeContent, setHomeContent] = useState<HomeContent>(defaultHomeContent);
@@ -147,6 +149,8 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                 console.error("Error loading data from API:", error);
                 const cachedDests = localStorage.getItem("planetlife_destinations");
                 if (!cachedDests) setDestinations(initialDestinations);
+            } finally {
+                setIsLoading(false);
             }
         };
         loadData();
@@ -238,6 +242,7 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                 updateContactContent,
                 packagesContent,
                 updatePackagesContent,
+                isLoading,
             }}
         >
             {children}

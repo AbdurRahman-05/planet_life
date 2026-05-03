@@ -45,7 +45,7 @@ const AboutEditor = () => {
                             <Input
                                 id="heroTitle"
                                 name="heroTitle"
-                                value={formData.heroTitle}
+                                value={formData.heroTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
@@ -54,7 +54,7 @@ const AboutEditor = () => {
                             <Textarea
                                 id="heroSubtitle"
                                 name="heroSubtitle"
-                                value={formData.heroSubtitle}
+                                value={formData.heroSubtitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
@@ -67,7 +67,7 @@ const AboutEditor = () => {
                             <Input
                                 id="ourStoryTitle"
                                 name="ourStoryTitle"
-                                value={formData.ourStoryTitle}
+                                value={formData.ourStoryTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
@@ -76,7 +76,7 @@ const AboutEditor = () => {
                             <Textarea
                                 id="ourStoryText"
                                 name="ourStoryText"
-                                value={formData.ourStoryText}
+                                value={formData.ourStoryText || ''}
                                 onChange={handleChange}
                                 rows={6}
                             />
@@ -84,32 +84,27 @@ const AboutEditor = () => {
                     </div>
 
                     <div className="space-y-4">
-                        <h3 className="text-lg font-semibold">Founder Section</h3>
+                        <h3 className="text-lg font-semibold">Core Values Section</h3>
                         <div className="space-y-2">
-                            <Label htmlFor="founderTitle">Title</Label>
+                            <Label htmlFor="coreValuesTitle">Title</Label>
                             <Input
-                                id="founderTitle"
-                                name="founderTitle"
-                                value={formData.founderTitle}
+                                id="coreValuesTitle"
+                                name="coreValuesTitle"
+                                value={formData.coreValuesTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">Services Section</h3>
                         <div className="space-y-2">
-                            <Label htmlFor="founderText">Founder Text</Label>
-                            <Textarea
-                                id="founderText"
-                                name="founderText"
-                                value={formData.founderText}
+                            <Label htmlFor="servicesTitle">Title</Label>
+                            <Input
+                                id="servicesTitle"
+                                name="servicesTitle"
+                                value={formData.servicesTitle || ''}
                                 onChange={handleChange}
-                                rows={6}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="founderImage">Founder Image</Label>
-                            <CloudinaryUpload 
-                                onUpload={(url) => setFormData(prev => ({ ...prev, founderImage: url }))}
-                                defaultImage={formData.founderImage}
-                                folder="planet_life/images"
                             />
                         </div>
                     </div>
@@ -121,7 +116,7 @@ const AboutEditor = () => {
                             <Input
                                 id="missionTitle"
                                 name="missionTitle"
-                                value={formData.missionTitle}
+                                value={formData.missionTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
@@ -130,7 +125,7 @@ const AboutEditor = () => {
                             <Textarea
                                 id="missionText"
                                 name="missionText"
-                                value={formData.missionText}
+                                value={formData.missionText || ''}
                                 onChange={handleChange}
                                 rows={4}
                             />

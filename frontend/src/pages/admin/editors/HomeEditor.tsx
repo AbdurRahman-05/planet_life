@@ -44,7 +44,7 @@ const HomeEditor = () => {
                             <Input
                                 id="heroTitle"
                                 name="heroTitle"
-                                value={formData.heroTitle}
+                                value={formData.heroTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
@@ -53,51 +53,51 @@ const HomeEditor = () => {
                             <Textarea
                                 id="heroSubtitle"
                                 name="heroSubtitle"
-                                value={formData.heroSubtitle}
+                                value={formData.heroSubtitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
                     </div>
 
                     <div className="space-y-4">
-                        <h3 className="text-lg font-semibold">Why Choose Us Section</h3>
+                        <h3 className="text-lg font-semibold">Trending Destinations Section</h3>
                         <div className="space-y-2">
-                            <Label htmlFor="whyChooseUsTitle">Section Title</Label>
+                            <Label htmlFor="destinationsTitle">Section Title</Label>
                             <Input
-                                id="whyChooseUsTitle"
-                                name="whyChooseUsTitle"
-                                value={formData.whyChooseUsTitle}
+                                id="destinationsTitle"
+                                name="destinationsTitle"
+                                value={formData.destinationsTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="whyChooseUsSubtitle">Section Subtitle</Label>
+                            <Label htmlFor="destinationsSubtitle">Section Subtitle</Label>
                             <Textarea
-                                id="whyChooseUsSubtitle"
-                                name="whyChooseUsSubtitle"
-                                value={formData.whyChooseUsSubtitle}
+                                id="destinationsSubtitle"
+                                name="destinationsSubtitle"
+                                value={formData.destinationsSubtitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
                     </div>
 
                     <div className="space-y-4">
-                        <h3 className="text-lg font-semibold">Call to Action Section</h3>
+                        <h3 className="text-lg font-semibold">Community Section</h3>
                         <div className="space-y-2">
-                            <Label htmlFor="ctaTitle">CTA Title</Label>
+                            <Label htmlFor="communityTitle">Community Title</Label>
                             <Input
-                                id="ctaTitle"
-                                name="ctaTitle"
-                                value={formData.ctaTitle}
+                                id="communityTitle"
+                                name="communityTitle"
+                                value={formData.communityTitle || ''}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="ctaText">CTA Text</Label>
+                            <Label htmlFor="communitySubtitle">Community Subtitle</Label>
                             <Textarea
-                                id="ctaText"
-                                name="ctaText"
-                                value={formData.ctaText}
+                                id="communitySubtitle"
+                                name="communitySubtitle"
+                                value={formData.communitySubtitle || ''}
                                 onChange={handleChange}
                             />
                         </div>

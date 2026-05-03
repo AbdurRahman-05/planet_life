@@ -110,7 +110,7 @@ const About = () => {
 
                 <div className="relative mb-8">
                   <Quote className="absolute -left-10 -top-4 w-12 h-12 text-primary/10 rotate-180" />
-                  <p className="text-lg text-foreground/90 font-medium leading-relaxed text-justify">
+                  <p className="text-lg text-foreground/90 font-medium leading-relaxed text-justify whitespace-pre-line">
                     {aboutContent.ourStoryText}
                   </p>
                 </div>
@@ -140,7 +140,7 @@ const About = () => {
             <div className="text-center mb-16">
               <span className="text-primary font-bold tracking-[0.2em] mobile:tracking-[0.3em] uppercase mb-3 mobile:mb-4 block text-[10px] mobile:text-xs">Our Philosophy</span>
               <h2 className="text-2xl xs:text-3xl mobile:text-4xl md:text-5xl font-heading font-bold text-foreground uppercase tracking-tight">
-                Why Travelers Choose Us
+                {aboutContent.coreValuesTitle || "Why Travelers Choose Us"}
               </h2>
             </div>
           </ScrollReveal>
@@ -172,7 +172,7 @@ const About = () => {
             <div className="text-center mb-16">
               <span className="text-red-600 font-bold tracking-[0.2em] mobile:tracking-[0.3em] uppercase mb-3 mobile:mb-4 block text-[10px] mobile:text-xs">Our Services</span>
               <h2 className="text-2xl xs:text-3xl mobile:text-4xl md:text-5xl font-heading font-bold text-black uppercase tracking-tight">
-                Trips We Offer
+                {aboutContent.servicesTitle || "Trips We Offer"}
               </h2>
             </div>
           </ScrollReveal>

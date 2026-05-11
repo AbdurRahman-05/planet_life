@@ -50,14 +50,14 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-red-600 shadow-xl ${isScrolled ? "py-2" : "py-4"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-black via-black/95 to-red-600 shadow-xl ${isScrolled ? "py-2" : "py-4"
                 }`}
         >
             <div className="container mx-auto px-3 mobile:px-4 flex justify-between items-center">
                 {/* Logo */}
                 <Link to="/" className="flex items-center space-x-2">
                     <img
-                        src="/planet-life-logo.jpg"
+                        src="/logo.png"
                         alt="Planet Life Logo"
                         className="h-8 mobile:h-10 w-auto rounded-md shadow-sm"
                     />

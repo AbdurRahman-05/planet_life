@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -6,25 +8,26 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Globe, Heart, Award, Users, X, ArrowRight, Quote, Briefcase, ShieldCheck, GraduationCap, Home } from "lucide-react";
 import malaysiaImg from "@/assets/malaysia_main_new.jpg";
 import thailandImg from "@/assets/thailand.jpg";
 import baliImg from "@/assets/bali_new.jpg";
 import vietnamImg from "@/assets/vietnam_new.jpg";
 import dubaiImg from "@/assets/dubai_new.jpg";
 import singaporeImg from "@/assets/singapore.jpg";
-import Autoplay from "embla-carousel-autoplay";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { useAdmin } from "@/context/AdminContext";
-import logoImg from "@/assets/planet_life_logo_full.jpg";
+import logoImg from "@/assets/logo.png";
 import corporateTripsImg from "@/assets/corporate_trips.png";
 import privateTripsImg from "@/assets/private_trips.png";
 import strangersTripsImg from "@/assets/strangers_trips.png";
 import couplesTripsImg from "@/assets/couples_trips.png";
 import collegeTripsImg from "@/assets/college_trips.png";
 import familyTripsImg from "@/assets/family_trips.png";
+import strangersExperienceImg from "@/assets/strangers_experience.png";
+import { Globe, Heart, Award, Users, X, ArrowRight, Quote, Briefcase, ShieldCheck, GraduationCap, Home, Sparkles, Map } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { useAdmin } from "@/context/AdminContext";
 
 const About = () => {
   const { aboutContent } = useAdmin();
@@ -134,6 +137,82 @@ const About = () => {
                   </div>
                 </div>
               </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Exclusive Strangers Trips Section */}
+      <section className="py-20 mobile:py-24 md:py-32 bg-[#0a0a0a] text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-30 lg:opacity-40 pointer-events-none">
+           <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/20 to-[#0a0a0a] z-10" />
+           <img src={strangersExperienceImg} className="w-full h-full object-cover" alt="Strangers Experience" />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-20">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="w-full lg:w-3/5">
+              <ScrollReveal direction="left">
+                <span className="text-red-600 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-6 block">Our Signature Experience</span>
+                <h2 className="text-4xl mobile:text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-8 uppercase tracking-tighter leading-[0.85]">
+                  Strangers Trips: <br />
+                  <span className="text-red-600">The New Way</span> <br />
+                  To Explore
+                </h2>
+                
+                <div className="flex items-center gap-4 mobile:gap-6 mb-10 mobile:mb-12">
+                   <div className="text-6xl mobile:text-7xl md:text-8xl font-heading font-black text-red-600 select-none">15+</div>
+                   <div className="bg-red-600/20 border border-red-600/30 p-3 mobile:p-4 rounded-xl mobile:rounded-2xl backdrop-blur-md">
+                      <p className="text-lg mobile:text-xl font-bold text-red-500">Successfully Conducted</p>
+                      <p className="text-white/60 text-xs mobile:text-sm">International Group Adventures</p>
+                   </div>
+                </div>
+
+                <p className="text-base mobile:text-lg text-white/70 leading-relaxed mb-8 mobile:mb-10 max-w-xl">
+                  Planet Life's Strangers Trips are designed for the bold, the solo, and the curious. We bring together a group of like-minded travelers who start as strangers and return as a lifelong family.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mobile:gap-8">
+                   <div className="flex gap-4">
+                      <div className="w-10 h-10 mobile:w-12 mobile:h-12 rounded-xl bg-red-600 flex-shrink-0 flex items-center justify-center">
+                         <ShieldCheck className="w-5 h-5 mobile:w-6 mobile:h-6 text-white" />
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight">Safe & Secured</h4>
+                         <p className="text-xs mobile:text-sm text-white/50">Meticulously planned with 24/7 on-ground assistance.</p>
+                      </div>
+                   </div>
+                   <div className="flex gap-4">
+                      <div className="w-10 h-10 mobile:w-12 mobile:h-12 rounded-xl bg-white/10 flex-shrink-0 flex items-center justify-center">
+                         <Sparkles className="w-5 h-5 mobile:w-6 mobile:h-6 text-red-600" />
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight">Curated Moments</h4>
+                         <p className="text-xs mobile:text-sm text-white/50">Exclusive activities designed for deep group bonding.</p>
+                      </div>
+                   </div>
+                </div>
+              </ScrollReveal>
+            </div>
+
+            <div className="w-full lg:w-2/5">
+               <ScrollReveal direction="right" delay={0.2}>
+                  <div className="relative group">
+                     <div className="absolute -inset-4 bg-red-600/20 rounded-[2.5rem] mobile:rounded-[3rem] blur-2xl group-hover:bg-red-600/30 transition-all duration-500" />
+                     <div className="relative rounded-[2rem] mobile:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+                        <img src={strangersTripsImg} alt="Strangers Trip" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 mobile:p-8">
+                           <h4 className="text-xl mobile:text-2xl font-black uppercase tracking-tighter mb-1 text-red-600">Next Adventure</h4>
+                           <p className="text-white/60 text-[10px] mobile:text-xs mb-4 mobile:mb-6 uppercase tracking-[0.2em] font-bold">Join our next signature group</p>
+                           <Button asChild className="bg-red-600 hover:bg-white hover:text-black text-white rounded-full w-fit px-6 mobile:px-8 py-5 mobile:py-6 font-black uppercase tracking-widest text-[10px] transition-all">
+                              <Link to="/packages">
+                                View Schedule <ArrowRight className="ml-2 w-4 h-4" />
+                              </Link>
+                           </Button>
+                        </div>
+                     </div>
+                  </div>
+               </ScrollReveal>
             </div>
           </div>
         </div>

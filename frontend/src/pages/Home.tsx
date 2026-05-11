@@ -134,17 +134,17 @@ const Home = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/50" />
 
-        <div className="relative container mx-auto px-3 mobile:px-4 flex-grow flex flex-col lg:flex-row items-center justify-between pt-20 mobile:pt-24 pb-8 mobile:pb-12 z-10 gap-8 lg:gap-0">
+        <div className="relative container mx-auto px-3 mobile:px-4 flex-grow flex flex-col lg:flex-row items-center justify-center lg:justify-between pt-20 mobile:pt-24 pb-8 mobile:pb-12 z-10 gap-8 lg:gap-0">
           {/* Left Content */}
-          <div className="text-white max-w-3xl z-10 text-center lg:text-left">
+          <div className="text-white max-w-3xl z-10 text-center lg:text-left flex flex-col items-center lg:items-start justify-center min-h-[60vh] lg:min-h-0">
             <ScrollReveal>
-            <h1 className="text-2xl xs:text-3xl mobile:text-4xl sm:text-5xl lg:text-7xl font-heading font-bold mb-0 lg:mb-6 pt-[10px] leading-[1.1] drop-shadow-2xl text-white uppercase tracking-tight">
+              <h1 className="text-2xl xs:text-3xl mobile:text-4xl sm:text-5xl lg:text-7xl font-heading font-bold mb-4 lg:mb-6 pt-[10px] leading-[1.1] drop-shadow-2xl text-white uppercase tracking-tight">
                 {homeContent.heroTitle}
               </h1>
-              <p className="text-sm mobile:text-base sm:text-lg md:text-xl lg:text-2xl mb-0 lg:mb-10 pt-[10px] text-white/90 font-medium max-w-xl drop-shadow-md leading-relaxed">
+              <p className="text-sm mobile:text-base sm:text-lg md:text-xl lg:text-2xl mb-8 lg:mb-10 pt-[10px] text-white/90 font-medium max-w-xl drop-shadow-md leading-relaxed mx-auto lg:mx-0">
                 {homeContent.heroSubtitle}
               </p>
-              <Button asChild size="lg" className="hidden lg:inline-flex bg-red-600 hover:bg-black text-white rounded-full px-5 mobile:px-6 sm:px-8 py-4 mobile:py-5 sm:py-6 text-xs mobile:text-sm sm:text-base shadow-xl transition-all hover:scale-105 font-extrabold uppercase mb-6 mobile:mb-8 lg:mb-0">
+              <Button asChild size="lg" className="inline-flex bg-red-600 hover:bg-black text-white rounded-full px-5 mobile:px-6 sm:px-8 py-4 mobile:py-5 sm:py-6 text-xs mobile:text-sm sm:text-base shadow-xl transition-all hover:scale-105 font-extrabold uppercase mb-6 mobile:mb-8 lg:mb-0">
                 <Link to="/packages">
                   Explore Packages <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Link>
@@ -152,8 +152,8 @@ const Home = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right Booking Card */}
-          <div className="w-full lg:w-[400px] bg-white/95 backdrop-blur-sm rounded-2xl mobile:rounded-3xl shadow-2xl p-4 mobile:p-5 sm:p-6 relative border border-white/20">
+          {/* Right Booking Card - Desktop Only */}
+          <div className="hidden lg:block w-full lg:w-[400px] bg-white/95 backdrop-blur-sm rounded-2xl mobile:rounded-3xl shadow-2xl p-4 mobile:p-5 sm:p-6 relative border border-white/20">
             <div className="text-center mb-4 mobile:mb-6 sm:mb-8">
               <h3 className="font-heading font-semibold text-muted-foreground text-[10px] mobile:text-xs sm:text-sm uppercase tracking-[0.15em] mobile:tracking-[0.2em] mb-1 mobile:mb-2">Your Perfect Holiday Awaits!</h3>
               <h2 className="text-lg mobile:text-xl sm:text-2xl font-bold text-foreground font-heading uppercase">Get Your Custom Quote</h2>
@@ -319,12 +319,7 @@ const Home = () => {
             )}
           </div>
           
-          {/* Mobile Explore Packages Button */}
-          <Button asChild size="lg" className="lg:hidden w-full bg-red-600 hover:bg-black text-white rounded-full px-5 py-4 text-xs mobile:text-sm shadow-xl transition-all hover:scale-105 font-extrabold uppercase mt-2">
-            <Link to="/packages">
-              Explore Packages <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          {/* Existing mobile button removed - integrated into hero content above */}
         </div>
 
         <div className="relative bg-white border-t border-gray-100 shadow-2xl py-4 mobile:py-6 md:py-8 z-20">
@@ -372,6 +367,177 @@ const Home = () => {
               </div>
 
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile Custom Quote Form - Now under the hero video */}
+      <section className="lg:hidden bg-white py-12 px-4 border-b border-gray-100">
+        <div className="container mx-auto max-w-lg">
+          <div className="bg-gray-50 rounded-3xl shadow-xl p-6 mobile:p-8 border border-gray-100">
+            <div className="text-center mb-8">
+              <h3 className="font-heading font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em] mb-2">Your Perfect Holiday Awaits!</h3>
+              <h2 className="text-2xl font-bold text-foreground font-heading uppercase">Get Your Custom Quote</h2>
+            </div>
+
+            {step === 1 ? (
+              <div className="space-y-5">
+                <div className="space-y-3">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs flex items-center gap-2">
+                    <MapPin className="w-4 h-4" /> Destination
+                  </Label>
+                  <Select value={formData.destination} onValueChange={(v) => handleSelectChange("destination", v)}>
+                    <SelectTrigger className="bg-white border-gray-200 text-gray-900 h-12">
+                      <SelectValue placeholder="Select Destination" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900">
+                      {destinations.map(d => (
+                        <SelectItem key={d.id} value={d.name}>{d.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" /> Travel Month
+                  </Label>
+                  <Select value={formData.travelMonth} onValueChange={(v) => handleSelectChange("travelMonth", v)}>
+                    <SelectTrigger className="bg-white border-gray-200 text-gray-900 h-12">
+                      <SelectValue placeholder="Select Month" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900">
+                      {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(m => (
+                        <SelectItem key={m} value={m}>{m}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <Label className="text-red-600 font-extrabold uppercase text-xs flex items-center gap-2">
+                      <Clock className="w-4 h-4" /> Duration
+                    </Label>
+                    <Select value={formData.duration} onValueChange={(v) => handleSelectChange("duration", v)}>
+                      <SelectTrigger className="bg-white border-gray-200 text-gray-900 h-12">
+                        <SelectValue placeholder="Duration" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900">
+                        <SelectItem value="3-5">3-5 Days</SelectItem>
+                        <SelectItem value="5-7">5-7 Days</SelectItem>
+                        <SelectItem value="7-10">7-10 Days</SelectItem>
+                        <SelectItem value="10+">10+ Days</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label className="text-red-600 font-extrabold uppercase text-xs flex items-center gap-2">
+                      <Users className="w-4 h-4" /> Persons
+                    </Label>
+                    <Select value={formData.numPersons} onValueChange={(v) => handleSelectChange("numPersons", v)}>
+                      <SelectTrigger className="bg-white border-gray-200 text-gray-900 h-12">
+                        <SelectValue placeholder="Persons" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white text-gray-900">
+                        <SelectItem value="solo">Solo</SelectItem>
+                        <SelectItem value="couple">Couple</SelectItem>
+                        <SelectItem value="family-3">Family (3)</SelectItem>
+                        <SelectItem value="family-4">Family (4+)</SelectItem>
+                        <SelectItem value="group">Group</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleNext}
+                  className="w-full bg-red-600 hover:bg-black text-white font-extrabold py-7 rounded-2xl mt-6 uppercase transition-all duration-300 shadow-xl"
+                >
+                  Continue Request
+                </Button>
+                
+                <div className="flex justify-center gap-2 mt-4">
+                    <div className="w-8 h-1.5 rounded-full bg-red-600"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs">Name</Label>
+                  <Input
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="bg-white border-gray-200 text-gray-900 h-12"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs">Email Address</Label>
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="youremail@gmail.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="bg-white border-gray-200 text-gray-900 h-12"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs">WhatsApp Number</Label>
+                  <div className="flex">
+                    <div className="bg-gray-100 border border-r-0 border-gray-200 rounded-l-md px-3 flex items-center text-gray-500 text-sm">
+                      🇮🇳 +91
+                    </div>
+                    <Input
+                      name="whatsapp"
+                      placeholder="9876543210"
+                      value={formData.whatsapp}
+                      onChange={handleInputChange}
+                      className="bg-white border-gray-200 rounded-l-none text-gray-900 h-12"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-red-600 font-extrabold uppercase text-xs">Select Language</Label>
+                  <Select value={formData.language} onValueChange={(v) => handleSelectChange("language", v)}>
+                    <SelectTrigger className="bg-white border-gray-200 text-gray-900 h-12">
+                      <SelectValue placeholder="Language" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900">
+                      <SelectItem value="english">English</SelectItem>
+                      <SelectItem value="hindi">Hindi</SelectItem>
+                      <SelectItem value="tamil">Tamil</SelectItem>
+                      <SelectItem value="malayalam">Malayalam</SelectItem>
+                      <SelectItem value="kannada">Kannada</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Button
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="w-full bg-red-600 hover:bg-black text-white font-bold py-7 rounded-2xl mt-6 uppercase transition-all duration-300 shadow-xl tracking-widest"
+                >
+                  {isSubmitting ? "Processing..." : "Submit Quote Request"}
+                </Button>
+ 
+                <div className="flex justify-center gap-2 mt-4">
+                  <div className="w-1.5 h-1.5 rounded-full bg-muted"></div>
+                  <div className="w-8 h-1.5 rounded-full bg-primary/40"></div>
+                </div>
+ 
+                <Button variant="link" onClick={() => setStep(1)} className="w-full text-sm text-muted-foreground hover:text-foreground">
+                  Back to previous step
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>

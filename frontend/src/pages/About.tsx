@@ -19,6 +19,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { useAdmin } from "@/context/AdminContext";
 import logoImg from "@/assets/planet_life_logo_full.jpg";
+import corporateTripsImg from "@/assets/corporate_trips.png";
+import privateTripsImg from "@/assets/private_trips.png";
+import strangersTripsImg from "@/assets/strangers_trips.png";
+import couplesTripsImg from "@/assets/couples_trips.png";
+import collegeTripsImg from "@/assets/college_trips.png";
+import familyTripsImg from "@/assets/family_trips.png";
 
 const About = () => {
   const { aboutContent } = useAdmin();
@@ -179,12 +185,12 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mobile:gap-8">
             {[
-              { title: "Corporate Trips", icon: Briefcase, img: singaporeImg, desc: "Professional itineraries designed for team building, offsites, and corporate retreats with top-tier amenities." },
-              { title: "Private Trips", icon: ShieldCheck, img: dubaiImg, desc: "Exclusive, personalized journeys offering ultimate privacy, luxury, and tailor-made experiences." },
-              { title: "Strangers Trips", icon: Users, img: vietnamImg, desc: "Join a group of like-minded solo travelers for an adventure of a lifetime and make lasting friendships." },
-              { title: "Couples Trips", icon: Heart, img: baliImg, desc: "Romantic getaways crafted perfectly for couples to celebrate honeymoons, anniversaries, or just each other." },
-              { title: "College Trips", icon: GraduationCap, img: thailandImg, desc: "Budget-friendly, action-packed group tours perfect for students looking for fun and exploration." },
-              { title: "Family Trips", icon: Home, img: malaysiaImg, desc: "Wholesome holiday packages designed to bring families together with activities suitable for all ages." }
+              { title: "Corporate Trips", icon: Briefcase, img: corporateTripsImg, desc: "Professional itineraries designed for team building, offsites, and corporate retreats with top-tier amenities." },
+              { title: "Private Trips", icon: ShieldCheck, img: privateTripsImg, desc: "Exclusive, personalized journeys offering ultimate privacy, luxury, and tailor-made experiences." },
+              { title: "Strangers Trips", icon: Users, img: strangersTripsImg, desc: "Join a group of like-minded solo travelers for an adventure of a lifetime and make lasting friendships." },
+              { title: "Couples Trips", icon: Heart, img: couplesTripsImg, desc: "Romantic getaways crafted perfectly for couples to celebrate honeymoons, anniversaries, or just each other." },
+              { title: "College Trips", icon: GraduationCap, img: collegeTripsImg, desc: "Budget-friendly, action-packed group tours perfect for students looking for fun and exploration." },
+              { title: "Family Trips", icon: Home, img: familyTripsImg, desc: "Wholesome holiday packages designed to bring families together with activities suitable for all ages." }
             ].map((trip, index) => (
               <ScrollReveal key={index} delay={index * 0.1} width="100%">
                 <div className="group bg-white rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full hover:-translate-y-2">

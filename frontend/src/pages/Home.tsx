@@ -14,6 +14,13 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import StoryMarquee from "@/components/StoryMarquee";
+import BounceCards from "@/components/ui/BounceCards";
+import CountUp from "@/components/ui/CountUp";
+import strangersTripsImg from "@/assets/strangers_trips.png";
+import strangersExperienceImg from "@/assets/strangers_experience.png";
+import thailandImg from "@/assets/thailand.jpg";
+import baliImg from "@/assets/bali_new.jpg";
+import vietnamImg from "@/assets/vietnam_new.jpg";
 
 const Home = () => {
   const { destinations, homeContent } = useAdmin();
@@ -681,6 +688,75 @@ const Home = () => {
           >
             Read All 500+ Google Reviews <ArrowRight className="w-4 h-4" />
           </a>
+        </div>
+      </section>
+
+      {/* Strangers Trips Feature Section - Clean Centered */}
+      <section className="py-20 mobile:py-24 md:py-32 bg-white overflow-visible border-t border-gray-100">
+        <div className="container mx-auto px-4 overflow-visible">
+          {/* Heading - Strictly Centered */}
+          <div className="flex justify-center w-full">
+            <ScrollReveal direction="up" width="100%">
+              <div className="text-center max-w-4xl mx-auto">
+                <span className="text-red-600 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-6 block">Our Signature Experience</span>
+                <h2 className="text-4xl mobile:text-5xl md:text-7xl font-heading font-black mb-8 uppercase tracking-tighter leading-[0.85] text-black">
+                  Strangers Trips: <br />
+                  <span className="text-red-600">Travel Alone,</span> Not Lonely
+                </h2>
+                <p className="text-lg mobile:text-xl text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto">
+                  Join our exclusive group adventures designed for solo travelers. <br className="hidden mobile:block" />
+                  Start as strangers, return as a lifelong family.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Bounce Cards - Centered, No Background Container */}
+          <div className="flex justify-center items-center h-[400px] mobile:h-[500px] md:h-[600px] relative overflow-visible">
+            <ScrollReveal direction="up" delay={0.2} width="100%">
+              <div className="flex justify-center items-center w-full overflow-visible">
+                <BounceCards
+                  images={[
+                    strangersTripsImg,
+                    strangersExperienceImg,
+                    thailandImg,
+                    baliImg,
+                    vietnamImg
+                  ]}
+                  containerWidth={window.innerWidth < 640 ? 400 : 900}
+                  containerHeight={window.innerWidth < 640 ? 400 : 600}
+                  className="z-10"
+                  enableHover={true}
+                />
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Action Area - Strictly Centered Stack */}
+          <div className="flex justify-center w-full">
+            <ScrollReveal direction="up" delay={0.3} width="100%">
+              <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+                <div className="mb-12">
+                   <div className="text-8xl mobile:text-9xl font-heading font-black text-red-600 select-none mb-4 leading-none flex justify-center">
+                     <CountUp to={15} suffix="+" duration={2.5} />
+                   </div>
+                   <div className="space-y-2">
+                      <p className="text-2xl mobile:text-4xl font-black text-black uppercase tracking-tight leading-tight">Successfully Conducted</p>
+                      <p className="text-black/40 font-bold uppercase text-xs mobile:text-sm tracking-[0.3em]">International Adventures</p>
+                   </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-6 justify-center w-full">
+                  <Button asChild size="lg" className="bg-red-600 hover:bg-black text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs shadow-2xl transition-all hover:scale-105">
+                    <Link to="/packages">View Upcoming Packages <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="border-2 border-black text-black hover:bg-black hover:text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs transition-all">
+                    <Link to="/about">Our Story</Link>
+                  </Button>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 

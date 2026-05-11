@@ -124,16 +124,11 @@ const About = () => {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                <div className="mt-8 max-w-sm">
                   <div className="bg-red-50 p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition-shadow">
                     <h1 className="text-4xl font-heading font-black text-red-600 mb-2 tracking-tighter">7+ Years</h1>
                     <h2 className="text-[10px] font-black tracking-widest text-black uppercase">Experience in this industry</h2>
                     <p className="text-xs text-gray-600 mt-2 font-medium">Crafting unforgettable journeys with expertise, dedication, and deep local knowledge across the globe.</p>
-                  </div>
-                  <div className="bg-red-50 p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition-shadow">
-                    <h1 className="text-4xl font-heading font-black text-red-600 mb-2 tracking-tighter">15+ Trips</h1>
-                    <h2 className="text-[10px] font-black tracking-widest text-black uppercase">Successful Strangers Trips</h2>
-                    <p className="text-xs text-gray-600 mt-2 font-medium">Connecting like-minded solo travelers through meticulously planned group adventures worldwide.</p>
                   </div>
                 </div>
               </ScrollReveal>

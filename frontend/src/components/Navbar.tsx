@@ -14,7 +14,6 @@ import { useAdmin } from "@/context/AdminContext";
 
 const Navbar = () => {
     const { destinations } = useAdmin();
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -35,23 +34,9 @@ const Navbar = () => {
         }, 150);
     };
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-black via-black/95 to-red-600 shadow-xl ${isScrolled ? "py-2" : "py-4"
-                }`}
+            className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-black via-black/95 to-red-600 shadow-xl py-3"
         >
             <div className="container mx-auto px-3 mobile:px-4 flex justify-between items-center">
                 {/* Logo */}
@@ -71,7 +56,7 @@ const Navbar = () => {
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center gap-6">
                         <Link to="/" className="font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm">Home</Link>
-                        <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+                        <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen} modal={false}>
                             <DropdownMenuTrigger 
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
@@ -153,7 +138,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* Mobile Menu Trigger */}
-                    <DropdownMenu>
+                    <DropdownMenu modal={false}>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="lg:hidden text-white hover:bg-white/10">
                                 <Menu className="h-6 w-6" />

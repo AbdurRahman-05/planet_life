@@ -131,6 +131,12 @@ import karAdv4 from "@/assets/karnataka/kar_adventure_4.jpg";
 import karAdv5 from "@/assets/karnataka/kar_adventure_5.jpg";
 import karAdv6 from "@/assets/karnataka/kar_adventure_6.jpg";
 
+// ── Rajasthan ──
+import rajasthanMain from "@/assets/rajasthan/rajasthan_main.png";
+import rajAdv1 from "@/assets/rajasthan/raj_adventure_1.png";
+import rajAdv2 from "@/assets/rajasthan/raj_adventure_2.png";
+import rajAdv3 from "@/assets/rajasthan/raj_adventure_3.png";
+
 
 /**
  * Master image map: maps filename keys (used in destinations.ts data)
@@ -261,6 +267,11 @@ export const imageMap: Record<string, string> = {
   "kar_adventure_4.jpg": karAdv4,
   "kar_adventure_5.jpg": karAdv5,
   "kar_adventure_6.jpg": karAdv6,
+  // ── Rajasthan ──
+  "rajasthan_main.png": rajasthanMain,
+  "raj_adventure_1.png": rajAdv1,
+  "raj_adventure_2.png": rajAdv2,
+  "raj_adventure_3.png": rajAdv3,
 
   // ── Legacy aliases (old names that may exist in cached localStorage) ──
   "malaysia_new_front.jpg": malaysiaFrontImg,

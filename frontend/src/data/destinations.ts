@@ -3079,5 +3079,232 @@ export const destinations: Destination[] = [
         ]
       }
     ]
+  },
+  {
+    id: "rajasthan",
+    name: "Rajasthan",
+    country: "India",
+    description: "Experience the royal heritage of India in Rajasthan, the land of kings. From the pink streets of Jaipur and the blue alleys of Jodhpur to the golden sands of Jaisalmer and the serene lakes of Udaipur, every city tells a story of valor, architecture, and vibrant culture.",
+    image: "rajasthan_main.png",
+    video: "rajasthan_video.mp4",
+    featured: true,
+    whyVisit: [
+      "Explore majestic forts like Amber Fort, Mehrangarh Fort, and Jaisalmer Fort",
+      "Experience the magic of the Thar Desert with sunset camel safaris and overnight camp stays",
+      "Witness the architectural marvels of Hawa Mahal, City Palace, and Jantar Mantar",
+      "Immerse yourself in the vibrant culture, colorful festivals, and world-renowned Rajasthani cuisine"
+    ],
+    adventureImages: [
+      "raj_adventure_1.png",
+      "raj_adventure_2.png",
+      "raj_adventure_3.png",
+      "raj_adventure_1.png",
+      "raj_adventure_2.png"
+    ],
+    packages: [
+      {
+        id: "rajasthan-2n3d-jaipur",
+        duration: "02 Nights / 03 Days - Jaipur",
+        nights: 2,
+        days: 3,
+        price: 12500,
+        image: "raj_adventure_1.png",
+        inclusions: [
+          "02 Night’s Accommodation in hotel (Crestmount Ashapurna / Crestmont Royals)",
+          "Meal Plan: MAPAI (02 Breakfast + 02 Dinner)",
+          "All transfer and Sightseeing by AC Sedan",
+          "Driver allowances, parking, toll taxes, fuel",
+          "Airport/ Railway station pickup drop off"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival in Jaipur",
+            description: "Namaste and Welcome! Upon arrival at Jaipur Airport/ Railway Station, transfer to hotel for check-in and overnight stay.",
+            activities: [
+              "Airport/Railway Station Pickup",
+              "Transfer to Hotel",
+              "Check-in and Leisure",
+              "Overnight stay in Jaipur"
+            ]
+          },
+          {
+            day: 2,
+            title: "Jaipur Sightseeing",
+            description: "Explore the pink city's most iconic landmarks and vibrant markets.",
+            activities: [
+              "Visit Amber Fort, Jal Mahal, and Hawa Mahal",
+              "Visit City Palace & Jantar Mantar",
+              "Evening shopping for ethnic Rajasthani dresses and silver jewelry",
+              "Explore blue pottery, miniature paintings and Mojaris (leather shoes)",
+              "Overnight stay in Jaipur"
+            ]
+          },
+          {
+            day: 3,
+            title: "Jaipur Sightseeing - Departure",
+            description: "Final sightseeing before departure.",
+            activities: [
+              "Visit Birla Temple & Albert Hall Museum",
+              "Transfer to Jaipur Airport / Railway Station",
+              "Departure with sweet memories"
+            ]
+          }
+        ]
+      },
+      {
+        id: "rajasthan-4n5d-jodhpur-jaisalmer",
+        duration: "04 Nights / 05 Days - Jodhpur & Jaisalmer",
+        nights: 4,
+        days: 5,
+        price: 23333,
+        image: "raj_adventure_2.png",
+        inclusions: [
+          "03 Night’s Accommodation in hotel + 01 Night in Desert Camp",
+          "Meal Plan: MAPAI (04 Breakfast + 04 Dinner)",
+          "All transfer & sightseeing by Ac Sedan",
+          "Camel Ride, Tea/Coffee and Cultural Program in Camp",
+          "Driver allowances, parking, toll taxes, fuel",
+          "Airport/ Railway station pickup drop off"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival at Jodhpur",
+            description: "Welcome to the Blue City! Transfer to your hotel and prepare for an adventure.",
+            activities: [
+              "Airport/Railway Station Pickup",
+              "Transfer to Hotel",
+              "Check-in and Overnight stay in Jodhpur"
+            ]
+          },
+          {
+            day: 2,
+            title: "Jodhpur Sightseeing to Jaisalmer",
+            description: "Explore Jodhpur's palaces before heading to the Golden City.",
+            activities: [
+              "Visit Umaid Bhawan Palace & Toorji Ka Jhalra",
+              "Visit Jaswant Thada",
+              "Drive to Jaisalmer (approx. 6 hours)",
+              "Check-in and Overnight stay in Jaisalmer"
+            ]
+          },
+          {
+            day: 3,
+            title: "Jaisalmer Sightseeing & Desert Camp",
+            description: "Tour the golden fort and experience the magic of the desert dunes.",
+            activities: [
+              "Visit Jaisalmer Fort, Patwon ki Haveli, and Salim Singh-ki-Haveli",
+              "Visit Jain Temple and Bada Bagh",
+              "Transfer to Desert Camp",
+              "Camel cart ride and sunset views",
+              "Cultural program and overnight stay in Camp"
+            ]
+          },
+          {
+            day: 4,
+            title: "Jaisalmer to Jodhpur Shopping",
+            description: "Return to Jodhpur for a shopping spree.",
+            activities: [
+              "Breakfast at Camp and drive back to Jodhpur",
+              "Visit Clock Tower Market for local shopping",
+              "Check-in and Overnight stay in Jodhpur"
+            ]
+          },
+          {
+            day: 5,
+            title: "Jodhpur Sightseeing - Departure",
+            description: "Final tour of Jodhpur's grand fort before heading home.",
+            activities: [
+              "Visit Mehrangarh Fort & Mandore Garden",
+              "Transfer to Jodhpur Airport / Railway Station",
+              "Tour ends with sweet memories"
+            ]
+          }
+        ]
+      },
+      {
+        id: "rajasthan-5n6d-jaipur-pushkar-udaipur",
+        duration: "05 Nights / 06 Days - Rajasthan Highlights",
+        nights: 5,
+        days: 6,
+        price: 17500,
+        image: "raj_adventure_3.png",
+        inclusions: [
+          "5 Nights Accommodation (2N Jaipur, 1N Pushkar, 2N Udaipur)",
+          "Daily Breakfast (5 Breakfasts)",
+          "Private cab for 6 days Sightseeing",
+          "Pickup from Jaipur & Drop at Udaipur",
+          "Driver allowances, parking, toll taxes, fuel"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival Jaipur",
+            description: "Start your journey in the Pink City with its famous water palace and observatory.",
+            activities: [
+              "Pickup from Jaipur Airport/Station",
+              "Visit Jal Mahal and Hawa Mahal",
+              "Explore City Palace and Jantar Mantar",
+              "Overnight in Jaipur"
+            ]
+          },
+          {
+            day: 2,
+            title: "Jaipur Local Sightseeing",
+            description: "Explore the massive forts of Jaipur.",
+            activities: [
+              "Visit Nahargarh Fort and Jaigarh Fort",
+              "Visit Amer Fort",
+              "Explore Local Markets",
+              "Overnight stay in Jaipur"
+            ]
+          },
+          {
+            day: 3,
+            title: "Jaipur to Pushkar via Kishangarh",
+            description: "Travel to the holy city of Pushkar with a stop at the unique dumping yard.",
+            activities: [
+              "Drive to Pushkar",
+              "Enroute visit Kishangarh Dumping Yard (Marble Slurry)",
+              "Visit Pushkar Lake and Ghats",
+              "Overnight stay in Pushkar"
+            ]
+          },
+          {
+            day: 4,
+            title: "Pushkar to Udaipur",
+            description: "Head to the City of Lakes and explore its royal architecture.",
+            activities: [
+              "Drive to Udaipur",
+              "Visit City Palace and Jagdish Temple",
+              "Lake Pichola boat ride (optional)",
+              "Visit Bagore Ki Haveli and Vintage Car Museum",
+              "Overnight in Udaipur"
+            ]
+          },
+          {
+            day: 5,
+            title: "Local Udaipur Visit",
+            description: "Enjoy the gardens and scenic lake views of Udaipur.",
+            activities: [
+              "Visit Saheliyon Ki Bari and Fateh Sagar Lake",
+              "Visit Maharana Pratap Memorial",
+              "Sunset view at Sajjangarh Fort (Monsoon Palace)",
+              "Overnight stay in Udaipur"
+            ]
+          },
+          {
+            day: 6,
+            title: "Departure",
+            description: "Final morning in Udaipur before departure.",
+            activities: [
+              "Breakfast and check-out",
+              "Drop at Udaipur Station / Airport"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];

@@ -12,6 +12,7 @@ interface BounceCardsProps {
   easeType?: string;
   transformStyles?: string[];
   enableHover?: boolean;
+  children?: React.ReactNode[];
 }
 
 export default function BounceCards({
@@ -29,7 +30,8 @@ export default function BounceCards({
     'rotate(-12deg) translate(125px)',
     'rotate(4deg) translate(250px)'
   ],
-  enableHover = true
+  enableHover = true,
+  children
 }: BounceCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -76,8 +78,9 @@ export default function BounceCards({
     if (!enableHover || !containerRef.current) return;
 
     const q = gsap.utils.selector(containerRef);
-
-    images.forEach((_, i) => {
+    const itemCount = children ? children.length : images.length;
+    
+    for (let i = 0; i < itemCount; i++) {
       const target = q(`.card-${i}`);
       gsap.killTweensOf(target);
 
@@ -106,15 +109,16 @@ export default function BounceCards({
           overwrite: 'auto'
         });
       }
-    });
+    }
   };
 
   const resetSiblings = () => {
     if (!enableHover || !containerRef.current) return;
 
     const q = gsap.utils.selector(containerRef);
+    const itemCount = children ? children.length : images.length;
 
-    images.forEach((_, i) => {
+    for (let i = 0; i < itemCount; i++) {
       const target = q(`.card-${i}`);
       gsap.killTweensOf(target);
       const baseTransform = transformStyles[i] || 'none';
@@ -124,7 +128,7 @@ export default function BounceCards({
         ease: 'back.out(1.4)',
         overwrite: 'auto'
       });
-    });
+    }
   };
 
   return (
@@ -138,19 +142,35 @@ export default function BounceCards({
         overflow: 'visible'
       }}
     >
-      {images.map((src, idx) => (
-        <div
-          key={idx}
-          className={`card card-${idx}`}
-          style={{
-            transform: transformStyles[idx] ?? 'none'
-          }}
-          onMouseEnter={() => pushSiblings(idx)}
-          onMouseLeave={resetSiblings}
-        >
-          <img className="image" src={src} alt={`card-${idx}`} />
-        </div>
-      ))}
+      {children ? (
+        children.map((child, idx) => (
+          <div
+            key={idx}
+            className={`card card-${idx}`}
+            style={{
+              transform: transformStyles[idx] ?? 'none'
+            }}
+            onMouseEnter={() => pushSiblings(idx)}
+            onMouseLeave={resetSiblings}
+          >
+            {child}
+          </div>
+        ))
+      ) : (
+        images.map((src, idx) => (
+          <div
+            key={idx}
+            className={`card card-${idx}`}
+            style={{
+              transform: transformStyles[idx] ?? 'none'
+            }}
+            onMouseEnter={() => pushSiblings(idx)}
+            onMouseLeave={resetSiblings}
+          >
+            <img className="image" src={src} alt={`card-${idx}`} />
+          </div>
+        ))
+      )}
     </div>
   );
 }

@@ -18,9 +18,11 @@ import BounceCards from "@/components/ui/BounceCards";
 import CountUp from "@/components/ui/CountUp";
 import strangersTripsImg from "@/assets/strangers_trips.png";
 import strangersExperienceImg from "@/assets/strangers_experience.png";
-import thailandImg from "@/assets/thailand.jpg";
+import thailandImg from "@/assets/thailand_new.jpg";
 import baliImg from "@/assets/bali_new.jpg";
 import vietnamImg from "@/assets/vietnam_new.jpg";
+import kashmirImg from "@/assets/kashmir/kashmir_main.jpg";
+import malaysiaImg from "@/assets/malaysia_main_new.jpg";
 
 const Home = () => {
   const { destinations, homeContent } = useAdmin();
@@ -691,19 +693,21 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Strangers Trips Feature Section - Clean Centered */}
-      <section className="py-20 mobile:py-24 md:py-32 bg-white overflow-visible border-t border-gray-100">
-        <div className="container mx-auto px-4 overflow-visible">
+      {/* Strangers Trips Feature Section - Premium Dark Re-design */}
+      <section className="py-20 mobile:py-24 md:py-32 bg-[#0a0a0a] text-white relative overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(220,38,38,0.15)_0%,_transparent_70%)]" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           {/* Heading - Strictly Centered */}
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center w-full mb-8 mobile:mb-10 md:mb-12">
             <ScrollReveal direction="up" width="100%">
               <div className="text-center max-w-4xl mx-auto">
-                <span className="text-red-600 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-6 block">Our Signature Experience</span>
-                <h2 className="text-4xl mobile:text-5xl md:text-7xl font-heading font-black mb-8 uppercase tracking-tighter leading-[0.85] text-black">
+                <span className="text-red-600 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-4 block drop-shadow-lg">Our Signature Experience</span>
+                <h2 className="text-4xl mobile:text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-6 uppercase tracking-tighter leading-[0.85] text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
                   Strangers Trips: <br />
                   <span className="text-red-600">Travel Alone,</span> Not Lonely
                 </h2>
-                <p className="text-lg mobile:text-xl text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto">
+                <p className="text-lg mobile:text-xl text-white/60 leading-relaxed font-medium max-w-2xl mx-auto">
                   Join our exclusive group adventures designed for solo travelers. <br className="hidden mobile:block" />
                   Start as strangers, return as a lifelong family.
                 </p>
@@ -711,46 +715,106 @@ const Home = () => {
             </ScrollReveal>
           </div>
 
-          {/* Bounce Cards - Centered, No Background Container */}
-          <div className="flex justify-center items-center h-[400px] mobile:h-[500px] md:h-[600px] relative overflow-visible">
-            <ScrollReveal direction="up" delay={0.2} width="100%">
-              <div className="flex justify-center items-center w-full overflow-visible">
-                <BounceCards
-                  images={[
-                    strangersTripsImg,
-                    strangersExperienceImg,
-                    thailandImg,
-                    baliImg,
-                    vietnamImg
-                  ]}
-                  containerWidth={window.innerWidth < 640 ? 400 : 900}
-                  containerHeight={window.innerWidth < 640 ? 400 : 600}
-                  className="z-10"
-                  enableHover={true}
-                />
-              </div>
-            </ScrollReveal>
-          </div>
+          {/* Interactive Packages Stack - Centered focus on 3 Packages */}
+          <div className="flex flex-col items-center w-full overflow-visible">
+            <div className="flex justify-center items-center h-[350px] mobile:h-[450px] md:h-[500px] relative overflow-visible w-full">
+              <ScrollReveal direction="up" delay={0.2} width="100%">
+                <div className="flex justify-center items-center w-full overflow-visible">
+                  <BounceCards
+                    containerWidth={window.innerWidth < 640 ? 300 : 700}
+                    containerHeight={window.innerWidth < 640 ? 350 : 500}
+                    className="z-10"
+                    enableHover={true}
+                    transformStyles={window.innerWidth < 640 ? [
+                      'rotate(-8deg) translate(-80px)',
+                      'rotate(0deg)',
+                      'rotate(8deg) translate(80px)'
+                    ] : [
+                      'rotate(-8deg) translate(-150px)',
+                      'rotate(0deg)',
+                      'rotate(8deg) translate(150px)'
+                    ]}
+                  >
+                    {[
+                      {
+                        title: "Kashmir Strangers Tour",
+                        image: kashmirImg,
+                        date: "Jan 10-18, 2026",
+                        price: "₹14,999",
+                        month: "January"
+                      },
+                      {
+                        title: "Thailand Siam Sojourn",
+                        image: thailandImg,
+                        date: "May 15-19, 2026",
+                        price: "₹27,999",
+                        month: "May",
+                        note: "Flight Excl."
+                      },
+                      {
+                        title: "Kuala Lumpur Adventurers",
+                        image: malaysiaImg,
+                        date: "June 12-15, 2026",
+                        price: "₹24,999",
+                        month: "June",
+                        note: "Flight Excl."
+                      }
+                    ].map((pkg, idx) => (
+                      <div key={idx} className="relative w-full h-full group/card">
+                        <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                        
+                        <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                          {pkg.month}
+                        </div>
 
-          {/* Action Area - Strictly Centered Stack */}
-          <div className="flex justify-center w-full">
+                        <div className="absolute bottom-0 left-0 right-0 p-6 text-left">
+                          <h3 className="text-xl mobile:text-2xl font-heading font-black uppercase tracking-tighter text-white mb-2 leading-none">
+                            {pkg.title}
+                          </h3>
+                          <div className="flex items-center gap-4 mb-4">
+                             <div className="flex items-center gap-1.5 text-white/70 text-[10px] font-bold uppercase">
+                               <Calendar className="w-3 h-3 text-red-500" /> {pkg.date}
+                             </div>
+                          </div>
+                          <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                             <div>
+                                <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-0.5">Package Price</p>
+                                <div className="flex items-baseline gap-1.5">
+                                  <span className="text-xl font-heading font-black text-white">{pkg.price}</span>
+                                  {pkg.note && <span className="text-[8px] font-bold text-red-500 uppercase">{pkg.note}</span>}
+                                </div>
+                             </div>
+                             <Link to="/contact" className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
+                                <ArrowRight className="w-4 h-4 text-white" />
+                             </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </BounceCards>
+                </div>
+              </ScrollReveal>
+            </div>
+
+            {/* Stats & CTA - Strictly Centered below cards */}
             <ScrollReveal direction="up" delay={0.3} width="100%">
-              <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+              <div className="flex flex-col items-center text-center max-w-3xl mx-auto mt-12 mobile:mt-16 md:mt-20">
                 <div className="mb-12">
-                   <div className="text-8xl mobile:text-9xl font-heading font-black text-red-600 select-none mb-4 leading-none flex justify-center">
+                   <div className="text-7xl mobile:text-8xl md:text-9xl font-heading font-black text-red-600 select-none mb-2 leading-none">
                      <CountUp to={15} suffix="+" duration={2.5} />
                    </div>
-                   <div className="space-y-2">
-                      <p className="text-2xl mobile:text-4xl font-black text-black uppercase tracking-tight leading-tight">Successfully Conducted</p>
-                      <p className="text-black/40 font-bold uppercase text-xs mobile:text-sm tracking-[0.3em]">International Adventures</p>
+                   <div className="space-y-1">
+                      <p className="text-xl mobile:text-2xl font-black text-white uppercase tracking-tight">Successfully Conducted</p>
+                      <p className="text-white/40 font-bold uppercase text-[10px] mobile:text-xs tracking-[0.3em]">International Adventures</p>
                    </div>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center w-full">
-                  <Button asChild size="lg" className="bg-red-600 hover:bg-black text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs shadow-2xl transition-all hover:scale-105">
-                    <Link to="/packages">View Upcoming Packages <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                <div className="flex flex-col sm:flex-row gap-6 w-full justify-center">
+                  <Button asChild size="lg" className="bg-red-600 hover:bg-white hover:text-red-600 text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs shadow-2xl transition-all hover:scale-105">
+                    <Link to="/packages">View All Packages <ArrowRight className="ml-2 w-5 h-5" /></Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-2 border-black text-black hover:bg-black hover:text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs transition-all">
+                  <Button asChild variant="outline" size="lg" className="border-2 border-white/20 text-white hover:bg-white hover:text-black rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs transition-all backdrop-blur-sm">
                     <Link to="/about">Our Story</Link>
                   </Button>
                 </div>

@@ -148,18 +148,17 @@ const About = () => {
            </div>
         </div>
 
-        
         <div className="container mx-auto px-4 relative z-20">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <div className="w-full lg:w-3/5">
               <ScrollReveal direction="left">
                 <span className="text-red-600 font-black tracking-[0.4em] uppercase text-[10px] md:text-xs mb-6 block">Our Signature Experience</span>
-                <h2 className="text-4xl mobile:text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-8 uppercase tracking-tighter leading-[0.85]">
+                <h2 className="text-4xl mobile:text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-8 uppercase tracking-tighter leading-[0.85] text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">
                   Strangers Trips: <br />
                   <span className="text-red-600">The New Way</span> <br />
                   To Explore
                 </h2>
-                
+
                 <div className="flex items-center gap-4 mobile:gap-6 mb-10 mobile:mb-12">
                    <div className="text-6xl mobile:text-7xl md:text-8xl font-heading font-black text-red-600 select-none">15+</div>
                    <div className="bg-red-600/20 border border-red-600/30 p-3 mobile:p-4 rounded-xl mobile:rounded-2xl backdrop-blur-md">
@@ -168,7 +167,7 @@ const About = () => {
                    </div>
                 </div>
 
-                <p className="text-base mobile:text-lg text-white/70 leading-relaxed mb-8 mobile:mb-10 max-w-xl">
+                <p className="text-base mobile:text-lg text-gray-400 leading-relaxed mb-8 mobile:mb-10 max-w-xl">
                   Planet Life's Strangers Trips are designed for the bold, the solo, and the curious. We bring together a group of like-minded travelers who start as strangers and return as a lifelong family.
                 </p>
 
@@ -178,8 +177,8 @@ const About = () => {
                          <ShieldCheck className="w-5 h-5 mobile:w-6 mobile:h-6 text-white" />
                       </div>
                       <div>
-                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight">Safe & Secured</h4>
-                         <p className="text-xs mobile:text-sm text-white/50">Meticulously planned with 24/7 on-ground assistance.</p>
+                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight text-gray-300">Safe & Secured</h4>
+                         <p className="text-xs mobile:text-sm text-gray-500">Meticulously planned with 24/7 on-ground assistance.</p>
                       </div>
                    </div>
                    <div className="flex gap-4">
@@ -187,8 +186,8 @@ const About = () => {
                          <Sparkles className="w-5 h-5 mobile:w-6 mobile:h-6 text-red-600" />
                       </div>
                       <div>
-                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight">Curated Moments</h4>
-                         <p className="text-xs mobile:text-sm text-white/50">Exclusive activities designed for deep group bonding.</p>
+                         <h4 className="font-bold text-base mobile:text-lg mb-1 uppercase tracking-tight text-gray-300">Curated Moments</h4>
+                         <p className="text-xs mobile:text-sm text-gray-500">Exclusive activities designed for deep group bonding.</p>
                       </div>
                    </div>
                 </div>
@@ -201,7 +200,8 @@ const About = () => {
                      <div className="absolute -inset-4 bg-red-600/10 rounded-[2.5rem] mobile:rounded-[3rem] blur-2xl group-hover:bg-red-600/20 transition-all duration-500" />
                      <div className="relative z-10">
                         <h4 className="text-2xl mobile:text-3xl font-black uppercase tracking-tighter mb-2 text-red-600">Next Adventure</h4>
-                        <p className="text-white/80 text-xs mobile:text-sm mb-6 uppercase tracking-[0.2em] font-bold leading-relaxed">Join our next signature group of strangers turned family</p>
+                        <p className="text-gray-400 text-xs mobile:text-sm mb-6 uppercase tracking-[0.2em] font-bold leading-relaxed">Join our next signature group of strangers turned family</p>
+
                         <Button asChild className="bg-red-600 hover:bg-white hover:text-black text-white rounded-full w-full sm:w-fit px-8 py-6 font-black uppercase tracking-widest text-xs transition-all shadow-xl hover:scale-105">
                            <Link to="/packages">
                              Explore Schedule <ArrowRight className="ml-2 w-5 h-5" />

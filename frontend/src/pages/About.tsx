@@ -28,6 +28,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { useAdmin } from "@/context/AdminContext";
+import VerticalStoryMarquee from "@/components/VerticalStoryMarquee";
+
 
 const About = () => {
   const { aboutContent } = useAdmin();
@@ -139,10 +141,13 @@ const About = () => {
 
       {/* Exclusive Strangers Trips Section */}
       <section className="py-20 mobile:py-24 md:py-32 bg-[#0a0a0a] text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-30 lg:opacity-40 pointer-events-none">
-           <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/20 to-[#0a0a0a] z-10" />
-           <img src={strangersExperienceImg} className="w-full h-full object-cover" alt="Strangers Experience" />
+        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-20 lg:opacity-30 pointer-events-none overflow-hidden">
+           <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-transparent to-[#0a0a0a] z-20" />
+           <div className="h-full w-full transform scale-110">
+             <VerticalStoryMarquee />
+           </div>
         </div>
+
         
         <div className="container mx-auto px-4 relative z-20">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -190,25 +195,24 @@ const About = () => {
               </ScrollReveal>
             </div>
 
-            <div className="w-full lg:w-2/5">
+            <div className="w-full lg:w-2/5 flex flex-col justify-center">
                <ScrollReveal direction="right" delay={0.2}>
-                  <div className="relative group">
-                     <div className="absolute -inset-4 bg-red-600/20 rounded-[2.5rem] mobile:rounded-[3rem] blur-2xl group-hover:bg-red-600/30 transition-all duration-500" />
-                     <div className="relative rounded-[2rem] mobile:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
-                        <img src={strangersTripsImg} alt="Strangers Trip" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 mobile:p-8">
-                           <h4 className="text-xl mobile:text-2xl font-black uppercase tracking-tighter mb-1 text-red-600">Next Adventure</h4>
-                           <p className="text-white/60 text-[10px] mobile:text-xs mb-4 mobile:mb-6 uppercase tracking-[0.2em] font-bold">Join our next signature group</p>
-                           <Button asChild className="bg-red-600 hover:bg-white hover:text-black text-white rounded-full w-fit px-6 mobile:px-8 py-5 mobile:py-6 font-black uppercase tracking-widest text-[10px] transition-all">
-                              <Link to="/packages">
-                                View Schedule <ArrowRight className="ml-2 w-4 h-4" />
-                              </Link>
-                           </Button>
-                        </div>
+                  <div className="relative group p-6 mobile:p-8 rounded-[2rem] mobile:rounded-[3.5rem] bg-red-600/5 backdrop-blur-sm border border-white/5 overflow-hidden">
+                     <div className="absolute -inset-4 bg-red-600/10 rounded-[2.5rem] mobile:rounded-[3rem] blur-2xl group-hover:bg-red-600/20 transition-all duration-500" />
+                     <div className="relative z-10">
+                        <h4 className="text-2xl mobile:text-3xl font-black uppercase tracking-tighter mb-2 text-red-600">Next Adventure</h4>
+                        <p className="text-white/80 text-xs mobile:text-sm mb-6 uppercase tracking-[0.2em] font-bold leading-relaxed">Join our next signature group of strangers turned family</p>
+                        <Button asChild className="bg-red-600 hover:bg-white hover:text-black text-white rounded-full w-full sm:w-fit px-8 py-6 font-black uppercase tracking-widest text-xs transition-all shadow-xl hover:scale-105">
+                           <Link to="/packages">
+                             Explore Schedule <ArrowRight className="ml-2 w-5 h-5" />
+                           </Link>
+                        </Button>
                      </div>
                   </div>
                </ScrollReveal>
             </div>
+
+
           </div>
         </div>
       </section>

@@ -3,56 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "./ui/ScrollReveal";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 
-const storyImages = [
-  "WhatsApp Image 2026-04-22 at 1.52.03 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.04 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.05 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.06 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.06 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.09 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.09 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.09 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.09 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.10 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.10 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.10 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.10 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.11 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.11 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.11 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.11 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.12 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.12 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.12 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.13 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.13 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.13 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.13 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.14 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.14 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.14 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.14 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.15 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.15 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.15 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.15 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.16 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.16 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.16 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.17 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.17 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.17 AM (3).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.17 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.18 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.18 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.18 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.19 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.19 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.19 AM.jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.20 AM (1).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.20 AM (2).jpeg",
-  "WhatsApp Image 2026-04-22 at 1.52.20 AM.jpeg",
-];
+import { storyImages } from "@/data/storyImages";
+
 
 const StoryMarquee = () => {
   const [isPaused, setIsPaused] = useState(false);

@@ -203,7 +203,7 @@ const About = () => {
                         <p className="text-white/60 text-xs mobile:text-sm mb-6 uppercase tracking-[0.2em] font-bold leading-relaxed">Join our next signature group of strangers turned family</p>
 
                         <Button asChild className="bg-red-600 hover:bg-white hover:text-red-600 text-white rounded-full w-full sm:w-fit px-8 py-6 font-black uppercase tracking-widest text-xs transition-all shadow-xl hover:scale-105">
-                           <Link to="/packages">
+                           <Link to="/#strangers">
                              Explore Schedule <ArrowRight className="ml-2 w-5 h-5" />
                            </Link>
                         </Button>

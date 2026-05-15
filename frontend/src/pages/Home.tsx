@@ -694,7 +694,7 @@ const Home = () => {
       </section>
 
       {/* Strangers Trips Feature Section - Premium Dark Re-design */}
-      <section className="py-20 mobile:py-24 md:py-32 bg-[#0a0a0a] text-white relative overflow-hidden border-t border-white/5">
+      <section id="strangers" className="py-20 mobile:py-24 md:py-32 bg-[#0a0a0a] text-white relative overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(220,38,38,0.15)_0%,_transparent_70%)]" />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -741,7 +741,8 @@ const Home = () => {
                         image: kashmirImg,
                         date: "Jan 10-18, 2026",
                         price: "₹14,999",
-                        month: "January"
+                        month: "January",
+                        link: "/destination/kashmir?pkg=kashmir-strangers-4n5d"
                       },
                       {
                         title: "Thailand Siam Sojourn",
@@ -749,7 +750,8 @@ const Home = () => {
                         date: "May 15-19, 2026",
                         price: "₹27,999",
                         month: "May",
-                        note: "Flight Excl."
+                        note: "Flight Excl.",
+                        link: "/destination/thailand?pkg=thailand-4n5d-siam-sojourn"
                       },
                       {
                         title: "Kuala Lumpur Adventurers",
@@ -757,7 +759,8 @@ const Home = () => {
                         date: "June 12-15, 2026",
                         price: "₹24,999",
                         month: "June",
-                        note: "Flight Excl."
+                        note: "Flight Excl.",
+                        link: "/destination/malaysia?pkg=malaysia-3n4d-kl-adventurers"
                       }
                     ].map((pkg, idx) => (
                       <div key={idx} className="relative w-full h-full group/card">
@@ -785,7 +788,7 @@ const Home = () => {
                                   {pkg.note && <span className="text-[8px] font-bold text-red-500 uppercase">{pkg.note}</span>}
                                 </div>
                              </div>
-                             <Link to="/contact" className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
+                             <Link to={pkg.link} className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
                                 <ArrowRight className="w-4 h-4 text-white" />
                              </Link>
                           </div>

@@ -191,6 +191,72 @@ export const destinations: Destination[] = [
             ]
           }
         ]
+      },
+      {
+        id: "malaysia-3n4d-kl-adventurers",
+        duration: "3 Nights 4 Days (Kuala Lumpur Adventurers)",
+        nights: 3,
+        days: 4,
+        price: 24999,
+        image: "mal_adventure_1.jpg",
+        inclusions: [
+          "3 Nights accommodation in 3-star hotel (twin sharing)",
+          "Daily Indian meals (Breakfast, Lunch, Dinner)",
+          "All transfers and sightseeing in private vehicles",
+          "Local Malaysian guide",
+          "Complimentary Putrajaya photo stop",
+          "KL City Tour, Batu Caves, Genting Highlands with 2-way cable car",
+          "Day trip to Malacca city",
+          "KL Tower Observation Deck tickets",
+          "Daily bottled water",
+          "24x7 on-tour support"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival & Kuala Lumpur City Tour",
+            description: "Start your Malaysian adventure with a tour of the modern capital.",
+            activities: [
+              "Pickup from KL International Airport",
+              "Short Putrajaya tour enroute",
+              "KL City Tour: Merdeka Square, Thean Hou Temple, Petronas Twin Towers",
+              "Symphony Lake Water Fountain Show at Suria KLCC",
+              "Overnight stay in Kuala Lumpur"
+            ]
+          },
+          {
+            day: 2,
+            title: "Genting Highlands & Batu Caves",
+            description: "Visit the iconic limestone caves and the cool hill resort of Genting.",
+            activities: [
+              "Visit Batu Caves (golden statue of Lord Murugan)",
+              "Cable car ride to Genting Highlands",
+              "Explore Chin Swee Temple",
+              "Return to Kuala Lumpur for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 3,
+            title: "Malacca - UNESCO World Heritage Site",
+            description: "A full day exploring the historic colonial charms of Malacca.",
+            activities: [
+              "Full-day tour of Malacca city",
+              "Visit Red Square, St. Paul's Church, and Dutch buildings",
+              "Explore Cheng Hoon Teng Temple and Jonker Street",
+              "Discover Melaka's development as a trading port"
+            ]
+          },
+          {
+            day: 4,
+            title: "KL Tower & Departure",
+            description: "Panoramic views and last-minute shopping before heading home.",
+            activities: [
+              "Visit Kuala Lumpur Tower (Menara KL) observation deck",
+              "Last-minute shopping at local markets or malls",
+              "Transfer to airport for return journey"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -428,6 +494,82 @@ export const destinations: Destination[] = [
             activities: [
               "Breakfast and check-out",
               "Drop at Krabi Airport for departure"
+            ]
+          }
+        ]
+      },
+      {
+        id: "thailand-4n5d-siam-sojourn",
+        duration: "4 Nights 5 Days (Thailand Siam Sojourn)",
+        nights: 4,
+        days: 5,
+        price: 27999,
+        image: "thailand_adventure_2.jpg",
+        inclusions: [
+          "2 Nights Golden Beach Hotel (Pattaya) & 2 Nights The Ecotel (Bangkok)",
+          "Pattaya Tiger Park & Alcazar Show",
+          "Half day Coral Island tour by speed boat",
+          "Chao Phraya Princess Cruise dinner",
+          "Safari World & Marine Park full day",
+          "Half day Bangkok city & temple tour",
+          "5 Daily breakfasts, all lunches & dinners as per itinerary",
+          "Shopping at Indra Market",
+          "English speaking guide",
+          "All transfers on PVT basis"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrive Bangkok - Way to Pattaya",
+            description: "Land in Bangkok and head straight to the fun city of Pattaya.",
+            activities: [
+              "Arrive in Bangkok and transfer to Pattaya",
+              "Visit Tiger Park (Photo with Tiger - Optional)",
+              "Enjoy the spectacular Alcazar Cabaret Show",
+              "Overnight stay in Pattaya"
+            ]
+          },
+          {
+            day: 2,
+            title: "Coral Island Tour",
+            description: "A day of sun and sea at Coral Island.",
+            activities: [
+              "Coral Island Tour by speed boat",
+              "Lunch at Indian Restaurant",
+              "Free time for leisure or water activities",
+              "Overnight stay in Pattaya"
+            ]
+          },
+          {
+            day: 3,
+            title: "Pattaya City Tour & Bangkok Dinner Cruise",
+            description: "Tour Pattaya's landmarks and enjoy a romantic dinner cruise in Bangkok.",
+            activities: [
+              "Pattaya City Tour (Big Buddha Temple & Gems Gallery)",
+              "Transfer to Bangkok and check-in",
+              "Evening Chao Phraya River Dinner Cruise",
+              "Overnight stay in Bangkok"
+            ]
+          },
+          {
+            day: 4,
+            title: "Full Day Safari World & Marine Park",
+            description: "Experience Thailand's greatest open zoo and animal shows.",
+            activities: [
+              "Full day at Safari World & Marine Park",
+              "Buffet lunch included",
+              "Evening free for leisure",
+              "Overnight stay in Bangkok"
+            ]
+          },
+          {
+            day: 5,
+            title: "Bangkok City Tour & Departure",
+            description: "Explore Bangkok's temples and markets before your flight.",
+            activities: [
+              "Bangkok City Tour (Golden Buddha, Marble Temple)",
+              "Shopping at Indra Market",
+              "Airport drop for return journey"
             ]
           }
         ]
@@ -3301,6 +3443,104 @@ export const destinations: Destination[] = [
             activities: [
               "Breakfast and check-out",
               "Drop at Udaipur Station / Airport"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "kashmir",
+    name: "Kashmir",
+    country: "India",
+    description: "Paradise on Earth — a breathtaking region of snow-capped mountains, lush valleys, and serene lakes. Experience the charm of Srinagar, the meadows of Sonmarg and Gulmarg, and the valley of shepherds, Pahalgam.",
+    image: "kashmir_main.jpg",
+    video: "kashmir_video.mp4",
+    featured: true,
+    whyVisit: [
+      "Enjoy a serene Shikara ride on the iconic Dal Lake",
+      "Experience the world's highest cable car ride in Gulmarg",
+      "Explore the stunning Betaab and Aru valleys in Pahalgam",
+      "Witness the majestic Thajiwas Glacier in Sonmarg"
+    ],
+    adventureImages: [
+      "kas_adventure_1.jpg",
+      "kas_adventure_2.jpg",
+      "kas_adventure_3.jpg",
+      "kas_adventure_4.jpg"
+    ],
+    packages: [
+      {
+        id: "kashmir-strangers-4n5d",
+        duration: "4 Nights 5 Days (Strangers Tour)",
+        nights: 4,
+        days: 5,
+        price: 14999,
+        image: "kas_adventure_1.jpg",
+        inclusions: [
+          "Airport Pick-up & Drop (Srinagar)",
+          "5 Days private vehicle for sightseeing",
+          "4 Nights hotel accommodation (twin sharing)",
+          "4 Breakfasts & 4 Dinners",
+          "Union cabs in Pahalgam for Aru Valley, Betaab Valley & Chandanwari",
+          "Chain jeeps",
+          "1-Hour complimentary Shikara Ride",
+          "Tamil tour guide throughout the tour"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival & Srinagar City Tour",
+            description: "Welcome to Srinagar! Begin your journey with a tour of the city's historic gardens and temples.",
+            activities: [
+              "Pickup from Srinagar International Airport",
+              "Visit Shankaracharya Temple (panoramic views)",
+              "Explore Pari Mahal, Cheshma Shahi, Nishat Bagh, and Shalimar Bagh",
+              "Dinner & Overnight stay in Srinagar"
+            ]
+          },
+          {
+            day: 2,
+            title: "Sonmarg Excursion",
+            description: "Explore the 'Meadow of Gold', a scenic drive along the Sindh River.",
+            activities: [
+              "Day trip to Sonmarg (2.5-hour drive)",
+              "Optional excursion to Thajiwas Glacier (local taxi/pony)",
+              "Stunning views of valleys and paddy fields",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 3,
+            title: "Pahalgam - Valley of Shepherds",
+            description: "Visit the iconic valleys and film locations in Pahalgam.",
+            activities: [
+              "Enroute visit Saffron fields and Cricket bat factories",
+              "Visit Betaab Valley, Aru Valley, and Chandanwari",
+              "Visit Baisaran Valley (Mini Switzerland) via pony ride",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 4,
+            title: "Gulmarg - Meadow of Flowers",
+            description: "Experience the snow-clad mountains and world-famous gondola ride.",
+            activities: [
+              "Full-day excursion to Gulmarg",
+              "Visit world's highest 18-hole golf course",
+              "Gondola Ride (Asia’s highest cable car) - optional",
+              "Winter activities like skiing & sledging (seasonal)",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 5,
+            title: "Dal Lake Shikara Ride & Departure",
+            description: "End your journey with a peaceful ride on the lake before heading home.",
+            activities: [
+              "Complimentary 1-hour Shikara Ride on Dal Lake",
+              "Visit Floating Gardens, Golden Lake, and Meena Bazaar",
+              "Transfer to Srinagar Airport for departure"
             ]
           }
         ]

@@ -137,6 +137,10 @@ import rajAdv1 from "@/assets/rajasthan/raj_adventure_1.png";
 import rajAdv2 from "@/assets/rajasthan/raj_adventure_2.png";
 import rajAdv3 from "@/assets/rajasthan/raj_adventure_3.png";
 
+// ── Meghalaya ──
+import meghalayaImg from "@/assets/meghalaya_new.jpg";
+import meghalayaVideo from "@/assets/hero-video.mp4";
+
 
 /**
  * Master image map: maps filename keys (used in destinations.ts data)
@@ -267,6 +271,10 @@ export const imageMap: Record<string, string> = {
   "kar_adventure_4.jpg": karAdv4,
   "kar_adventure_5.jpg": karAdv5,
   "kar_adventure_6.jpg": karAdv6,
+  // ── Meghalaya ──
+  "meghalaya_new.jpg": meghalayaImg,
+  "hero-video.mp4": meghalayaVideo,
+
   // ── Rajasthan ──
   "rajasthan_main.png": rajasthanMain,
   "raj_adventure_1.png": rajAdv1,

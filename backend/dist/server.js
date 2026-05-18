@@ -18,12 +18,19 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const client_1 = require("@prisma/client");
+const serverless_1 = require("@neondatabase/serverless");
+const adapter_neon_1 = require("@prisma/adapter-neon");
+const ws_1 = __importDefault(require("ws"));
 const cloudinary_1 = require("cloudinary");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const prisma = new client_1.PrismaClient();
+serverless_1.neonConfig.webSocketConstructor = ws_1.default;
+const connectionString = process.env.DATABASE_URL || '';
+const pool = new serverless_1.Pool({ connectionString });
+const adapter = new adapter_neon_1.PrismaNeon(pool);
+const prisma = new client_1.PrismaClient({ adapter });
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use((0, express_fileupload_1.default)({ useTempFiles: true }));
@@ -75,6 +82,10 @@ app.post('/api/auth/login', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json({ message: 'Database error', error: error.message });
     }
 }));
+// --- HEALTH CHECK ---
+app.get('/api/ping', (req, res) => {
+    res.status(200).json({ message: 'pong', timestamp: new Date().toISOString() });
+});
 // --- CACHE ---
 let destinationsCache = null;
 // --- DESTINATIONS ---

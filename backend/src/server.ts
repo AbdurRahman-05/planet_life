@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import ws from 'ws';
 import { v2 as cloudinary } from 'cloudinary';
 import fileUpload from 'express-fileupload';
 import path from 'path';
@@ -11,7 +14,12 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
-const prisma = new PrismaClient();
+
+neonConfig.webSocketConstructor = ws;
+const connectionString = process.env.DATABASE_URL || '';
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool as any);
+const prisma = new PrismaClient({ adapter });
 
 app.use(cors());
 app.use(express.json());
@@ -59,6 +67,12 @@ app.post('/api/auth/login', async (req, res) => {
     res.status(500).json({ message: 'Database error', error: error.message });
   }
 });
+
+// --- HEALTH CHECK ---
+app.get('/api/ping', (req, res) => {
+  res.status(200).json({ message: 'pong', timestamp: new Date().toISOString() });
+});
+
 
 // --- CACHE ---
 let destinationsCache: any = null;

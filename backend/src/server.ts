@@ -229,12 +229,12 @@ app.post('/api/upload', verifyToken, async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Backend server running on port ${PORT}`);
-});
-
 // Catch-all to serve frontend index.html for SPA routing
 app.get('*', (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Backend server running on port ${PORT}`);
 });

@@ -1,0 +1,1 @@
+var e=`/assets/videos/hero-video-C8W6igjU.mp4`;export{e as t};

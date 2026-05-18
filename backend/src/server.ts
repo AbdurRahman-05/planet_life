@@ -4,9 +4,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import { neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import ws from 'ws';
+import { PrismaNeonHTTP } from '@prisma/adapter-neon';
 import { v2 as cloudinary } from 'cloudinary';
 import fileUpload from 'express-fileupload';
 import path from 'path';
@@ -15,9 +13,8 @@ dotenv.config();
 
 const app = express();
 
-neonConfig.webSocketConstructor = ws;
 const connectionString = process.env.DATABASE_URL || '';
-const adapter = new PrismaNeon({ connectionString });
+const adapter = new PrismaNeonHTTP(connectionString, {});
 const prisma = new PrismaClient({ adapter });
 
 app.use(cors());

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import { Pool, neonConfig } from '@neondatabase/serverless';
+import { neonConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import ws from 'ws';
 import { v2 as cloudinary } from 'cloudinary';
@@ -17,8 +17,7 @@ const app = express();
 
 neonConfig.webSocketConstructor = ws;
 const connectionString = process.env.DATABASE_URL || '';
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool as any);
+const adapter = new PrismaNeon({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 app.use(cors());
@@ -68,9 +67,15 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-// --- HEALTH CHECK ---
-app.get('/api/ping', (req, res) => {
-  res.status(200).json({ message: 'pong', timestamp: new Date().toISOString() });
+// --- HEALTH CHECK / KEEP-ALIVE ---
+app.get('/api/ping', async (req, res) => {
+  try {
+    // A tiny query to keep the Neon database awake
+    await prisma.$queryRaw`SELECT 1`;
+    res.status(200).json({ message: 'pong', db: 'connected', timestamp: new Date().toISOString() });
+  } catch (error) {
+    res.status(500).json({ message: 'pong', db: 'error', timestamp: new Date().toISOString() });
+  }
 });
 
 
@@ -173,11 +178,19 @@ app.delete('/api/destinations/:id', verifyToken, async (req, res) => {
 });
 
 // --- CONTENT ---
+const contentCache: Record<string, any> = {};
+
 app.get('/api/content/:page', async (req, res) => {
   const { page } = req.params;
+  if (contentCache[page]) {
+    res.status(200).json(contentCache[page]);
+    return;
+  }
   try {
     const content = await prisma.pageContent.findUnique({ where: { page } });
-    res.status(200).json(content || { page, data: {} });
+    const responseData = content || { page, data: {} };
+    contentCache[page] = responseData;
+    res.status(200).json(responseData);
   } catch (error: any) {
     res.status(500).json({ message: 'Database error', error: error.message });
   }
@@ -192,6 +205,7 @@ app.put('/api/content/:page', verifyToken, async (req, res) => {
       update: { data },
       create: { page, data },
     });
+    contentCache[page] = updatedContent;
     res.status(200).json(updatedContent);
   } catch (error: any) {
     res.status(400).json({ message: error.message });

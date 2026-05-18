@@ -28,8 +28,7 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 serverless_1.neonConfig.webSocketConstructor = ws_1.default;
 const connectionString = process.env.DATABASE_URL || '';
-const pool = new serverless_1.Pool({ connectionString });
-const adapter = new adapter_neon_1.PrismaNeon(pool);
+const adapter = new adapter_neon_1.PrismaNeon({ connectionString });
 const prisma = new client_1.PrismaClient({ adapter });
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -82,10 +81,17 @@ app.post('/api/auth/login', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json({ message: 'Database error', error: error.message });
     }
 }));
-// --- HEALTH CHECK ---
-app.get('/api/ping', (req, res) => {
-    res.status(200).json({ message: 'pong', timestamp: new Date().toISOString() });
-});
+// --- HEALTH CHECK / KEEP-ALIVE ---
+app.get('/api/ping', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // A tiny query to keep the Neon database awake
+        yield prisma.$queryRaw `SELECT 1`;
+        res.status(200).json({ message: 'pong', db: 'connected', timestamp: new Date().toISOString() });
+    }
+    catch (error) {
+        res.status(500).json({ message: 'pong', db: 'error', timestamp: new Date().toISOString() });
+    }
+}));
 // --- CACHE ---
 let destinationsCache = null;
 // --- DESTINATIONS ---
@@ -187,11 +193,18 @@ app.delete('/api/destinations/:id', verifyToken, (req, res) => __awaiter(void 0,
     }
 }));
 // --- CONTENT ---
+const contentCache = {};
 app.get('/api/content/:page', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.params;
+    if (contentCache[page]) {
+        res.status(200).json(contentCache[page]);
+        return;
+    }
     try {
         const content = yield prisma.pageContent.findUnique({ where: { page } });
-        res.status(200).json(content || { page, data: {} });
+        const responseData = content || { page, data: {} };
+        contentCache[page] = responseData;
+        res.status(200).json(responseData);
     }
     catch (error) {
         res.status(500).json({ message: 'Database error', error: error.message });
@@ -206,6 +219,7 @@ app.put('/api/content/:page', verifyToken, (req, res) => __awaiter(void 0, void 
             update: { data },
             create: { page, data },
         });
+        contentCache[page] = updatedContent;
         res.status(200).json(updatedContent);
     }
     catch (error) {

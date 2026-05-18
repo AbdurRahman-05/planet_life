@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const adapter = new PrismaNeonHTTP(process.env.DATABASE_URL || '', {});
+const adapter = new PrismaNeonHTTP('', {});
 const prisma = new PrismaClient({ adapter });
 
 async function main() {

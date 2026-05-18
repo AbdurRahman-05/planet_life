@@ -15,7 +15,7 @@ const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json());
-app.use(fileUpload({ useTempFiles: true, tempFileDir: '/tmp/' }));
+app.use(fileUpload({ useTempFiles: true }));
 
 // Serve static files from the frontend/dist directory
 const frontendPath = path.join(__dirname, '../../frontend/dist');

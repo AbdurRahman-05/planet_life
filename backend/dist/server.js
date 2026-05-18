@@ -26,7 +26,7 @@ const app = (0, express_1.default)();
 const prisma = new client_1.PrismaClient();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use((0, express_fileupload_1.default)({ useTempFiles: true, tempFileDir: '/tmp/' }));
+app.use((0, express_fileupload_1.default)({ useTempFiles: true }));
 // Serve static files from the frontend/dist directory
 const frontendPath = path_1.default.join(__dirname, '../../frontend/dist');
 app.use(express_1.default.static(frontendPath));

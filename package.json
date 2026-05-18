@@ -1,6 +1,7 @@
 {
   "name": "planet-life-workspace",
   "private": true,
+  "main": "backend/dist/server.js",
   "scripts": {
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
     "dev:frontend": "cd frontend && npm run dev",

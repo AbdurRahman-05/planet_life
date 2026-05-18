@@ -57,18 +57,23 @@ app.post('/api/auth/login', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(400).json({ message: 'Missing credentials' });
         return;
     }
-    const admin = yield prisma.admin.findUnique({ where: { email } });
-    if (!admin) {
-        res.status(401).json({ message: 'Invalid credentials' });
-        return;
+    try {
+        const admin = yield prisma.admin.findUnique({ where: { email } });
+        if (!admin) {
+            res.status(401).json({ message: 'Invalid credentials' });
+            return;
+        }
+        const isValid = yield bcryptjs_1.default.compare(password, admin.passwordHash);
+        if (!isValid) {
+            res.status(401).json({ message: 'Invalid credentials' });
+            return;
+        }
+        const token = jsonwebtoken_1.default.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        res.status(200).json({ token });
     }
-    const isValid = yield bcryptjs_1.default.compare(password, admin.passwordHash);
-    if (!isValid) {
-        res.status(401).json({ message: 'Invalid credentials' });
-        return;
+    catch (error) {
+        res.status(500).json({ message: 'Database error', error: error.message });
     }
-    const token = jsonwebtoken_1.default.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.status(200).json({ token });
 }));
 // --- CACHE ---
 let destinationsCache = null;
@@ -78,12 +83,17 @@ app.get('/api/destinations', (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.status(200).json(destinationsCache);
         return;
     }
-    const destinations = yield prisma.destination.findMany({
-        include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
-        orderBy: { name: 'asc' },
-    });
-    destinationsCache = destinations;
-    res.status(200).json(destinations);
+    try {
+        const destinations = yield prisma.destination.findMany({
+            include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
+            orderBy: { name: 'asc' },
+        });
+        destinationsCache = destinations;
+        res.status(200).json(destinations);
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Database error', error: error.message });
+    }
 }));
 app.post('/api/destinations', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
@@ -112,15 +122,20 @@ app.post('/api/destinations', verifyToken, (req, res) => __awaiter(void 0, void 
 }));
 app.get('/api/destinations/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const destination = yield prisma.destination.findUnique({
-        where: { id },
-        include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
-    });
-    if (!destination) {
-        res.status(404).json({ message: 'Not found' });
-        return;
+    try {
+        const destination = yield prisma.destination.findUnique({
+            where: { id },
+            include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
+        });
+        if (!destination) {
+            res.status(404).json({ message: 'Not found' });
+            return;
+        }
+        res.status(200).json(destination);
     }
-    res.status(200).json(destination);
+    catch (error) {
+        res.status(500).json({ message: 'Database error', error: error.message });
+    }
 }));
 app.put('/api/destinations/:id', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
@@ -163,8 +178,13 @@ app.delete('/api/destinations/:id', verifyToken, (req, res) => __awaiter(void 0,
 // --- CONTENT ---
 app.get('/api/content/:page', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.params;
-    const content = yield prisma.pageContent.findUnique({ where: { page } });
-    res.status(200).json(content || { page, data: {} });
+    try {
+        const content = yield prisma.pageContent.findUnique({ where: { page } });
+        res.status(200).json(content || { page, data: {} });
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Database error', error: error.message });
+    }
 }));
 app.put('/api/content/:page', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.params;

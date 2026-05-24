@@ -18,6 +18,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const client_1 = require("@prisma/client");
+const adapter_neon_1 = require("@prisma/adapter-neon");
 const cloudinary_1 = require("cloudinary");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const path_1 = __importDefault(require("path"));
@@ -25,7 +26,9 @@ let app;
 try {
     dotenv_1.default.config();
     app = (0, express_1.default)();
-    const prisma = new client_1.PrismaClient();
+    const connectionString = process.env.DATABASE_URL || '';
+    const adapter = new adapter_neon_1.PrismaNeonHTTP(connectionString, {});
+    const prisma = new client_1.PrismaClient({ adapter });
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
     app.use((0, express_fileupload_1.default)({ useTempFiles: true }));

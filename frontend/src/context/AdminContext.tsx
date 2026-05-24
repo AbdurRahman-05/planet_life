@@ -177,11 +177,20 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                     api.getContent("packages").catch(() => ({ data: defaultPackagesContent }))
                 ]);
 
-                if (dests) {
+                if (dests && Array.isArray(dests)) {
                     setDestinations(dests);
                     localStorage.setItem("planetlife_destinations", JSON.stringify(dests));
-                } else if (!cachedDests) {
-                    setDestinations(initialDestinations);
+                } else {
+                    const cachedDests = localStorage.getItem("planetlife_destinations");
+                    if (cachedDests) {
+                        try {
+                            setDestinations(JSON.parse(cachedDests));
+                        } catch (e) {
+                            setDestinations(initialDestinations);
+                        }
+                    } else {
+                        setDestinations(initialDestinations);
+                    }
                 }
 
                 const mergedHome = {

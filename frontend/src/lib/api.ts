@@ -15,24 +15,45 @@ export const api = {
     }),
 
   // Destinations  
-  getDestinations: () => fetch(`${API}/destinations`).then(r => r.json()),
+  getDestinations: () => fetch(`${API}/destinations`).then(r => {
+    if (!r.ok) throw new Error('Failed to fetch destinations');
+    return r.json();
+  }),
   createDestination: (data: any, token: string) =>
-    fetch(`${API}/destinations`, { method: 'POST', headers: headers(token), body: JSON.stringify(data) }).then(r => r.json()),
+    fetch(`${API}/destinations`, { method: 'POST', headers: headers(token), body: JSON.stringify(data) }).then(r => {
+      if (!r.ok) throw new Error('Failed to create destination');
+      return r.json();
+    }),
   updateDestination: (id: string, data: any, token: string) =>
-    fetch(`${API}/destinations/${id}`, { method: 'PUT', headers: headers(token), body: JSON.stringify(data) }).then(r => r.json()),
+    fetch(`${API}/destinations/${id}`, { method: 'PUT', headers: headers(token), body: JSON.stringify(data) }).then(r => {
+      if (!r.ok) throw new Error('Failed to update destination');
+      return r.json();
+    }),
   deleteDestination: (id: string, token: string) =>
-    fetch(`${API}/destinations/${id}`, { method: 'DELETE', headers: headers(token) }).then(r => r.json()),
+    fetch(`${API}/destinations/${id}`, { method: 'DELETE', headers: headers(token) }).then(r => {
+      if (!r.ok) throw new Error('Failed to delete destination');
+      return r.json();
+    }),
 
   // Page Content
-  getContent: (page: string) => fetch(`${API}/content/${page}`).then(r => r.json()),
+  getContent: (page: string) => fetch(`${API}/content/${page}`).then(r => {
+    if (!r.ok) throw new Error(`Failed to fetch content for ${page}`);
+    return r.json();
+  }),
   updateContent: (page: string, data: any, token: string) =>
-    fetch(`${API}/content/${page}`, { method: 'PUT', headers: headers(token), body: JSON.stringify(data) }).then(r => r.json()),
+    fetch(`${API}/content/${page}`, { method: 'PUT', headers: headers(token), body: JSON.stringify(data) }).then(r => {
+      if (!r.ok) throw new Error(`Failed to update content for ${page}`);
+      return r.json();
+    }),
 
   // Upload
   upload: (file: File, folder: string, token: string) => {
     const fd = new FormData();
     fd.append('file', file);
     fd.append('folder', folder);
-    return fetch(`${API}/upload`, { method: 'POST', headers: { Authorization: `Bearer ${token}` }, body: fd }).then(r => r.json());
+    return fetch(`${API}/upload`, { method: 'POST', headers: { Authorization: `Bearer ${token}` }, body: fd }).then(r => {
+      if (!r.ok) throw new Error('Failed to upload file');
+      return r.json();
+    });
   },
 };

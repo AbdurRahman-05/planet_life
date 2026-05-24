@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { v2 as cloudinary } from 'cloudinary';
-import { destinations } from '../src/data/destinations';
+import { destinations, Destination, Package, DayItinerary } from '../../frontend/src/data/destinations';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,12 +21,12 @@ cloudinary.config({
 
 async function uploadToCloudinary(localPath: string, folder: string) {
   try {
-    let fullPath = path.resolve(__dirname, '..', 'src', 'assets', localPath);
+    let fullPath = path.resolve(__dirname, '..', '..', 'frontend', 'src', 'assets', localPath);
     
     // Check if file exists in root of assets
     if (!fs.existsSync(fullPath)) {
       // Try to find it in subdirectories
-      const assetsDir = path.resolve(__dirname, '..', 'src', 'assets');
+      const assetsDir = path.resolve(__dirname, '..', '..', 'frontend', 'src', 'assets');
       const findFile = (dir: string): string | null => {
         const files = fs.readdirSync(dir);
         for (const file of files) {
@@ -63,12 +63,43 @@ async function uploadToCloudinary(localPath: string, folder: string) {
 }
 
 const defaultHomeContent = {
-  heroTitle: "Let's Go Travel",
-  heroSubtitle: "Discover the world's most breathtaking destinations with curated premium packages",
-  whyChooseUsTitle: "Why Choose Planet Life?",
-  whyChooseUsSubtitle: "We deliver exceptional travel experiences with attention to every detail",
-  ctaTitle: "Ready to Start Your Adventure?",
-  ctaText: "Contact us today to plan your dream vacation. Our travel experts are ready to help you create unforgettable memories."
+  heroTitle: "Customized International Adventures",
+  heroSubtitle: "Experience the epitome of luxury and adventure with our carefully curated international journeys.",
+  destinationsTitle: "Trending Destinations",
+  destinationsSubtitle: "Explore our most popular international destinations, handpicked for your perfect vacation.",
+  communityTitle: "Happy Customers, Happy Stories",
+  communitySubtitle: "Join thousands of satisfied travelers who have explored the world with us.\nEvery picture tells a story of adventure and joy.",
+  strangerTrips: [
+    {
+      id: "stranger-kashmir",
+      title: "Kashmir Strangers Tour",
+      image: "kashmir_main.jpg",
+      date: "Jan 10-18, 2026",
+      price: "₹14,999",
+      month: "January",
+      link: "/destination/kashmir?pkg=kashmir-strangers-4n5d"
+    },
+    {
+      id: "stranger-thailand",
+      title: "Thailand Siam Sojourn",
+      image: "thailand_new.jpg",
+      date: "May 15-19, 2026",
+      price: "₹27,999",
+      month: "May",
+      note: "Flight Excl.",
+      link: "/destination/thailand?pkg=thailand-4n5d-siam-sojourn"
+    },
+    {
+      id: "stranger-malaysia",
+      title: "Kuala Lumpur Adventurers",
+      image: "malaysia_main_new.jpg",
+      date: "June 12-15, 2026",
+      price: "₹24,999",
+      month: "June",
+      note: "Flight Excl.",
+      link: "/destination/malaysia?pkg=malaysia-3n4d-kl-adventurers"
+    }
+  ]
 };
 
 const defaultAboutContent = {
@@ -135,7 +166,7 @@ async function main() {
   // We clean up existing destinations first to avoid duplicates/conflicts during seeding
   // await prisma.destination.deleteMany();
 
-  for (const dest of destinations) {
+  for (const dest of destinations as Destination[]) {
     console.log(`Processing destination: ${dest.name}`);
     
     // Upload main media
@@ -163,7 +194,7 @@ async function main() {
         adventureImages: adventureImagesUrls,
         packages: {
           deleteMany: {},
-          create: await Promise.all(dest.packages.map(async (pkg) => {
+          create: await Promise.all(dest.packages.map(async (pkg: Package) => {
             const pkgImageUrl = pkg.image ? await uploadToCloudinary(pkg.image, 'planet_life/images') : null;
             return {
               id: pkg.id,
@@ -174,7 +205,7 @@ async function main() {
               image: pkgImageUrl,
               inclusions: pkg.inclusions || [],
               itinerary: {
-                create: (pkg.itinerary || []).map(day => ({
+                create: (pkg.itinerary || []).map((day: DayItinerary) => ({
                   day: day.day,
                   title: day.title,
                   description: day.description,
@@ -196,7 +227,7 @@ async function main() {
         whyVisit: dest.whyVisit || [],
         adventureImages: adventureImagesUrls,
         packages: {
-          create: await Promise.all(dest.packages.map(async (pkg) => {
+          create: await Promise.all(dest.packages.map(async (pkg: Package) => {
             const pkgImageUrl = pkg.image ? await uploadToCloudinary(pkg.image, 'planet_life/images') : null;
             return {
               id: pkg.id,
@@ -207,7 +238,7 @@ async function main() {
               image: pkgImageUrl,
               inclusions: pkg.inclusions || [],
               itinerary: {
-                create: (pkg.itinerary || []).map(day => ({
+                create: (pkg.itinerary || []).map((day: DayItinerary) => ({
                   day: day.day,
                   title: day.title,
                   description: day.description,

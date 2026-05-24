@@ -3,6 +3,17 @@ import { Destination, destinations as initialDestinations } from "@/data/destina
 import { api } from "@/lib/api";
 
 // Content Interfaces
+export interface StrangerTripPackage {
+    id: string;
+    title: string;
+    image: string;
+    date: string;
+    price: string;
+    month: string;
+    note?: string;
+    link: string;
+}
+
 export interface HomeContent {
     heroTitle: string;
     heroSubtitle: string;
@@ -10,6 +21,7 @@ export interface HomeContent {
     destinationsSubtitle: string;
     communityTitle: string;
     communitySubtitle: string;
+    strangerTrips?: StrangerTripPackage[];
 }
 
 export interface AboutContent {
@@ -61,13 +73,46 @@ interface AdminContextType {
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 // Default Values (Current Hardcoded Content)
+export const defaultStrangerTrips: StrangerTripPackage[] = [
+    {
+        id: "stranger-kashmir",
+        title: "Kashmir Strangers Tour",
+        image: "kashmir_main.jpg",
+        date: "Jan 10-18, 2026",
+        price: "₹14,999",
+        month: "January",
+        link: "/destination/kashmir?pkg=kashmir-strangers-4n5d"
+    },
+    {
+        id: "stranger-thailand",
+        title: "Thailand Siam Sojourn",
+        image: "thailand_new.jpg",
+        date: "May 15-19, 2026",
+        price: "₹27,999",
+        month: "May",
+        note: "Flight Excl.",
+        link: "/destination/thailand?pkg=thailand-4n5d-siam-sojourn"
+    },
+    {
+        id: "stranger-malaysia",
+        title: "Kuala Lumpur Adventurers",
+        image: "malaysia_main_new.jpg",
+        date: "June 12-15, 2026",
+        price: "₹24,999",
+        month: "June",
+        note: "Flight Excl.",
+        link: "/destination/malaysia?pkg=malaysia-3n4d-kl-adventurers"
+    }
+];
+
 const defaultHomeContent: HomeContent = {
     heroTitle: "Customized International Adventures",
     heroSubtitle: "Experience the epitome of luxury and adventure with our carefully curated international journeys.",
     destinationsTitle: "Trending Destinations",
     destinationsSubtitle: "Explore our most popular international destinations, handpicked for your perfect vacation.",
     communityTitle: "Happy Customers, Happy Stories",
-    communitySubtitle: "Join thousands of satisfied travelers who have explored the world with us.\nEvery picture tells a story of adventure and joy."
+    communitySubtitle: "Join thousands of satisfied travelers who have explored the world with us.\nEvery picture tells a story of adventure and joy.",
+    strangerTrips: defaultStrangerTrips
 };
 
 const defaultAboutContent: AboutContent = {
@@ -146,6 +191,7 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                     destinationsSubtitle: home.data?.destinationsSubtitle || defaultHomeContent.destinationsSubtitle,
                     communityTitle: home.data?.communityTitle || defaultHomeContent.communityTitle,
                     communitySubtitle: home.data?.communitySubtitle || defaultHomeContent.communitySubtitle,
+                    strangerTrips: home.data?.strangerTrips || defaultHomeContent.strangerTrips,
                 };
                 
                 const mergedAbout = {

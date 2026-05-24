@@ -715,87 +715,72 @@ const Home = () => {
             </ScrollReveal>
           </div>
 
-          {/* Interactive Packages Stack - Centered focus on 3 Packages */}
+          {/* Interactive Packages Stack - Centered focus on Packages */}
           <div className="flex flex-col items-center w-full overflow-visible">
             <div className="flex justify-center items-center h-[350px] mobile:h-[450px] md:h-[500px] relative overflow-visible w-full">
               <ScrollReveal direction="up" delay={0.2} width="100%">
                 <div className="flex justify-center items-center w-full overflow-visible">
-                  <BounceCards
-                    containerWidth={window.innerWidth < 640 ? 300 : 700}
-                    containerHeight={window.innerWidth < 640 ? 350 : 500}
-                    className="z-10"
-                    enableHover={true}
-                    transformStyles={window.innerWidth < 640 ? [
-                      'rotate(-8deg) translate(-80px)',
-                      'rotate(0deg)',
-                      'rotate(8deg) translate(80px)'
-                    ] : [
-                      'rotate(-8deg) translate(-150px)',
-                      'rotate(0deg)',
-                      'rotate(8deg) translate(150px)'
-                    ]}
-                  >
-                    {[
-                      {
-                        title: "Kashmir Strangers Tour",
-                        image: kashmirImg,
-                        date: "Jan 10-18, 2026",
-                        price: "₹14,999",
-                        month: "January",
-                        link: "/destination/kashmir?pkg=kashmir-strangers-4n5d"
-                      },
-                      {
-                        title: "Thailand Siam Sojourn",
-                        image: thailandImg,
-                        date: "May 15-19, 2026",
-                        price: "₹27,999",
-                        month: "May",
-                        note: "Flight Excl.",
-                        link: "/destination/thailand?pkg=thailand-4n5d-siam-sojourn"
-                      },
-                      {
-                        title: "Kuala Lumpur Adventurers",
-                        image: malaysiaImg,
-                        date: "June 12-15, 2026",
-                        price: "₹24,999",
-                        month: "June",
-                        note: "Flight Excl.",
-                        link: "/destination/malaysia?pkg=malaysia-3n4d-kl-adventurers"
-                      }
-                    ].map((pkg, idx) => (
-                      <div key={idx} className="relative w-full h-full group/card">
-                        <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                        
-                        <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                          {pkg.month}
-                        </div>
+                  {(() => {
+                    const strangerTrips = homeContent.strangerTrips || [];
+                    const centerIdx = (strangerTrips.length - 1) / 2;
+                    const stepAngle = 8;
+                    const stepTranslateMobile = 80;
+                    const stepTranslateDesktop = 150;
 
-                        <div className="absolute bottom-0 left-0 right-0 p-6 text-left">
-                          <h3 className="text-xl mobile:text-2xl font-heading font-black uppercase tracking-tighter text-white mb-2 leading-none">
-                            {pkg.title}
-                          </h3>
-                          <div className="flex items-center gap-4 mb-4">
-                             <div className="flex items-center gap-1.5 text-white/70 text-[10px] font-bold uppercase">
-                               <Calendar className="w-3 h-3 text-red-500" /> {pkg.date}
-                             </div>
+                    const transformStylesMobile = strangerTrips.map((_, idx) => {
+                      const diff = idx - centerIdx;
+                      return `rotate(${diff * stepAngle}deg) translate(${diff * stepTranslateMobile}px)`;
+                    });
+
+                    const transformStylesDesktop = strangerTrips.map((_, idx) => {
+                      const diff = idx - centerIdx;
+                      return `rotate(${diff * stepAngle}deg) translate(${diff * stepTranslateDesktop}px)`;
+                    });
+
+                    return (
+                      <BounceCards
+                        containerWidth={window.innerWidth < 640 ? 300 : 700}
+                        containerHeight={window.innerWidth < 640 ? 350 : 500}
+                        className="z-10"
+                        enableHover={true}
+                        transformStyles={window.innerWidth < 640 ? transformStylesMobile : transformStylesDesktop}
+                      >
+                        {strangerTrips.map((pkg, idx) => (
+                          <div key={pkg.id || idx} className="relative w-full h-full group/card">
+                            <img src={getImageSrc(pkg.image)} alt={pkg.title} className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                            
+                            <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                              {pkg.month}
+                            </div>
+
+                            <div className="absolute bottom-0 left-0 right-0 p-6 text-left">
+                              <h3 className="text-xl mobile:text-2xl font-heading font-black uppercase tracking-tighter text-white mb-2 leading-none">
+                                {pkg.title}
+                              </h3>
+                              <div className="flex items-center gap-4 mb-4">
+                                 <div className="flex items-center gap-1.5 text-white/70 text-[10px] font-bold uppercase">
+                                   <Calendar className="w-3 h-3 text-red-500" /> {pkg.date}
+                                 </div>
+                              </div>
+                              <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                                 <div>
+                                    <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-0.5">Package Price</p>
+                                    <div className="flex items-baseline gap-1.5">
+                                      <span className="text-xl font-heading font-black text-white">{pkg.price}</span>
+                                      {pkg.note && <span className="text-[8px] font-bold text-red-500 uppercase">{pkg.note}</span>}
+                                    </div>
+                                 </div>
+                                 <Link to={pkg.link} className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
+                                    <ArrowRight className="w-4 h-4 text-white" />
+                                 </Link>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                             <div>
-                                <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-0.5">Package Price</p>
-                                <div className="flex items-baseline gap-1.5">
-                                  <span className="text-xl font-heading font-black text-white">{pkg.price}</span>
-                                  {pkg.note && <span className="text-[8px] font-bold text-red-500 uppercase">{pkg.note}</span>}
-                                </div>
-                             </div>
-                             <Link to={pkg.link} className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
-                                <ArrowRight className="w-4 h-4 text-white" />
-                             </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </BounceCards>
+                        ))}
+                      </BounceCards>
+                    );
+                  })()}
                 </div>
               </ScrollReveal>
             </div>

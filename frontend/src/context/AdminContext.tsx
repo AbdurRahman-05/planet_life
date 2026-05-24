@@ -165,7 +165,18 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                 // Try to load from local storage first for instant UI
                 const cachedDests = localStorage.getItem("planetlife_destinations");
                 if (cachedDests) {
-                    try { setDestinations(JSON.parse(cachedDests)); } catch (e) {}
+                    try {
+                        const parsed = JSON.parse(cachedDests);
+                        if (Array.isArray(parsed)) {
+                            setDestinations(parsed);
+                        } else {
+                            setDestinations(initialDestinations);
+                        }
+                    } catch (e) {
+                        setDestinations(initialDestinations);
+                    }
+                } else {
+                    setDestinations(initialDestinations);
                 }
 
                 // Fetch everything from API
@@ -184,7 +195,12 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
                     const cachedDests = localStorage.getItem("planetlife_destinations");
                     if (cachedDests) {
                         try {
-                            setDestinations(JSON.parse(cachedDests));
+                            const parsed = JSON.parse(cachedDests);
+                            if (Array.isArray(parsed)) {
+                                setDestinations(parsed);
+                            } else {
+                                setDestinations(initialDestinations);
+                            }
                         } catch (e) {
                             setDestinations(initialDestinations);
                         }

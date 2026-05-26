@@ -818,7 +818,20 @@ const Home = () => {
           <div className="text-center mb-10 mobile:mb-14 md:mb-20 max-w-3xl mx-auto">
             <span className="text-primary font-bold tracking-[0.2em] mobile:tracking-[0.3em] uppercase text-[10px] mobile:text-xs mb-3 mobile:mb-4 block">World-Class Experiences</span>
             <h2 className="text-2xl xs:text-3xl mobile:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4 mobile:mb-6 uppercase tracking-tight">
-              {homeContent.destinationsTitle || "Trending Destinations"}
+              {(() => {
+                const title = homeContent.destinationsTitle || "Trending Destinations";
+                const words = title.split(" ");
+                if (words.length > 1) {
+                  const lastWord = words.pop();
+                  return (
+                    <>
+                      {words.join(" ")}{" "}
+                      <span className="text-red-600">{lastWord}</span>
+                    </>
+                  );
+                }
+                return title;
+              })()}
             </h2>
             <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
               {homeContent.destinationsSubtitle || "Explore our most popular international destinations, handpicked for your perfect vacation."}
@@ -900,7 +913,16 @@ const Home = () => {
              <div className="flex flex-col items-center text-center">
                <span className="text-muted-foreground font-bold tracking-[0.2em] mobile:tracking-[0.3em] uppercase text-[10px] mobile:text-xs mb-3 mobile:mb-4 block">Traveler Community</span>
                <h2 className="text-2xl xs:text-3xl mobile:text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-foreground mb-4 mobile:mb-6 md:mb-8 uppercase tracking-tighter whitespace-pre-line">
-                {homeContent.communityTitle || "Happy Customers, Happy Stories"}
+                {(() => {
+                  const title = homeContent.communityTitle || "Happy Customers, Happy Stories";
+                  const parts = title.split(/(Customers|Stories)/gi);
+                  return parts.map((part, i) => {
+                    if (/customers/i.test(part) || /stories/i.test(part)) {
+                      return <span key={i} className="text-red-600">{part}</span>;
+                    }
+                    return part;
+                  });
+                })()}
               </h2>
               <p className="text-sm mobile:text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 mobile:mb-12 md:mb-16 font-medium leading-relaxed whitespace-pre-line">
                 {homeContent.communitySubtitle || "Join thousands of satisfied travelers who have explored the world with us.\nEvery picture tells a story of adventure and joy."}

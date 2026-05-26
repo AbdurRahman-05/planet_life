@@ -154,7 +154,7 @@ const Home = () => {
                 {homeContent.heroSubtitle}
               </p>
               <Button asChild size="lg" className="inline-flex bg-red-600 hover:bg-black text-white rounded-full px-5 mobile:px-6 sm:px-8 py-4 mobile:py-5 sm:py-6 text-xs mobile:text-sm sm:text-base shadow-xl transition-all hover:scale-105 font-extrabold uppercase mb-6 mobile:mb-8 lg:mb-0">
-                <Link to="/packages">
+                <Link to="/packages?lead=true">
                   Explore Packages <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Link>
               </Button>
@@ -800,9 +800,9 @@ const Home = () => {
                 
                 <div className="flex flex-col sm:flex-row gap-6 w-full justify-center">
                   <Button asChild size="lg" className="bg-red-600 hover:bg-white hover:text-red-600 text-white rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs shadow-2xl transition-all hover:scale-105">
-                    <Link to="/packages">View All Packages <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                    <Link to="/packages?lead=true">View All Packages <ArrowRight className="ml-2 w-5 h-5" /></Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-2 border-white/20 text-white hover:bg-white hover:text-black rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs transition-all backdrop-blur-sm">
+                  <Button asChild variant="outline" size="lg" className="border-2 border-white/20 bg-transparent text-white hover:bg-white hover:text-black rounded-full px-12 py-8 font-black uppercase tracking-widest text-xs transition-all backdrop-blur-sm">
                     <Link to="/about">Our Story</Link>
                   </Button>
                 </div>

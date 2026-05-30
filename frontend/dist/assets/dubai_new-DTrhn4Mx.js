@@ -1,1 +1,0 @@
-var e=`/assets/images/malaysia_main_new-DUJcsx2S.jpg`,t=`/assets/images/dubai_new-CQTqw_eF.jpg`;export{e as n,t};

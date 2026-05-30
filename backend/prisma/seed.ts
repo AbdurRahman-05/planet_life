@@ -1,16 +1,15 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeonHTTP } from '@prisma/adapter-neon';
 import bcrypt from 'bcryptjs';
 import { v2 as cloudinary } from 'cloudinary';
 import { destinations, Destination, Package, DayItinerary } from '../../frontend/src/data/destinations';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL || '';
+const adapter = new PrismaNeonHTTP(connectionString, {});
+const prisma = new PrismaClient({ adapter });
 
 // Configure cloudinary for the seed script
 cloudinary.config({
@@ -180,76 +179,73 @@ async function main() {
       adventureImagesUrls.push(url);
     }
 
-    // Insert/Update destination
-    await prisma.destination.upsert({
-      where: { id: dest.id },
-      update: {
-        name: dest.name,
-        country: dest.country,
-        description: dest.description,
-        image: imageUrl,
-        video: videoUrl,
-        featured: dest.featured,
-        whyVisit: dest.whyVisit || [],
-        adventureImages: adventureImagesUrls,
-        packages: {
-          deleteMany: {},
-          create: await Promise.all(dest.packages.map(async (pkg: Package) => {
-            const pkgImageUrl = pkg.image ? await uploadToCloudinary(pkg.image, 'planet_life/images') : null;
-            return {
-              id: pkg.id,
-              duration: pkg.duration,
-              nights: pkg.nights,
-              days: pkg.days,
-              price: pkg.price,
-              image: pkgImageUrl,
-              inclusions: pkg.inclusions || [],
-              itinerary: {
-                create: (pkg.itinerary || []).map((day: DayItinerary) => ({
-                  day: day.day,
-                  title: day.title,
-                  description: day.description,
-                  activities: day.activities || [],
-                }))
-              }
-            };
-          }))
-        }
-      },
-      create: {
-        id: dest.id,
-        name: dest.name,
-        country: dest.country,
-        description: dest.description,
-        image: imageUrl,
-        video: videoUrl,
-        featured: dest.featured,
-        whyVisit: dest.whyVisit || [],
-        adventureImages: adventureImagesUrls,
-        packages: {
-          create: await Promise.all(dest.packages.map(async (pkg: Package) => {
-            const pkgImageUrl = pkg.image ? await uploadToCloudinary(pkg.image, 'planet_life/images') : null;
-            return {
-              id: pkg.id,
-              duration: pkg.duration,
-              nights: pkg.nights,
-              days: pkg.days,
-              price: pkg.price,
-              image: pkgImageUrl,
-              inclusions: pkg.inclusions || [],
-              itinerary: {
-                create: (pkg.itinerary || []).map((day: DayItinerary) => ({
-                  day: day.day,
-                  title: day.title,
-                  description: day.description,
-                  activities: day.activities || [],
-                }))
-              }
-            };
-          }))
-        }
-      }
+    // Check if the destination exists
+    const existingDest = await prisma.destination.findUnique({
+      where: { id: dest.id }
     });
+
+    if (existingDest) {
+      await prisma.destination.update({
+        where: { id: dest.id },
+        data: {
+          name: dest.name,
+          country: dest.country,
+          description: dest.description,
+          image: imageUrl,
+          video: videoUrl,
+          featured: dest.featured,
+          whyVisit: dest.whyVisit || [],
+          adventureImages: adventureImagesUrls
+        }
+      });
+      // Delete old packages (which cascades to itineraries)
+      await prisma.package.deleteMany({
+        where: { destinationId: dest.id }
+      });
+    } else {
+      await prisma.destination.create({
+        data: {
+          id: dest.id,
+          name: dest.name,
+          country: dest.country,
+          description: dest.description,
+          image: imageUrl,
+          video: videoUrl,
+          featured: dest.featured,
+          whyVisit: dest.whyVisit || [],
+          adventureImages: adventureImagesUrls
+        }
+      });
+    }
+
+    // Now insert packages and itineraries sequentially without transactions
+    for (const pkg of dest.packages) {
+      const pkgImageUrl = pkg.image ? await uploadToCloudinary(pkg.image, 'planet_life/images') : null;
+      await prisma.package.create({
+        data: {
+          id: pkg.id,
+          duration: pkg.duration,
+          nights: pkg.nights,
+          days: pkg.days,
+          price: pkg.price,
+          image: pkgImageUrl,
+          inclusions: pkg.inclusions || [],
+          destinationId: dest.id
+        }
+      });
+
+      for (const day of (pkg.itinerary || [])) {
+        await prisma.dayItinerary.create({
+          data: {
+            day: day.day,
+            title: day.title,
+            description: day.description,
+            activities: day.activities || [],
+            packageId: pkg.id
+          }
+        });
+      }
+    }
   }
 
   console.log('Migration completed successfully!');

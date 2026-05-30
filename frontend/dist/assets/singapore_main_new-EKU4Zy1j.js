@@ -1,0 +1,1 @@
+var e=`/assets/images/malaysia_profile_new-Zx35dPqS.jpg`,t=`/assets/images/thailand_adventure_1-BzCO4k0I.jpg`,n=`/assets/images/bali_adventure_1-DrUI4atJ.jpg`,r=`/assets/images/vietnam_main-HwpJOo25.jpg`,i=`/assets/images/dubai_adventure_1-APkhk2x6.jpg`,a=`/assets/images/singapore_main_new-C5GMMSMK.jpg`;export{t as a,n as i,i as n,e as o,r,a as t};

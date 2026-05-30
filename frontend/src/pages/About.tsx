@@ -8,12 +8,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import malaysiaImg from "@/assets/malaysia_main_new.jpg";
-import thailandImg from "@/assets/thailand.jpg";
-import baliImg from "@/assets/bali_new.jpg";
-import vietnamImg from "@/assets/vietnam_new.jpg";
-import dubaiImg from "@/assets/dubai_new.jpg";
-import singaporeImg from "@/assets/singapore.jpg";
+import malaysiaImg from "@/assets/malaysia_profile_new.jpg";
+import thailandImg from "@/assets/thailand_adventure_1.jpg";
+import baliImg from "@/assets/bali_adventure_1.jpg";
+import vietnamImg from "@/assets/vietnam/vietnam_main.jpg";
+import dubaiImg from "@/assets/dubai_adventure_1.jpg";
+import singaporeImg from "@/assets/singapore_main_new.jpg";
 import logoImg from "@/assets/logo.png";
 import corporateTripsImg from "@/assets/corporate_trips.png";
 import privateTripsImg from "@/assets/private_trips.png";
@@ -163,7 +163,7 @@ const About = () => {
                    <div className="text-6xl mobile:text-7xl md:text-8xl font-heading font-black text-red-600 select-none">15+</div>
                    <div className="bg-red-600/20 border border-red-600/30 p-3 mobile:p-4 rounded-xl mobile:rounded-2xl backdrop-blur-md">
                       <p className="text-lg mobile:text-xl font-bold text-red-500">Successfully Conducted</p>
-                      <p className="text-white/60 text-xs mobile:text-sm">International Group Adventures</p>
+                      <p className="text-white/60 text-xs mobile:text-sm">International Strangers Trips</p>
                    </div>
                 </div>
 

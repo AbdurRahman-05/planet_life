@@ -21,7 +21,7 @@ const Booking = () => {
     const { packageId } = useParams();
     const navigate = useNavigate();
     const { toast } = useToast();
-    const { destinations } = useAdmin();
+    const { destinations, isLoading } = useAdmin();
 
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,6 +44,23 @@ const Booking = () => {
 
     // Find package and destination
     const found = destinations.flatMap(d => d.packages.map(p => ({ ...p, destinationName: d.name, destinationImage: d.image, destinationId: d.id, video: d.video }))).find(p => p.id === packageId);
+
+    const isStrangerTrip = found && (
+        found.id.toLowerCase().includes("stranger") ||
+        found.duration.toLowerCase().includes("stranger") ||
+        found.destinationName.toLowerCase().includes("stranger")
+    );
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen pt-20 flex items-center justify-center bg-[#0a0a0a] font-sans">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600 mx-auto mb-4"></div>
+                    <p className="text-white/60 uppercase font-black tracking-widest text-xs">Loading Booking Details...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!found) {
         return (
@@ -93,9 +110,10 @@ const Booking = () => {
         setIsSubmitting(true);
 
         // Construct WhatsApp Message
-        const message = `*Tour Booking Request - Planet Life*%0A%0A` +
-                        `*Package:* ${found.title}%0A` +
+        const message = `*Tour Booking Request - Planet Life${isStrangerTrip ? " (Strangers Trip)" : ""}%0A%0A` +
+                        `*Package:* ${found.duration}%0A` +
                         `*Destination:* ${found.destinationName}%0A` +
+                        `*Type:* ${isStrangerTrip ? "Strangers Trip (Group Tour)" : "Custom Trip"}%0A` +
                         `*Name:* ${formData.name}%0A` +
                         `*WhatsApp:* ${formData.whatsapp}%0A` +
                         `*Email:* ${formData.email}%0A` +
@@ -157,10 +175,12 @@ const Booking = () => {
 
                 <div className="text-center mb-8 mobile:mb-12 md:mb-16 text-white max-w-4xl mx-auto">
                     <h1 className="text-2xl xs:text-3xl mobile:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 mobile:mb-6 md:mb-8 uppercase tracking-tighter leading-tight font-heading">
-                        {found.title}
+                        {isStrangerTrip ? `${found.destinationName} Strangers Tour` : found.duration}
                     </h1>
                     <p className="max-w-2xl mx-auto text-white/80 text-sm mobile:text-base md:text-lg lg:text-xl font-medium leading-relaxed">
-                        Secure your spot for an unforgettable experience in {found.destinationName}. Custom planning at your fingertips.
+                        {isStrangerTrip 
+                            ? `Secure your spot for an exciting group experience in ${found.destinationName}. Meet like-minded travelers!`
+                            : `Secure your spot for an unforgettable experience in ${found.destinationName}. Custom planning at your fingertips.`}
                     </p>
                 </div>
 
@@ -169,8 +189,12 @@ const Booking = () => {
                     <Card className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-none p-2">
                         <CardContent className="p-8">
                             <div className="text-center mb-10">
-                                <h3 className="font-bold text-primary uppercase text-[10px] tracking-[0.4em] mb-3 font-heading">Secure Your Adventure</h3>
-                                <h2 className="text-2xl font-bold text-foreground font-heading uppercase tracking-tight">Confirm Booking</h2>
+                                <h3 className="font-bold text-primary uppercase text-[10px] tracking-[0.4em] mb-3 font-heading">
+                                    {isStrangerTrip ? "Secure Your Strangers Group Adventure" : "Secure Your Adventure"}
+                                </h3>
+                                <h2 className="text-2xl font-bold text-foreground font-heading uppercase tracking-tight">
+                                    {isStrangerTrip ? "Confirm Group Booking" : "Confirm Booking"}
+                                </h2>
                             </div>
 
                             {step === 1 ? (

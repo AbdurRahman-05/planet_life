@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Edit, Trash, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Destination } from "@/data/destinations";
+import { getImageSrc } from "@/data/imageMap";
 import DestinationForm from "./DestinationForm";
 import HomeEditor from "./editors/HomeEditor";
 import AboutEditor from "./editors/AboutEditor";
@@ -98,7 +99,7 @@ const AdminDashboard = () => {
                                 <CardContent className="flex items-center justify-between p-6">
                                     <div className="flex items-center space-x-4">
                                         <img
-                                            src={destination.image.startsWith("/") ? destination.image : `/${destination.image}`}
+                                            src={getImageSrc(destination.image)}
                                             alt={destination.name}
                                             className="w-16 h-16 object-cover rounded"
                                         />

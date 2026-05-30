@@ -18,7 +18,7 @@ import { getImageSrc } from "@/data/imageMap";
 
 const DestinationDetail = () => {
   const { id } = useParams();
-  const { destinations } = useAdmin();
+  const { destinations, isLoading } = useAdmin();
   const destination = destinations.find((d) => d.id === id);
   const [searchParams] = useSearchParams();
   const pkgParam = searchParams.get("pkg");
@@ -41,6 +41,17 @@ const DestinationDetail = () => {
     }
   }, [pkgParam, id]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-[#0a0a0a]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600 mx-auto mb-4"></div>
+          <p className="text-white/60 uppercase font-black tracking-widest text-xs">Loading Destination...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!destination) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
@@ -60,6 +71,15 @@ const DestinationDetail = () => {
       ? destination.packages.find((p) => p.id === selectedPkgId) ?? destination.packages[0]
       : destination.packages[0]
     : null;
+
+  const isStrangerTrip = activePkg && (
+    activePkg.id.toLowerCase().includes("stranger") ||
+    activePkg.id.toLowerCase().includes("adventurer") ||
+    activePkg.id.toLowerCase().includes("sojourn") ||
+    activePkg.duration.toLowerCase().includes("stranger") ||
+    activePkg.duration.toLowerCase().includes("adventurer") ||
+    activePkg.duration.toLowerCase().includes("sojourn")
+  );
 
   if (!activePkg) {
     return (
@@ -227,6 +247,11 @@ const DestinationDetail = () => {
               <CardHeader className="bg-muted py-4 mobile:py-6 md:py-8 px-4 mobile:px-6 md:px-8">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                   <div>
+                    {isStrangerTrip && (
+                      <span className="inline-flex items-center gap-1.5 bg-red-600 text-white text-[10px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-md mb-3">
+                        <Users className="w-3.5 h-3.5" /> Strangers Trip
+                      </span>
+                    )}
                     <CardTitle className="text-xl mobile:text-2xl md:text-3xl mb-2 mobile:mb-3 font-bold font-heading uppercase tracking-tight">{activePkg.duration}</CardTitle>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground font-medium">
                       <span className="flex items-center bg-white/50 px-3 py-1 rounded-full border border-black/5">
@@ -245,6 +270,14 @@ const DestinationDetail = () => {
                 </div>
               </CardHeader>
               <CardContent className="p-3 mobile:p-4 md:p-6">
+                {isStrangerTrip && (
+                  <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-600 rounded-r-xl">
+                    <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-1">Strangers Group Tour Experience</p>
+                    <p className="text-xs text-red-900/80 font-medium">
+                      This package is a specially curated group adventure designed for solo travelers and small groups. Meet like-minded travelers, explore together, and share unforgettable experiences. Start as strangers, return as lifelong friends!
+                    </p>
+                  </div>
+                )}
                 <Tabs defaultValue="itinerary" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="itinerary">Itinerary</TabsTrigger>

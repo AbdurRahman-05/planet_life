@@ -10,7 +10,7 @@ import { useAdmin } from "@/context/AdminContext";
    MAIN PAGE
 ───────────────────────────────────────────── */
 const Packages = () => {
-  const { destinations, packagesContent } = useAdmin();
+  const { destinations, packagesContent, isLoading } = useAdmin();
   const [searchParams] = useSearchParams();
   const destParam = searchParams.get("destination");
   const [selectedDestination, setSelectedDestination] = useState<string>("all");
@@ -20,6 +20,16 @@ const Packages = () => {
     window.scrollTo(0, 0);
   }, [destParam]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-[#0a0a0a]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600 mx-auto mb-4"></div>
+          <p className="text-white/60 uppercase font-black tracking-widest text-xs">Loading Packages...</p>
+        </div>
+      </div>
+    );
+  }
 
   const groupedPackages = destinations.reduce(
     (acc, dest) => {
@@ -151,7 +161,8 @@ const DestinationBento = ({
           <img
             src={getImageSrc(group.destination.image)}
             alt={group.destination.name}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] group-hover/dest:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transition-transform group-hover/dest:scale-110"
+            style={{ transitionDuration: '1500ms' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
           
@@ -181,7 +192,8 @@ const DestinationBento = ({
               <img
                 src={getImageSrc(pkg.image || group.destination.image)}
                 alt={pkg.duration}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] opacity-80 group-hover/card:opacity-60 group-hover/card:scale-110"
+                className="absolute inset-0 w-full h-full object-cover transition-transform opacity-80 group-hover/card:opacity-60 group-hover/card:scale-110"
+                style={{ transitionDuration: '1500ms' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent transition-opacity duration-500 group-hover/card:opacity-90" />
               

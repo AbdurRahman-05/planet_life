@@ -266,10 +266,15 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem("adminToken");
     };
 
+    const saveDestinations = (dests: Destination[]) => {
+        setDestinations(dests);
+        localStorage.setItem("planetlife_destinations", JSON.stringify(dests));
+    };
+
     const addDestination = async (destination: Destination) => {
         try {
             const newDest = await api.createDestination(destination, getToken());
-            setDestinations((prev) => [...prev, newDest]);
+            saveDestinations([...destinations, newDest]);
         } catch (error) {
             console.error("Error creating destination", error);
         }
@@ -278,9 +283,7 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     const updateDestination = async (updatedDestination: Destination) => {
         try {
             const updated = await api.updateDestination(updatedDestination.id, updatedDestination, getToken());
-            setDestinations((prev) =>
-                prev.map((dest) => (dest.id === updated.id ? updated : dest))
-            );
+            saveDestinations(destinations.map((dest) => (dest.id === updated.id ? updated : dest)));
         } catch (error) {
             console.error("Error updating destination", error);
         }
@@ -289,7 +292,7 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     const deleteDestination = async (id: string) => {
         try {
             await api.deleteDestination(id, getToken());
-            setDestinations((prev) => prev.filter((dest) => dest.id !== id));
+            saveDestinations(destinations.filter((dest) => dest.id !== id));
         } catch (error) {
             console.error("Error deleting destination", error);
         }

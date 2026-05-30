@@ -74,8 +74,8 @@ const Navbar = () => {
                                         <DropdownMenuLabel className="text-[10px] text-red-600 font-black uppercase mb-1 px-2">International Tours</DropdownMenuLabel>
                                         {["Thailand", "Malaysia", "Bali", "Maldives", "Vietnam", "Sri Lanka", "Dubai", "Singapore"].map((name) => {
                                             const dest = destinations.find(d => 
-                                                d.name.toLowerCase() === name.toLowerCase() || 
-                                                d.country.toLowerCase() === name.toLowerCase()
+                                                d.name.toLowerCase().includes(name.toLowerCase()) || 
+                                                d.country.toLowerCase().includes(name.toLowerCase())
                                             );
                                             return (
                                                 <DropdownMenuItem key={name} asChild>
@@ -154,8 +154,8 @@ const Navbar = () => {
                                 <div className="grid grid-cols-2 gap-1 mb-4">
                                     {["Thailand", "Malaysia", "Bali", "Maldives", "Vietnam", "Sri Lanka", "Dubai", "Singapore"].map(name => {
                                         const dest = destinations.find(d => 
-                                            d.name.toLowerCase() === name.toLowerCase() || 
-                                            d.country.toLowerCase() === name.toLowerCase()
+                                            d.name.toLowerCase().includes(name.toLowerCase()) || 
+                                            d.country.toLowerCase().includes(name.toLowerCase())
                                         );
                                         return (
                                             <DropdownMenuItem key={name} asChild>
@@ -168,8 +168,8 @@ const Navbar = () => {
                                 <div className="grid grid-cols-2 gap-1">
                                     {["Kerala", "Andaman", "Himachal", "Kashmir", "Goa", "Karnataka", "Rajasthan"].map(name => {
                                         const dest = destinations.find(d => 
-                                            d.name.toLowerCase() === name.toLowerCase() || 
-                                            d.country.toLowerCase() === name.toLowerCase()
+                                            d.name.toLowerCase().includes(name.toLowerCase()) || 
+                                            d.country.toLowerCase().includes(name.toLowerCase())
                                         );
                                         return (
                                             <DropdownMenuItem key={name} asChild>

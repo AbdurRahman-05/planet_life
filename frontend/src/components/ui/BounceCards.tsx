@@ -95,7 +95,9 @@ export default function BounceCards({
           overwrite: 'auto'
         });
       } else {
-        const offsetX = i < hoveredIdx ? -200 : 200;
+        const offsetX = i < hoveredIdx
+          ? (window.innerWidth < 640 ? -70 : -200)
+          : (window.innerWidth < 640 ? 70 : 200);
         const pushedTransform = getPushedTransform(baseTransform, offsetX);
 
         const distance = Math.abs(hoveredIdx - i);

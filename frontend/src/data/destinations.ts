@@ -3006,6 +3006,81 @@ export const destinations: Destination[] = [
             ]
           }
         ]
+      },
+      {
+        id: "kashmir-strangers-4n5d",
+        duration: "4 Nights 5 Days (Strangers Tour)",
+        nights: 4,
+        days: 5,
+        price: 14999,
+        image: "kas_adventure_1.jpg",
+        inclusions: [
+          "Airport Pick-up & Drop (Srinagar)",
+          "5 Days private vehicle for sightseeing",
+          "4 Nights hotel accommodation (twin sharing)",
+          "4 Breakfasts & 4 Dinners",
+          "Union cabs in Pahalgam for Aru Valley, Betaab Valley & Chandanwari",
+          "Chain jeeps",
+          "1-Hour complimentary Shikara Ride",
+          "Tamil tour guide throughout the tour"
+        ],
+        itinerary: [
+          {
+            day: 1,
+            title: "Arrival & Srinagar City Tour",
+            description: "Welcome to Srinagar! Begin your journey with a tour of the city's historic gardens and temples.",
+            activities: [
+              "Pickup from Srinagar International Airport",
+              "Visit Shankaracharya Temple (panoramic views)",
+              "Explore Pari Mahal, Cheshma Shahi, Nishat Bagh, and Shalimar Bagh",
+              "Dinner & Overnight stay in Srinagar"
+            ]
+          },
+          {
+            day: 2,
+            title: "Sonmarg Excursion",
+            description: "Explore the 'Meadow of Gold', a scenic drive along the Sindh River.",
+            activities: [
+              "Day trip to Sonmarg (2.5-hour drive)",
+              "Optional excursion to Thajiwas Glacier (local taxi/pony)",
+              "Stunning views of valleys and paddy fields",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 3,
+            title: "Pahalgam - Valley of Shepherds",
+            description: "Visit the iconic valleys and film locations in Pahalgam.",
+            activities: [
+              "Enroute visit Saffron fields and Cricket bat factories",
+              "Visit Betaab Valley, Aru Valley, and Chandanwari",
+              "Visit Baisaran Valley (Mini Switzerland) via pony ride",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 4,
+            title: "Gulmarg - Meadow of Flowers",
+            description: "Experience the snow-clad mountains and world-famous gondola ride.",
+            activities: [
+              "Full-day excursion to Gulmarg",
+              "Visit world's highest 18-hole golf course",
+              "Gondola Ride (Asia’s highest cable car) - optional",
+              "Winter activities like skiing & sledging (seasonal)",
+              "Return to Srinagar for dinner and overnight stay"
+            ]
+          },
+          {
+            day: 5,
+            title: "Dal Lake Shikara Ride & Departure",
+            description: "End your journey with a peaceful ride on the lake before heading home.",
+            activities: [
+              "Complimentary 1-hour Shikara Ride on Dal Lake",
+              "Visit Floating Gardens, Golden Lake, and Meena Bazaar",
+              "Transfer to Srinagar Airport for departure"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -3443,104 +3518,6 @@ export const destinations: Destination[] = [
             activities: [
               "Breakfast and check-out",
               "Drop at Udaipur Station / Airport"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: "kashmir",
-    name: "Kashmir",
-    country: "India",
-    description: "Paradise on Earth — a breathtaking region of snow-capped mountains, lush valleys, and serene lakes. Experience the charm of Srinagar, the meadows of Sonmarg and Gulmarg, and the valley of shepherds, Pahalgam.",
-    image: "kashmir_main.jpg",
-    video: "kashmir_video.mp4",
-    featured: true,
-    whyVisit: [
-      "Enjoy a serene Shikara ride on the iconic Dal Lake",
-      "Experience the world's highest cable car ride in Gulmarg",
-      "Explore the stunning Betaab and Aru valleys in Pahalgam",
-      "Witness the majestic Thajiwas Glacier in Sonmarg"
-    ],
-    adventureImages: [
-      "kas_adventure_1.jpg",
-      "kas_adventure_2.jpg",
-      "kas_adventure_3.jpg",
-      "kas_adventure_4.jpg"
-    ],
-    packages: [
-      {
-        id: "kashmir-strangers-4n5d",
-        duration: "4 Nights 5 Days (Strangers Tour)",
-        nights: 4,
-        days: 5,
-        price: 14999,
-        image: "kas_adventure_1.jpg",
-        inclusions: [
-          "Airport Pick-up & Drop (Srinagar)",
-          "5 Days private vehicle for sightseeing",
-          "4 Nights hotel accommodation (twin sharing)",
-          "4 Breakfasts & 4 Dinners",
-          "Union cabs in Pahalgam for Aru Valley, Betaab Valley & Chandanwari",
-          "Chain jeeps",
-          "1-Hour complimentary Shikara Ride",
-          "Tamil tour guide throughout the tour"
-        ],
-        itinerary: [
-          {
-            day: 1,
-            title: "Arrival & Srinagar City Tour",
-            description: "Welcome to Srinagar! Begin your journey with a tour of the city's historic gardens and temples.",
-            activities: [
-              "Pickup from Srinagar International Airport",
-              "Visit Shankaracharya Temple (panoramic views)",
-              "Explore Pari Mahal, Cheshma Shahi, Nishat Bagh, and Shalimar Bagh",
-              "Dinner & Overnight stay in Srinagar"
-            ]
-          },
-          {
-            day: 2,
-            title: "Sonmarg Excursion",
-            description: "Explore the 'Meadow of Gold', a scenic drive along the Sindh River.",
-            activities: [
-              "Day trip to Sonmarg (2.5-hour drive)",
-              "Optional excursion to Thajiwas Glacier (local taxi/pony)",
-              "Stunning views of valleys and paddy fields",
-              "Return to Srinagar for dinner and overnight stay"
-            ]
-          },
-          {
-            day: 3,
-            title: "Pahalgam - Valley of Shepherds",
-            description: "Visit the iconic valleys and film locations in Pahalgam.",
-            activities: [
-              "Enroute visit Saffron fields and Cricket bat factories",
-              "Visit Betaab Valley, Aru Valley, and Chandanwari",
-              "Visit Baisaran Valley (Mini Switzerland) via pony ride",
-              "Return to Srinagar for dinner and overnight stay"
-            ]
-          },
-          {
-            day: 4,
-            title: "Gulmarg - Meadow of Flowers",
-            description: "Experience the snow-clad mountains and world-famous gondola ride.",
-            activities: [
-              "Full-day excursion to Gulmarg",
-              "Visit world's highest 18-hole golf course",
-              "Gondola Ride (Asia’s highest cable car) - optional",
-              "Winter activities like skiing & sledging (seasonal)",
-              "Return to Srinagar for dinner and overnight stay"
-            ]
-          },
-          {
-            day: 5,
-            title: "Dal Lake Shikara Ride & Departure",
-            description: "End your journey with a peaceful ride on the lake before heading home.",
-            activities: [
-              "Complimentary 1-hour Shikara Ride on Dal Lake",
-              "Visit Floating Gardens, Golden Lake, and Meena Bazaar",
-              "Transfer to Srinagar Airport for departure"
             ]
           }
         ]

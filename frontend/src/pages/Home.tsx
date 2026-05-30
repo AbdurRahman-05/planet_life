@@ -718,13 +718,13 @@ const Home = () => {
           {/* Interactive Packages Stack - Centered focus on Packages */}
           <div className="flex flex-col items-center w-full overflow-visible">
             <div className="flex justify-center items-center h-[350px] mobile:h-[450px] md:h-[500px] relative overflow-visible w-full">
-              <ScrollReveal direction="up" delay={0.2} width="100%">
+              <ScrollReveal direction="up" delay={0.2} width="100%" overflow="visible">
                 <div className="flex justify-center items-center w-full overflow-visible">
                   {(() => {
                     const strangerTrips = homeContent.strangerTrips || [];
                     const centerIdx = (strangerTrips.length - 1) / 2;
                     const stepAngle = 8;
-                    const stepTranslateMobile = 80;
+                    const stepTranslateMobile = 55;
                     const stepTranslateDesktop = 150;
 
                     const transformStylesMobile = strangerTrips.map((_, idx) => {
@@ -739,8 +739,8 @@ const Home = () => {
 
                     return (
                       <BounceCards
-                        containerWidth={window.innerWidth < 640 ? 300 : 700}
-                        containerHeight={window.innerWidth < 640 ? 350 : 500}
+                        containerWidth={window.innerWidth < 640 ? 240 : 700}
+                        containerHeight={window.innerWidth < 640 ? 300 : 500}
                         className="z-10"
                         enableHover={true}
                         transformStyles={window.innerWidth < 640 ? transformStylesMobile : transformStylesDesktop}
@@ -750,29 +750,27 @@ const Home = () => {
                             <img src={getImageSrc(pkg.image)} alt={pkg.title} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                             
-                            <div className="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                            <div className="absolute top-2 left-2 mobile:top-4 mobile:left-4 bg-red-600 text-white text-[9px] mobile:text-[10px] font-black px-2 py-1 mobile:px-3 mobile:py-1.5 rounded-full uppercase tracking-widest shadow-lg">
                               {pkg.month}
                             </div>
 
-                            <div className="absolute bottom-0 left-0 right-0 p-6 text-left">
-                              <h3 className="text-xl mobile:text-2xl font-heading font-black uppercase tracking-tighter text-white mb-2 leading-none">
+                            <div className="absolute bottom-0 left-0 right-0 p-3 mobile:p-6 text-left">
+                              <h3 className="text-sm mobile:text-xl md:text-2xl font-heading font-black uppercase tracking-tighter text-white mb-1 mobile:mb-2 leading-none">
                                 {pkg.title}
                               </h3>
-                              <div className="flex items-center gap-4 mb-4">
-                                 <div className="flex items-center gap-1.5 text-white/70 text-[10px] font-bold uppercase">
-                                   <Calendar className="w-3 h-3 text-red-500" /> {pkg.date}
+                              <div className="flex items-center gap-4 mb-2 mobile:mb-4">
+                                 <div className="flex items-center gap-1.5 text-white/70 text-[9px] mobile:text-[10px] font-bold uppercase">
+                                   <Calendar className="w-2.5 h-2.5 mobile:w-3 mobile:h-3 text-red-500" /> {pkg.date}
                                  </div>
                               </div>
-                              <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                              <div className="flex items-center justify-between border-t border-white/10 pt-2 mobile:pt-4">
                                  <div>
-                                    <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-0.5">Package Price</p>
-                                    <div className="flex items-baseline gap-1.5">
-                                      <span className="text-xl font-heading font-black text-white">{pkg.price}</span>
-                                      {pkg.note && <span className="text-[8px] font-bold text-red-500 uppercase">{pkg.note}</span>}
-                                    </div>
+                                    <span className="text-[9px] mobile:text-[10px] font-black text-white/60 uppercase tracking-widest">
+                                      Strangers Trip
+                                    </span>
                                  </div>
-                                 <Link to={pkg.link} className="bg-red-600 p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
-                                    <ArrowRight className="w-4 h-4 text-white" />
+                                 <Link to={pkg.link} className="bg-red-600 p-1.5 mobile:p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg">
+                                    <ArrowRight className="w-3 h-3 mobile:w-4 mobile:h-4 text-white" />
                                  </Link>
                               </div>
                             </div>
@@ -794,7 +792,7 @@ const Home = () => {
                    </div>
                    <div className="space-y-1">
                       <p className="text-xl mobile:text-2xl font-black text-white uppercase tracking-tight">Successfully Conducted</p>
-                      <p className="text-white/40 font-bold uppercase text-[10px] mobile:text-xs tracking-[0.3em]">International Adventures</p>
+                      <p className="text-white/40 font-bold uppercase text-[10px] mobile:text-xs tracking-[0.3em]">International Strangers Trips</p>
                    </div>
                 </div>
                 
@@ -882,10 +880,12 @@ const Home = () => {
                         </div>
 
                         <div className="border-t border-white/20 pt-6 mt-2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 transform translate-y-4 group-hover:translate-y-0">
-                          <div>
                             <p className="text-[10px] text-white/70 uppercase tracking-[0.2em] font-black mb-1">Starting From</p>
-                             <p className="text-2xl font-extrabold text-white">₹{destination.packages[0]?.price.toLocaleString()}</p>
-                          </div>
+                            <p className="text-2xl font-extrabold text-white">
+                              ₹{destination.packages.length > 0 
+                                ? Math.min(...destination.packages.map(p => p.price)).toLocaleString() 
+                                : "0"}
+                            </p>
                           <span className="bg-white text-black p-4 rounded-full hover:bg-black hover:text-white transition-all shadow-xl">
                             <ArrowRight className="w-5 h-5" />
                           </span>

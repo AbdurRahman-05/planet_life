@@ -1775,7 +1775,7 @@ export const destinations: Destination[] = [
     name: "Meghalaya",
     country: "India",
     description: "The 'Abode of Clouds' features breathtaking waterfalls, living root bridges, pristine lakes, and some of the wettest places on Earth with stunning natural beauty.",
-    image: "meghalaya_new.jpg",
+    image: "meghalaya_new.png",
     video: "hero-video.mp4",
     featured: true,
     whyVisit: [
@@ -1791,7 +1791,7 @@ export const destinations: Destination[] = [
         nights: 4,
         days: 5,
         price: 15999,
-        image: "meghalaya_new.jpg",
+        image: "meghalaya_new.png",
         inclusions: [
           "Transportation (Bus/Car)",
           "All Meals (Breakfast, Lunch, Dinner)",

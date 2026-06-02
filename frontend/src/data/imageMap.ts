@@ -138,7 +138,7 @@ import rajAdv2 from "@/assets/rajasthan/raj_adventure_2.png";
 import rajAdv3 from "@/assets/rajasthan/raj_adventure_3.png";
 
 // ── Meghalaya ──
-import meghalayaImg from "@/assets/meghalaya_new.jpg";
+import meghalayaImg from "@/assets/meghalaya_new.png";
 import meghalayaVideo from "@/assets/hero-video.mp4";
 
 
@@ -272,7 +272,7 @@ export const imageMap: Record<string, string> = {
   "kar_adventure_5.jpg": karAdv5,
   "kar_adventure_6.jpg": karAdv6,
   // ── Meghalaya ──
-  "meghalaya_new.jpg": meghalayaImg,
+  "meghalaya_new.png": meghalayaImg,
   "hero-video.mp4": meghalayaVideo,
 
   // ── Rajasthan ──
@@ -284,6 +284,7 @@ export const imageMap: Record<string, string> = {
   // ── Legacy aliases (old names that may exist in cached localStorage) ──
   "malaysia_new_front.jpg": malaysiaFrontImg,
   "malaysia_new.jpg": malaysiaImg,
+  "meghalaya_new.jpg": meghalayaImg,
 };
 
 /**

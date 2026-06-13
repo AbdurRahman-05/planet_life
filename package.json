@@ -1,0 +1,14 @@
+{
+  "name": "planet-life-root",
+  "version": "1.0.0",
+  "description": "Root package.json to delegate commands to the backend for easy hosting deployment",
+  "main": "backend/dist/server.js",
+  "scripts": {
+    "install-backend": "cd backend && npm install",
+    "postinstall": "npm run install-backend",
+    "start": "cd backend && npm start"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

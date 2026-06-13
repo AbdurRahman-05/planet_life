@@ -12,6 +12,3 @@ Allow: /
 
 User-agent: *
 Allow: /
-
-# Hostinger/Production Sitemap Link (Replace yourdomain.com with your actual active domain)
-Sitemap: https://yourdomain.com/sitemap.xml

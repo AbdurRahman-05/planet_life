@@ -74,36 +74,6 @@ try {
     // Serve static files from the frontend/dist directory
     const frontendPath = path_1.default.join(__dirname, '../../frontend/dist');
     app.use(express_1.default.static(frontendPath));
-    // Dynamic XML Sitemap for SEO
-    app.get('/sitemap.xml', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const host = req.headers.host || 'yourdomain.com';
-            const protocol = req.headers['x-forwarded-proto'] || 'https';
-            const baseUrl = `${protocol}://${host}`;
-            const destinations = yield prisma.destination.findMany({ select: { id: true } });
-            const packages = yield prisma.package.findMany({ select: { id: true, destinationId: true } });
-            let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-            xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-            xml += `  <url>\n    <loc>${baseUrl}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
-            const staticPages = ['/destinations', '/about', '/contact', '/privacy', '/terms'];
-            staticPages.forEach(page => {
-                xml += `  <url>\n    <loc>${baseUrl}${page}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
-            });
-            destinations.forEach(dest => {
-                xml += `  <url>\n    <loc>${baseUrl}/destination/${dest.id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
-            });
-            packages.forEach(pkg => {
-                xml += `  <url>\n    <loc>${baseUrl}/destination/${pkg.destinationId}?pkg=${pkg.id}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
-            });
-            xml += `</urlset>`;
-            res.header('Content-Type', 'application/xml');
-            res.status(200).send(xml);
-        }
-        catch (error) {
-            console.error("Sitemap generation error:", error);
-            res.status(500).send("Error generating sitemap");
-        }
-    }));
     cloudinary_1.v2.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,

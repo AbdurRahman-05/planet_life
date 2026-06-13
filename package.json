@@ -6,6 +6,7 @@
   "scripts": {
     "install-backend": "cd backend && npm install",
     "postinstall": "npm run install-backend",
+    "build": "echo \"already built\"",
     "start": "cd backend && npm start"
   },
   "engines": {

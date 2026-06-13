@@ -74,6 +74,16 @@ try {
     // Serve static files from the frontend/dist directory
     const frontendPath = path_1.default.join(__dirname, '../../frontend/dist');
     app.use(express_1.default.static(frontendPath));
+    // Permanent Favicon handler to prevent 503/404 errors
+    app.get('/favicon.ico', (req, res) => {
+        const logoPath = path_1.default.join(frontendPath, 'logo.png');
+        if (fs_1.default.existsSync(logoPath)) {
+            res.sendFile(logoPath);
+        }
+        else {
+            res.status(204).end();
+        }
+    });
     cloudinary_1.v2.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,

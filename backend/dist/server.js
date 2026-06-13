@@ -428,7 +428,7 @@ catch (startupError) {
     `);
     });
     app = fallbackApp;
-    if (!process.env.VERCEL) {
+    if (!process.env.HOSTINGER) {
         const PORT = hostingerPort || process.env.PORT || 3000;
         fallbackApp.listen(PORT, () => {
             console.log(`Fallback error server running on port ${PORT}`);

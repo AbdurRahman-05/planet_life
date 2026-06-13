@@ -26,6 +26,7 @@ const fs_1 = __importDefault(require("fs"));
 const generative_ai_1 = require("@google/generative-ai");
 const mammoth = require('mammoth');
 const pdfParse = require('pdf-parse');
+const hostingerPort = process.env.PORT;
 let app;
 try {
     // Find and load .env file from multiple fallback paths
@@ -406,7 +407,7 @@ ${text}
         res.sendFile(path_1.default.join(frontendPath, 'index.html'));
     });
     if (!process.env.VERCEL) {
-        const PORT = process.env.PORT || 3000;
+        const PORT = hostingerPort || process.env.PORT || 3000;
         const server = app.listen(PORT, () => {
             console.log(`Backend server running on port ${PORT}`);
         });
@@ -428,7 +429,7 @@ catch (startupError) {
     });
     app = fallbackApp;
     if (!process.env.VERCEL) {
-        const PORT = process.env.PORT || 3000;
+        const PORT = hostingerPort || process.env.PORT || 3000;
         fallbackApp.listen(PORT, () => {
             console.log(`Fallback error server running on port ${PORT}`);
         });

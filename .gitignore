@@ -88,7 +88,7 @@ out/
 
 # Nuxt.js build images
 .nuxt
-dist/
+# dist/
 
 # Gatsby files
 .cache/
@@ -96,7 +96,7 @@ dist/
 # public
 
 # vue-cli build images
-dist/
+# dist/
 
 # Serverless directories
 .serverless/

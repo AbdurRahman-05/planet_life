@@ -1,0 +1,75 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("admins")
+}
+
+model Destination {
+  id              String    @id
+  name            String
+  country         String
+  description     String
+  image           String
+  video           String?
+  featured        Boolean   @default(false)
+  whyVisit        String[]  @map("why_visit")
+  adventureImages String[]  @map("adventure_images")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  packages        Package[]
+
+  @@map("destinations")
+}
+
+model Package {
+  id            String         @id
+  duration      String
+  nights        Int
+  days          Int
+  price         Int
+  image         String?
+  inclusions    String[]
+  destinationId String         @map("destination_id")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  itinerary     DayItinerary[]
+  destination   Destination    @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@map("packages")
+}
+
+model DayItinerary {
+  id          String   @id @default(cuid())
+  day         Int
+  title       String
+  description String
+  activities  String[]
+  packageId   String   @map("package_id")
+  package     Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@map("day_itineraries")
+}
+
+model PageContent {
+  id        String   @id @default(cuid())
+  page      String   @unique
+  data      Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("page_contents")
+}

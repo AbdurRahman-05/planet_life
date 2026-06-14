@@ -6,7 +6,7 @@
   "scripts": {
     "install-backend": "cd backend && npm install",
     "postinstall": "npm run install-backend",
-    "build": "echo \"already built\"",
+    "build": "node -e \"const fs=require('fs'); const path=require('path'); const frontendPath=fs.existsSync('frontend/dist')?'frontend/dist':'planet_life/frontend/dist'; const sourceLogo=path.join(frontendPath, 'logo.png'); const destFavicon=path.join(frontendPath, 'favicon.ico'); if(fs.existsSync(sourceLogo) && !fs.existsSync(destFavicon)) fs.copyFileSync(sourceLogo, destFavicon);\"",
     "start": "cd backend && npm start"
   },
   "engines": {

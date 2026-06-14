@@ -66,25 +66,56 @@ try {
         console.warn(`WARNING: Missing auxiliary environment variables: ${missingOptional.join(', ')}`);
     }
     app = (0, express_1.default)();
+    
+    // Dynamic project root and static folder detection (traversing upwards to find files/folders)
+    const findFrontendDistPath = () => {
+        let currentDir = __dirname;
+        for (let i = 0; i < 5; i++) {
+            const checkPath = path_1.default.join(currentDir, 'frontend/dist');
+            if (fs_1.default.existsSync(path_1.default.join(checkPath, 'index.html'))) {
+                return checkPath;
+            }
+            const parentDir = path_1.default.dirname(currentDir);
+            if (parentDir === currentDir) break;
+            currentDir = parentDir;
+        }
+        return path_1.default.join(__dirname, '../../frontend/dist');
+    };
+
+    const findProjectRoot = () => {
+        let currentDir = __dirname;
+        for (let i = 0; i < 5; i++) {
+            if (fs_1.default.existsSync(path_1.default.join(currentDir, 'package.json')) && 
+                fs_1.default.existsSync(path_1.default.join(currentDir, 'frontend/dist'))) {
+                return currentDir;
+            }
+            const parentDir = path_1.default.dirname(currentDir);
+            if (parentDir === currentDir) break;
+            currentDir = parentDir;
+        }
+        return process.cwd();
+    };
+
+    const projectRoot = findProjectRoot();
+    const frontendPath = findFrontendDistPath();
+    const PORT = hostingerPort || process.env.PORT || 3000;
+
+    // Startup configuration logging
+    console.log(`[Startup] Project Root: ${projectRoot}`);
+    console.log(`[Startup] Frontend Path: ${frontendPath}`);
+    console.log(`[Startup] Frontend Exists: ${fs_1.default.existsSync(frontendPath)}`);
+    console.log(`[Startup] Current Working Directory: ${process.cwd()}`);
+    console.log(`[Startup] Node Environment: ${process.env.NODE_ENV || 'production'}`);
+    console.log(`[Startup] Passenger Environment: ${process.env.PASSENGER_APP_ENV || process.env.RAILS_ENV || 'production'}`);
+    console.log(`[Startup] Listening Port: ${PORT}`);
+
     const connectionString = process.env.DATABASE_URL || '';
     const adapter = new adapter_neon_1.PrismaNeonHTTP(connectionString, {});
     const prisma = new client_1.PrismaClient({ adapter });
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
     app.use((0, express_fileupload_1.default)({ useTempFiles: true }));
-    // Serve static files from the frontend/dist directory
-    const frontendPath = path_1.default.join(__dirname, '../../frontend/dist');
-    app.use(express_1.default.static(frontendPath));
-    // Permanent Favicon handler to prevent 503/404 errors
-    app.get('/favicon.ico', (req, res) => {
-        const logoPath = path_1.default.join(frontendPath, 'logo.png');
-        if (fs_1.default.existsSync(logoPath)) {
-            res.sendFile(logoPath);
-        }
-        else {
-            res.status(204).end();
-        }
-    });
+
     cloudinary_1.v2.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
@@ -398,6 +429,43 @@ ${text}
             res.status(500).json({ message: error.message });
         }
     }));
+    // Caching-optimized Static File Serving (Registered AFTER API routes)
+    // 1. Vite built hashed assets: immutable for 1 year
+    app.use('/assets', express_1.default.static(path_1.default.join(frontendPath, 'assets'), {
+        etag: true,
+        maxAge: '365d',
+        immutable: true,
+        index: false
+    }));
+    
+    // 2. Remaining static files: cached for 1 day, with HTML non-cache rules
+    app.use(express_1.default.static(frontendPath, {
+        etag: true,
+        maxAge: '1d',
+        index: false,
+        setHeaders: (res, filePath) => {
+            if (path_1.default.basename(filePath) === 'index.html') {
+                res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+            }
+        }
+    }));
+    
+    // Middleware to block missing static assets from falling through to the SPA index.html catch-all
+    app.use((req, res, next) => {
+        const isStaticAsset = req.path.includes('.') || 
+                              req.path.startsWith('/assets/') || 
+                              req.path.startsWith('/img/');
+        if (isStaticAsset) {
+            if (req.path === '/favicon.ico') {
+                res.status(204).end();
+            } else {
+                res.status(404).json({ message: `Static asset not found: ${req.path}` });
+            }
+        } else {
+            next();
+        }
+    });
+    
     // Catch-all to serve frontend index.html for SPA routing
     app.get('*', (req, res) => {
         if (req.path.startsWith('/api/')) {
@@ -406,8 +474,8 @@ ${text}
         }
         res.sendFile(path_1.default.join(frontendPath, 'index.html'));
     });
+    
     if (!process.env.VERCEL) {
-        const PORT = hostingerPort || process.env.PORT || 3000;
         const server = app.listen(PORT, () => {
             console.log(`Backend server running on port ${PORT}`);
         });
@@ -428,8 +496,7 @@ catch (startupError) {
     `);
     });
     app = fallbackApp;
-    if (!process.env.HOSTINGER) {
-        const PORT = hostingerPort || process.env.PORT || 3000;
+    if (!process.env.VERCEL) {
         fallbackApp.listen(PORT, () => {
             console.log(`Fallback error server running on port ${PORT}`);
         });

@@ -121,7 +121,7 @@ const defaultContactContent = {
   heroSubtitle: "Ready to plan your next adventure? We're here to help!",
   sectionTitle: "Contact Information",
   sectionText: "Have questions about our packages or need help planning your trip? Reach out to us through any of the following channels:",
-  phone: "9994553297",
+  phone: "+919994553297",
   email: "planetlifecamping@gmail.com",
   instagram: "@_planet_life",
   address: "2nd floor, 64, Nethaji Rd, Periyar, Madurai Main, Madurai, Tamil Nadu 625001",

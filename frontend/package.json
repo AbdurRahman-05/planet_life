@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"const fs=require('fs'); if(fs.existsSync('dist/logo.png') && !fs.existsSync('dist/favicon.ico')) fs.copyFileSync('dist/logo.png', 'dist/favicon.ico')\"",
-    "build:dev": "vite build --mode development && node -e \"const fs=require('fs'); if(fs.existsSync('dist/logo.png') && !fs.existsSync('dist/favicon.ico')) fs.copyFileSync('dist/logo.png', 'dist/favicon.ico')\"",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
   },

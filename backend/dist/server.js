@@ -12,47 +12,120 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const client_1 = require("@prisma/client");
-const adapter_neon_1 = require("@prisma/adapter-neon");
-const cloudinary_1 = require("cloudinary");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
-const generative_ai_1 = require("@google/generative-ai");
-const mammoth = require('mammoth');
-const pdfParse = require('pdf-parse');
+const { performance } = require('perf_hooks');
+
+// Begin Startup Measurement
+const startupStart = performance.now();
+const startupStartTimestamp = new Date().toISOString();
+console.log(`[Startup] Process spawned (PID: ${process.pid}) - Passenger Cold Start Init`);
+
+// Global event handlers to prevent crash/503 on unhandled exceptions
+process.on('uncaughtException', (err) => {
+    console.error('[Process] Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[Process] Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// Lazy-loaded dependencies getters
+let prismaInstance = null;
+function getPrisma() {
+    if (!prismaInstance) {
+        const { PrismaClient } = require("@prisma/client");
+        const { PrismaNeonHTTP } = require("@prisma/adapter-neon");
+        const connectionString = process.env.DATABASE_URL || '';
+        const adapter = new PrismaNeonHTTP(connectionString, {});
+        prismaInstance = new PrismaClient({ adapter });
+    }
+    return prismaInstance;
+}
+
+let cloudinaryV2Instance = null;
+function getCloudinaryV2() {
+    if (!cloudinaryV2Instance) {
+        const cloudinary = require("cloudinary");
+        cloudinary.v2.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET,
+        });
+        cloudinaryV2Instance = cloudinary.v2;
+    }
+    return cloudinaryV2Instance;
+}
+
+let jwtInstance = null;
+function getJwt() {
+    if (!jwtInstance) {
+        jwtInstance = __importDefault(require("jsonwebtoken")).default;
+    }
+    return jwtInstance;
+}
+
+let bcryptInstance = null;
+function getBcrypt() {
+    if (!bcryptInstance) {
+        bcryptInstance = __importDefault(require("bcryptjs")).default;
+    }
+    return bcryptInstance;
+}
+
+let geminiInstance = null;
+function getGemini() {
+    if (!geminiInstance) {
+        geminiInstance = require("@google/generative-ai");
+    }
+    return geminiInstance;
+}
+
 const hostingerPort = process.env.PORT;
 let app;
 try {
-    // Find and load .env file from multiple fallback paths
-    const envPaths = [
-        path_1.default.join(__dirname, '../.env'), // From src/ (development)
-        path_1.default.join(__dirname, '../../.env'), // From dist/ (production)
-        path_1.default.join(process.cwd(), 'backend/.env'), // From root cwd
-        path_1.default.join(process.cwd(), '.env'), // From current cwd
-    ];
+    // Determine project root directory cleanly
+    let projectRoot = process.cwd();
+    if (!fs_1.default.existsSync(path_1.default.join(projectRoot, 'package.json')) || !fs_1.default.existsSync(path_1.default.join(projectRoot, 'backend'))) {
+        // Fallback: traverse up from current file
+        projectRoot = path_1.default.resolve(__dirname, '../..');
+        if (!fs_1.default.existsSync(path_1.default.join(projectRoot, 'package.json'))) {
+            projectRoot = path_1.default.resolve(__dirname, '..');
+        }
+    }
+    
+    const frontendPath = path_1.default.join(projectRoot, 'frontend/dist');
+    const PORT = hostingerPort || process.env.PORT || 3000;
+
+    const envPath = path_1.default.join(projectRoot, 'backend/.env');
     let envLoaded = false;
-    for (const envPath of envPaths) {
-        if (fs_1.default.existsSync(envPath)) {
-            dotenv_1.default.config({ path: envPath });
+    if (fs_1.default.existsSync(envPath)) {
+        dotenv_1.default.config({ path: envPath });
+        envLoaded = true;
+        console.log(`[Startup] Loaded environment variables from: ${envPath}`);
+    } else {
+        const rootEnvPath = path_1.default.join(projectRoot, '.env');
+        if (fs_1.default.existsSync(rootEnvPath)) {
+            dotenv_1.default.config({ path: rootEnvPath });
             envLoaded = true;
-            console.log(`Loaded environment variables from: ${envPath}`);
-            break;
+            console.log(`[Startup] Loaded environment variables from: ${rootEnvPath}`);
         }
     }
     if (!envLoaded) {
         dotenv_1.default.config();
+        console.log(`[Startup] Attempted loading environment variables with default dotenv.config()`);
     }
+
     // Validate critical database environment variable to prevent silent hangs/crashes
     if (!process.env.DATABASE_URL) {
         throw new Error(`DATABASE_URL environment variable is missing! ` +
             `Please ensure this is set in your hosting control panel or in a .env file.`);
     }
+
     // Check and log warnings for other auxiliary environment variables
     const optionalEnv = [
         'CLOUDINARY_CLOUD_NAME',
@@ -63,64 +136,30 @@ try {
     ];
     const missingOptional = optionalEnv.filter(name => !process.env[name]);
     if (missingOptional.length > 0) {
-        console.warn(`WARNING: Missing auxiliary environment variables: ${missingOptional.join(', ')}`);
+        console.warn(`[Startup] WARNING: Missing auxiliary environment variables: ${missingOptional.join(', ')}`);
     }
+
     app = (0, express_1.default)();
     
-    // Dynamic project root and static folder detection (traversing upwards to find files/folders)
-    const findFrontendDistPath = () => {
-        let currentDir = __dirname;
-        for (let i = 0; i < 5; i++) {
-            const checkPath = path_1.default.join(currentDir, 'frontend/dist');
-            if (fs_1.default.existsSync(path_1.default.join(checkPath, 'index.html'))) {
-                return checkPath;
-            }
-            const parentDir = path_1.default.dirname(currentDir);
-            if (parentDir === currentDir) break;
-            currentDir = parentDir;
-        }
-        return path_1.default.join(__dirname, '../../frontend/dist');
-    };
+    // Request/Response logging middleware
+    app.use((req, res, next) => {
+        const reqStart = performance.now();
+        const { method, path: reqPath } = req;
+        console.log(`[Request] ${method} ${reqPath} - Received`);
+        
+        res.on('finish', () => {
+            const duration = performance.now() - reqStart;
+            const memory = process.memoryUsage();
+            console.log(`[Response] ${method} ${reqPath} - Status: ${res.statusCode} - Duration: ${duration.toFixed(2)}ms - RAM: ${(memory.rss / 1024 / 1024).toFixed(2)}MB`);
+        });
+        
+        next();
+    });
 
-    const findProjectRoot = () => {
-        let currentDir = __dirname;
-        for (let i = 0; i < 5; i++) {
-            if (fs_1.default.existsSync(path_1.default.join(currentDir, 'package.json')) && 
-                fs_1.default.existsSync(path_1.default.join(currentDir, 'frontend/dist'))) {
-                return currentDir;
-            }
-            const parentDir = path_1.default.dirname(currentDir);
-            if (parentDir === currentDir) break;
-            currentDir = parentDir;
-        }
-        return process.cwd();
-    };
-
-    const projectRoot = findProjectRoot();
-    const frontendPath = findFrontendDistPath();
-    const PORT = hostingerPort || process.env.PORT || 3000;
-
-    // Startup configuration logging
-    console.log(`[Startup] Project Root: ${projectRoot}`);
-    console.log(`[Startup] Frontend Path: ${frontendPath}`);
-    console.log(`[Startup] Frontend Exists: ${fs_1.default.existsSync(frontendPath)}`);
-    console.log(`[Startup] Current Working Directory: ${process.cwd()}`);
-    console.log(`[Startup] Node Environment: ${process.env.NODE_ENV || 'production'}`);
-    console.log(`[Startup] Passenger Environment: ${process.env.PASSENGER_APP_ENV || process.env.RAILS_ENV || 'production'}`);
-    console.log(`[Startup] Listening Port: ${PORT}`);
-
-    const connectionString = process.env.DATABASE_URL || '';
-    const adapter = new adapter_neon_1.PrismaNeonHTTP(connectionString, {});
-    const prisma = new client_1.PrismaClient({ adapter });
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
     app.use((0, express_fileupload_1.default)({ useTempFiles: true }));
 
-    cloudinary_1.v2.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-    });
     const verifyToken = (req, res, next) => {
         var _a;
         const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
@@ -129,13 +168,14 @@ try {
             return;
         }
         try {
-            jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+            getJwt().verify(token, process.env.JWT_SECRET);
             next();
         }
         catch (e) {
             res.status(401).json({ message: 'Unauthorized' });
         }
     };
+
     // --- AUTH ---
     app.post('/api/auth/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { email, password } = req.body;
@@ -144,36 +184,39 @@ try {
             return;
         }
         try {
-            const admin = yield prisma.admin.findUnique({ where: { email } });
+            const admin = yield getPrisma().admin.findUnique({ where: { email } });
             if (!admin) {
                 res.status(401).json({ message: 'Invalid credentials' });
                 return;
             }
-            const isValid = yield bcryptjs_1.default.compare(password, admin.passwordHash);
+            const isValid = yield getBcrypt().compare(password, admin.passwordHash);
             if (!isValid) {
                 res.status(401).json({ message: 'Invalid credentials' });
                 return;
             }
-            const token = jsonwebtoken_1.default.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+            const token = getJwt().sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
             res.status(200).json({ token });
         }
         catch (error) {
             res.status(500).json({ message: 'Database error', error: error.message });
         }
     }));
+
     // --- HEALTH CHECK / KEEP-ALIVE ---
     app.get('/api/ping', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             // A tiny query to keep the Neon database awake
-            yield prisma.$queryRaw `SELECT 1`;
+            yield getPrisma().$queryRaw `SELECT 1`;
             res.status(200).json({ message: 'pong', db: 'connected', timestamp: new Date().toISOString() });
         }
         catch (error) {
             res.status(500).json({ message: 'pong', db: 'error', timestamp: new Date().toISOString() });
         }
     }));
+
     // --- CACHE ---
     let destinationsCache = null;
+
     // --- DESTINATIONS ---
     app.get('/api/destinations', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (destinationsCache) {
@@ -181,7 +224,7 @@ try {
             return;
         }
         try {
-            const destinations = yield prisma.destination.findMany({
+            const destinations = yield getPrisma().destination.findMany({
                 include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
                 orderBy: { name: 'asc' },
             });
@@ -192,10 +235,11 @@ try {
             res.status(500).json({ message: 'Database error', error: error.message });
         }
     }));
+
     app.post('/api/destinations', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const data = req.body;
         try {
-            const newDest = yield prisma.destination.create({
+            const newDest = yield getPrisma().destination.create({
                 data: {
                     id: data.id, name: data.name, country: data.country, description: data.description,
                     image: data.image, video: data.video, featured: data.featured || false,
@@ -217,10 +261,11 @@ try {
             res.status(400).json({ message: error.message });
         }
     }));
+
     app.get('/api/destinations/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { id } = req.params;
         try {
-            const destination = yield prisma.destination.findUnique({
+            const destination = yield getPrisma().destination.findUnique({
                 where: { id },
                 include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
             });
@@ -234,12 +279,13 @@ try {
             res.status(500).json({ message: 'Database error', error: error.message });
         }
     }));
+
     app.put('/api/destinations/:id', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { id } = req.params;
         const data = req.body;
         try {
-            yield prisma.package.deleteMany({ where: { destinationId: id } });
-            const updatedDest = yield prisma.destination.update({
+            yield getPrisma().package.deleteMany({ where: { destinationId: id } });
+            const updatedDest = yield getPrisma().destination.update({
                 where: { id },
                 data: {
                     name: data.name, country: data.country, description: data.description,
@@ -262,9 +308,10 @@ try {
             res.status(400).json({ message: error.message });
         }
     }));
+
     app.delete('/api/destinations/:id', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            yield prisma.destination.delete({ where: { id: req.params.id } });
+            yield getPrisma().destination.delete({ where: { id: req.params.id } });
             destinationsCache = null;
             res.status(200).json({ message: 'Deleted successfully' });
         }
@@ -272,6 +319,7 @@ try {
             res.status(400).json({ message: error.message });
         }
     }));
+
     // --- CONTENT ---
     const contentCache = {};
     app.get('/api/content/:page', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -281,7 +329,7 @@ try {
             return;
         }
         try {
-            const content = yield prisma.pageContent.findUnique({ where: { page } });
+            const content = yield getPrisma().pageContent.findUnique({ where: { page } });
             const responseData = content || { page, data: {} };
             contentCache[page] = responseData;
             res.status(200).json(responseData);
@@ -290,11 +338,12 @@ try {
             res.status(500).json({ message: 'Database error', error: error.message });
         }
     }));
+
     app.put('/api/content/:page', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { page } = req.params;
         const data = req.body;
         try {
-            const updatedContent = yield prisma.pageContent.upsert({
+            const updatedContent = yield getPrisma().pageContent.upsert({
                 where: { page },
                 update: { data },
                 create: { page, data },
@@ -306,6 +355,7 @@ try {
             res.status(400).json({ message: error.message });
         }
     }));
+
     // --- UPLOAD ---
     app.post('/api/upload', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!req.files || !req.files.file) {
@@ -315,7 +365,7 @@ try {
         const file = Array.isArray(req.files.file) ? req.files.file[0] : req.files.file;
         const folder = req.body.folder || 'planet_life/media';
         try {
-            const result = yield cloudinary_1.v2.uploader.upload(file.tempFilePath, {
+            const result = yield getCloudinaryV2().uploader.upload(file.tempFilePath, {
                 folder: folder,
                 resource_type: 'auto',
             });
@@ -325,6 +375,7 @@ try {
             res.status(500).json({ message: error.message });
         }
     }));
+
     // --- DOCUMENT PARSING WITH GEMINI ---
     app.post('/api/parse-package-document', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!process.env.GEMINI_API_KEY) {
@@ -342,11 +393,13 @@ try {
         let text = '';
         try {
             if (ext === '.docx') {
+                const mammoth = require('mammoth');
                 const mammothLib = mammoth.extractRawText ? mammoth : (mammoth.default || mammoth);
                 const result = yield mammothLib.extractRawText({ path: file.tempFilePath });
                 text = result.value;
             }
             else if (ext === '.pdf') {
+                const pdfParse = require('pdf-parse');
                 const dataBuffer = fs_1.default.readFileSync(file.tempFilePath);
                 const parsePdf = typeof pdfParse === 'function' ? pdfParse : (pdfParse.default || pdfParse);
                 if (typeof parsePdf === 'function') {
@@ -373,7 +426,7 @@ try {
                 res.status(400).json({ message: 'The uploaded document is empty or could not be parsed.' });
                 return;
             }
-            const genAI = new generative_ai_1.GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+            const genAI = new (getGemini().GoogleGenerativeAI)(process.env.GEMINI_API_KEY);
             const model = genAI.getGenerativeModel({
                 model: 'gemini-2.0-flash',
                 generationConfig: { responseMimeType: 'application/json' }
@@ -429,6 +482,7 @@ ${text}
             res.status(500).json({ message: error.message });
         }
     }));
+
     // Caching-optimized Static File Serving (Registered AFTER API routes)
     // 1. Vite built hashed assets: immutable for 1 year
     app.use('/assets', express_1.default.static(path_1.default.join(frontendPath, 'assets'), {
@@ -477,7 +531,23 @@ ${text}
     
     if (!process.env.VERCEL) {
         const server = app.listen(PORT, () => {
-            console.log(`Backend server running on port ${PORT}`);
+            const startupEndTimestamp = new Date().toISOString();
+            const startupDuration = performance.now() - startupStart;
+            
+            console.log(`\n========================================`);
+            console.log(`[Startup] Startup Start: ${startupStartTimestamp}`);
+            console.log(`[Startup] Startup End: ${startupEndTimestamp}`);
+            console.log(`[Startup] Startup Duration: ${startupDuration.toFixed(2)} ms`);
+            console.log(`[Startup] Frontend Path: ${frontendPath}`);
+            console.log(`[Startup] Current Working Directory: ${process.cwd()}`);
+            console.log(`[Startup] Node Version: ${process.version}`);
+            console.log(`[Startup] Environment: ${process.env.NODE_ENV || 'production'}`);
+            console.log(`[Startup] Port: ${PORT}`);
+            console.log(`[Startup] Passenger Environment: ${process.env.PASSENGER_APP_ENV || process.env.RAILS_ENV || 'production'}`);
+            
+            const memoryUsage = process.memoryUsage();
+            console.log(`[Startup] Memory Usage: RSS: ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB, Heap Total: ${(memoryUsage.heapTotal / 1024 / 1024).toFixed(2)} MB, Heap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+            console.log(`========================================\n`);
         });
         server.on('error', (err) => {
             console.error("SERVER FATAL ERROR ON LISTEN:", err);
@@ -485,6 +555,8 @@ ${text}
     }
 }
 catch (startupError) {
+    const startupDuration = performance.now() - startupStart;
+    console.error(`[Startup] Failed in: ${startupDuration.toFixed(2)} ms`);
     console.error("FATAL ERROR ON STARTUP:", startupError);
     // Start a fallback server to display the error on the webpage instead of a 503
     const fallbackApp = (0, express_1.default)();

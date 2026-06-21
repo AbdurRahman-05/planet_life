@@ -239,20 +239,33 @@ try {
     app.post('/api/destinations', verifyToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const data = req.body;
         try {
-            const newDest = yield getPrisma().destination.create({
+            yield getPrisma().destination.create({
                 data: {
                     id: data.id, name: data.name, country: data.country, description: data.description,
                     image: data.image, video: data.video, featured: data.featured || false,
-                    whyVisit: data.whyVisit || [], adventureImages: data.adventureImages || [],
-                    packages: {
-                        create: (data.packages || []).map((pkg) => ({
-                            id: pkg.id, duration: pkg.duration, nights: pkg.nights, days: pkg.days,
-                            price: pkg.price, image: pkg.image, inclusions: pkg.inclusions || [],
-                            itinerary: { create: (pkg.itinerary || []).map((day) => ({ day: day.day, title: day.title, description: day.description, activities: day.activities || [] })) }
-                        }))
+                    whyVisit: data.whyVisit || [], adventureImages: data.adventureImages || []
+                }
+            });
+            for (const pkg of (data.packages || [])) {
+                yield getPrisma().package.create({
+                    data: {
+                        id: pkg.id, duration: pkg.duration, nights: pkg.nights, days: pkg.days,
+                        price: pkg.price, image: pkg.image, inclusions: pkg.inclusions || [],
+                        destinationId: data.id
                     }
-                },
-                include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
+                });
+                for (const day of (pkg.itinerary || [])) {
+                    yield getPrisma().dayItinerary.create({
+                        data: {
+                            day: day.day, title: day.title, description: day.description, activities: day.activities || [],
+                            packageId: pkg.id
+                        }
+                    });
+                }
+            }
+            const newDest = yield getPrisma().destination.findUnique({
+                where: { id: data.id },
+                include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } }
             });
             destinationsCache = null;
             res.status(201).json(newDest);
@@ -285,21 +298,34 @@ try {
         const data = req.body;
         try {
             yield getPrisma().package.deleteMany({ where: { destinationId: id } });
-            const updatedDest = yield getPrisma().destination.update({
+            yield getPrisma().destination.update({
                 where: { id },
                 data: {
                     name: data.name, country: data.country, description: data.description,
                     image: data.image, video: data.video, featured: data.featured || false,
-                    whyVisit: data.whyVisit || [], adventureImages: data.adventureImages || [],
-                    packages: {
-                        create: (data.packages || []).map((pkg) => ({
-                            id: pkg.id, duration: pkg.duration, nights: pkg.nights, days: pkg.days,
-                            price: pkg.price, image: pkg.image, inclusions: pkg.inclusions || [],
-                            itinerary: { create: (pkg.itinerary || []).map((day) => ({ day: day.day, title: day.title, description: day.description, activities: day.activities || [] })) }
-                        }))
+                    whyVisit: data.whyVisit || [], adventureImages: data.adventureImages || []
+                }
+            });
+            for (const pkg of (data.packages || [])) {
+                yield getPrisma().package.create({
+                    data: {
+                        id: pkg.id, duration: pkg.duration, nights: pkg.nights, days: pkg.days,
+                        price: pkg.price, image: pkg.image, inclusions: pkg.inclusions || [],
+                        destinationId: id
                     }
-                },
-                include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } },
+                });
+                for (const day of (pkg.itinerary || [])) {
+                    yield getPrisma().dayItinerary.create({
+                        data: {
+                            day: day.day, title: day.title, description: day.description, activities: day.activities || [],
+                            packageId: pkg.id
+                        }
+                    });
+                }
+            }
+            const updatedDest = yield getPrisma().destination.findUnique({
+                where: { id },
+                include: { packages: { include: { itinerary: { orderBy: { day: 'asc' } } } } }
             });
             destinationsCache = null;
             res.status(200).json(updatedDest);

@@ -156,6 +156,33 @@ try {
         next();
     });
 
+    // Maintenance Mode Middleware
+    app.use((req, res, next) => {
+        if (process.env.MAINTENANCE_MODE === 'true') {
+            // Bypass API health check
+            if (req.path === '/api/ping') {
+                return next();
+            }
+            // Allow loading site logo and favicon so the maintenance page displays them
+            const allowedPublicAssets = ['/logo.png', '/favicon.ico'];
+            if (allowedPublicAssets.includes(req.path)) {
+                return next();
+            }
+            // Block all other API requests with 503 Service Unavailable
+            if (req.path.startsWith('/api/')) {
+                res.status(503).json({
+                    status: 'Maintenance',
+                    message: 'Planet Life is currently undergoing scheduled maintenance. Please try again later.'
+                });
+                return;
+            }
+            // Serve the self-contained maintenance page for all other paths
+            res.sendFile(path_1.default.join(frontendPath, 'maintenance.html'));
+            return;
+        }
+        next();
+    });
+
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
     app.use((0, express_fileupload_1.default)({ useTempFiles: true }));

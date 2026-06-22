@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Maintenance | Planet Life</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #3a86ff;
+      --primary-glow: rgba(58, 134, 255, 0.4);
+      --accent: #f77f00;
+      --accent-glow: rgba(247, 127, 0, 0.4);
+      --success: #06d6a0;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --bg: #070913;
+      --card-bg: rgba(13, 18, 33, 0.45);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(58, 134, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg);
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Background Canvas */
+    #canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Dark Overlay Gradient */
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(7, 9, 19, 0.2) 0%, rgba(7, 9, 19, 0.85) 80%, #070913 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Content Wrapper */
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        max-width: 540px;
+        text-align: center;
+        overflow-y: auto;
+        max-height: 95vh;
+        padding: 20px 0;
+      }
+      
+      .globe-side {
+        order: -1;
+        height: 250px;
+      }
+    }
+
+    /* Left Side: Brand & Message Card */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                  0 0 40px var(--card-border-glow);
+      transition: border 0.5s ease, box-shadow 0.5s ease, transform 0.1s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      border-color: rgba(58, 134, 255, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+                  0 0 50px rgba(58, 134, 255, 0.25);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .logo-container {
+        justify-content: center;
+      }
+    }
+
+    .logo-img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(58, 134, 255, 0.4));
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, #ffffff, #9ec1ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(247, 127, 0, 0.1);
+      border: 1px solid rgba(247, 127, 0, 0.3);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(247, 127, 0, 0.05);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 rgba(247, 127, 0, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 8px rgba(247, 127, 0, 0);
+      }
+      100% {
+        transform: scale(0.9);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 rgba(247, 127, 0, 0);
+      }
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 30px;
+      }
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-weight: 350;
+    }
+
+    /* Subscription Form */
+    .notify-form {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 6px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .input-group:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(58, 134, 255, 0.15);
+    }
+
+    .notify-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 10px 16px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .notify-input::placeholder {
+      color: #6b7280;
+    }
+
+    .notify-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      outline: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+    }
+
+    .notify-btn:hover {
+      background: #2575fc;
+      box-shadow: 0 4px 20px rgba(58, 134, 255, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .notify-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Custom Notification message */
+    .form-message {
+      margin-top: 12px;
+      font-size: 14px;
+      height: 20px;
+      opacity: 0;
+      transform: translateY(-5px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .form-message.success {
+      color: var(--success);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .form-message.error {
+      color: #ef4444;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Telemetry Info Board (Right Side on desktop) */
+    .telemetry-board {
+      background: rgba(8, 10, 18, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 26px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: #94a3b8;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .telemetry-board::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: scanline-top 3s infinite linear;
+    }
+
+    @keyframes scanline-top {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.04);
+      padding-bottom: 8px;
+    }
+
+    .telemetry-row:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .telemetry-label {
+      color: #576f93;
+    }
+
+    .telemetry-val {
+      color: #cbd5e1;
+    }
+
+    .telemetry-val.glow-blue {
+      color: #60a5fa;
+      text-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+    }
+
+    .telemetry-val.glow-green {
+      color: #34d399;
+      text-shadow: 0 0 8px rgba(52, 211, 153, 0.5);
+    }
+
+    /* Progress bar */
+    .progress-container {
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      height: 8px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(90deg, var(--primary) 0%, #60a5fa 100%);
+      box-shadow: 0 0 10px rgba(58, 134, 255, 0.7);
+      border-radius: 4px;
+      position: relative;
+      animation: load-progress 20s infinite alternate ease-in-out;
+    }
+
+    @keyframes load-progress {
+      0% { width: 75%; }
+      50% { width: 84%; }
+      100% { width: 88%; }
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .social-links {
+        justify-content: center;
+      }
+    }
+
+    .social-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      color: white;
+      background: rgba(58, 134, 255, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(58, 134, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Floating globe side for desktops */
+    .globe-side {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      min-height: 380px;
+      position: relative;
+    }
+
+    .globe-overlay-info {
+      position: absolute;
+      bottom: -10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      animation: fade-pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes fade-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Console logging simulated */
+    .console-logs {
+      margin-top: 15px;
+      height: 80px;
+      overflow-y: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .log-item {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      animation: log-slide 0.3s ease-out forwards;
+    }
+
+    @keyframes log-slide {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .log-item.success { color: #10b981; }
+    .log-item.warning { color: #f59e0b; }
+    .log-item.info { color: #3b82f6; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Stars Canvas and 3D Globe -->
+  <div id="canvas-container">
+    <canvas id="starfield-globe"></canvas>
+  </div>
+  
+  <div class="bg-overlay"></div>
+
+  <!-- Main Grid Container -->
+  <div class="container" id="interactive-container">
+    
+    <!-- Left: Card -->
+    <div class="card" id="tilt-card">
+      <div class="logo-container">
+        <!-- Logo file is loaded relative to website root, served by Express backend -->
+        <img class="logo-img" src="/logo.png" alt="Planet Life Logo" onerror="this.style.display='none'; document.getElementById('brand-text').style.paddingLeft='0';">
+        <span class="brand-name" id="brand-text">Planet Life</span>
+      </div>
+
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        System Upgrade
+      </div>
+
+      <h1>Charting New<br>Adventures</h1>
+      
+      <p class="description">
+        We are currently updating our itinerary engine and mapping out breathtaking new destinations for your next escape. Our servers are undergoing a brief scheduled enhancement to elevate your booking experience. We'll be back online momentarily.
+      </p>
+
+      <!-- Simulated Notify form -->
+      <form class="notify-form" id="subscription-form" onsubmit="handleNotifySubmit(event)">
+        <div class="input-group">
+          <input type="email" class="notify-input" id="subscriber-email" placeholder="Enter your email for coordinates..." required>
+          <button type="submit" class="notify-btn" id="submit-btn">Notify Me</button>
+        </div>
+        <div class="form-message" id="message-box"></div>
+      </form>
+
+      <!-- Socials -->
+      <div class="social-links">
+        <a href="#" class="social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Telemetry Board (with space/globe on left/right depending on perspective) -->
+    <div class="globe-side">
+      <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+        
+        <!-- Live status board -->
+        <div class="telemetry-board">
+          <div class="telemetry-row">
+            <span class="telemetry-label">SYSTEM_STATUS</span>
+            <span class="telemetry-val glow-blue">UPGRADING</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">COORDINATES</span>
+            <span class="telemetry-val" id="telemetry-coords">0.0000° N, 0.0000° E</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">ITINERARY_DB</span>
+            <span class="telemetry-val glow-green">OPTIMIZED</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="telemetry-label">CDN_RESPONSE</span>
+            <span class="telemetry-val">12ms (FAST)</span>
+          </div>
+          <div class="telemetry-row" style="flex-direction: column; border-bottom: none; padding-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span class="telemetry-label">PROGRESS_RATIO</span>
+              <span class="telemetry-val" id="progress-pct">87.4%</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar" id="progress-bar-el"></div>
+            </div>
+          </div>
+          
+          <!-- Logging console simulation -->
+          <div class="console-logs" id="console-logs-container">
+            <div class="log-item info">> Initializing database migration pipeline...</div>
+            <div class="log-item info">> Compiling travel package static routes...</div>
+            <div class="log-item success">> Neon PostgreSQL direct connect successfully linked.</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="globe-overlay-info">
+        Interactive Navigation Grid
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // --- 3D PARTICLE GLOBE & STARFIELD ON CANVAS ---
+    const canvas = document.getElementById('starfield-globe');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    // Handle Resize
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse Tracking
+    let mouse = { x: width / 2, y: height / 2, tx: width / 2, ty: height / 2, down: false };
+    window.addEventListener('mousemove', (e) => {
+      mouse.tx = e.clientX;
+      mouse.ty = e.clientY;
+    });
+
+    // Star Class
+    class Star {
+      constructor() {
+        this.reset();
+        this.z = Math.random() * width; // random depth
+      }
+
+      reset() {
+        this.x = (Math.random() - 0.5) * width * 2;
+        this.y = (Math.random() - 0.5) * height * 2;
+        this.z = width;
+        this.px = 0;
+        this.py = 0;
+        this.color = `rgba(${170 + Math.random() * 85}, ${190 + Math.random() * 65}, 255, ${0.1 + Math.random() * 0.4})`;
+        this.speed = 0.5 + Math.random() * 1.5;
+      }
+
+      update() {
+        // Star movement speed warped slightly by mouse distance from center
+        const dx = (mouse.tx - width / 2) * 0.05;
+        const dy = (mouse.ty - height / 2) * 0.05;
+        
+        this.z -= this.speed + (Math.abs(dx) + Math.abs(dy)) * 0.1;
+        
+        // Slightly drag star position based on mouse vector
+        this.x -= dx * 0.05;
+        this.y -= dy * 0.05;
+
+        if (this.z <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        // 3D projection
+        const sx = (this.x / this.z) * width + width / 2;
+        const sy = (this.y / this.z) * height + height / 2;
+
+        if (sx < 0 || sx > width || sy < 0 || sy > height) {
+          this.reset();
+          return;
+        }
+
+        // Draw star trail/dot
+        const r = (1 - this.z / width) * 2;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r > 0.1 ? r : 0.1, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        
+        this.px = sx;
+        this.py = sy;
+      }
+    }
+
+    // Globe Particle Class (3D Sphere Coordinates)
+    class GlobeParticle {
+      constructor(theta, phi, radius) {
+        this.theta = theta; // angle in XY plane
+        this.phi = phi;     // angle from Z axis
+        this.radius = radius;
+        
+        // Calculated spherical coordinate values
+        this.x = this.radius * Math.sin(this.phi) * Math.cos(this.theta);
+        this.y = this.radius * Math.sin(this.phi) * Math.sin(this.theta);
+        this.z = this.radius * Math.cos(this.phi);
+      }
+
+      rotateY(angle) {
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        const x1 = this.x * cos - this.z * sin;
+        const z1 = this.z * cos + this.x * sin;
+        this.x = x1;
+        this.z = z1;
+      }
+
+      rotateX(angle) {
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        const y1 = this.y * cos - this.z * sin;
+        const z1 = this.z * cos + this.y * sin;
+        this.y = y1;
+        this.z = z1;
+      }
+
+      project(globeX, globeY, d) {
+        // Simple 3D projection to 2D
+        // d is distance of camera
+        const scale = 250; 
+        const perspective = scale / (this.z + d);
+        const sx = this.x * perspective + globeX;
+        const sy = this.y * perspective + globeY;
+        const brightness = (this.z + this.radius) / (this.radius * 2); // 0 (back) to 1 (front)
+        
+        return { x: sx, y: sy, z: this.z, brightness: brightness };
+      }
+    }
+
+    // Initialize Starfield
+    const stars = [];
+    const starCount = 300;
+    for (let i = 0; i < starCount; i++) {
+      stars.push(new Star());
+    }
+
+    // Initialize 3D Globe Points
+    const globeParticles = [];
+    const ringCount = 15; // Number of vertical slices
+    const pointsPerRing = 20; // Number of points per slice
+    const globeRadius = 150;
+
+    for (let i = 0; i < ringCount; i++) {
+      const phi = (Math.PI * i) / (ringCount - 1);
+      for (let j = 0; j < pointsPerRing; j++) {
+        const theta = (Math.PI * 2 * j) / pointsPerRing;
+        globeParticles.push(new GlobeParticle(theta, phi, globeRadius));
+      }
+    }
+
+    let rotY = 0.003;
+    let rotX = 0.001;
+
+    // Animation Loop
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Interpolate Mouse Position
+      mouse.x += (mouse.tx - mouse.x) * 0.1;
+      mouse.y += (mouse.ty - mouse.y) * 0.1;
+
+      // 1. Draw Starfield Background
+      for (let i = 0; i < stars.length; i++) {
+        stars[i].update();
+        stars[i].draw();
+      }
+
+      // 2. Determine Globe Center Location
+      // On desktop, render on the right half. On mobile, render centered.
+      let globeX = width * 0.75;
+      let globeY = height * 0.5;
+      if (width < 900) {
+        globeX = width * 0.5;
+        // Float the globe above the mobile card
+        const globeContainer = document.querySelector('.globe-side');
+        if (globeContainer) {
+          const rect = globeContainer.getBoundingClientRect();
+          globeX = rect.left + rect.width / 2;
+          globeY = rect.top + rect.height / 2;
+        }
+      }
+
+      // Rotate globe slightly based on mouse offset
+      const mouseSpeedX = (mouse.x - width / 2) * 0.00001;
+      const mouseSpeedY = (mouse.y - height / 2) * 0.00001;
+
+      // Draw Globe Connections (Mesh Grid Lines)
+      const projected = [];
+      const camDistance = 350;
+
+      for (let i = 0; i < globeParticles.length; i++) {
+        // Rotate points
+        globeParticles[i].rotateY(rotY + mouseSpeedX);
+        globeParticles[i].rotateX(rotX + mouseSpeedY);
+        
+        projected.push(globeParticles[i].project(globeX, globeY, camDistance));
+      }
+
+      // Sort points back-to-front by depth (Z index) so rendering order looks correct
+      // Draw grid lines
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < ringCount; i++) {
+        for (let j = 0; j < pointsPerRing; j++) {
+          const idx1 = i * pointsPerRing + j;
+          const idx2 = i * pointsPerRing + ((j + 1) % pointsPerRing); // Next in same ring
+          
+          const p1 = projected[idx1];
+          const p2 = projected[idx2];
+          
+          // Draw horizontal wire connections
+          if (p1.z > -100 && p2.z > -100) { // Don't draw completely in back
+            const alpha = Math.min(p1.brightness, p2.brightness) * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(58, 134, 255, ${alpha})`;
+            ctx.strokeStyle = `rgba(58, 134, 255, ${alpha})`;
+            ctx.stroke();
+          }
+
+          // Vertical wire connections
+          if (i < ringCount - 1) {
+            const idx3 = (i + 1) * pointsPerRing + j;
+            const p3 = projected[idx3];
+            if (p1.z > -100 && p3.z > -100) {
+              const alpha = Math.min(p1.brightness, p3.brightness) * 0.18;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p3.x, p3.y);
+              ctx.strokeStyle = `rgba(58, 134, 255, ${alpha})`;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      // Draw Globe Nodes (Glowing Dots)
+      for (let i = 0; i < projected.length; i++) {
+        const p = projected[i];
+        if (p.z > -120) {
+          const size = p.brightness * 2.5 + 0.5;
+          const alpha = p.brightness * 0.8;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          
+          // Accent colored poles
+          if (i < pointsPerRing || i >= globeParticles.length - pointsPerRing) {
+            ctx.fillStyle = `rgba(247, 127, 0, ${alpha})`;
+          } else {
+            ctx.fillStyle = `rgba(96, 165, 250, ${alpha})`;
+          }
+          ctx.fill();
+
+          // Subtle glow behind dots
+          if (p.brightness > 0.75) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, size * 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(58, 134, 255, ${alpha * 0.15})`;
+            ctx.fill();
+          }
+        }
+      }
+
+      // Subtle atmospheric halo around globe
+      ctx.beginPath();
+      ctx.arc(globeX, globeY, globeRadius * 0.77, 0, Math.PI * 2);
+      const grad = ctx.createRadialGradient(globeX, globeY, globeRadius * 0.6, globeX, globeY, globeRadius * 0.85);
+      grad.addColorStop(0, 'rgba(58, 134, 255, 0)');
+      grad.addColorStop(0.7, 'rgba(58, 134, 255, 0.04)');
+      grad.addColorStop(1, 'rgba(58, 134, 255, 0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // --- TILT CARD 3D EFFECT ---
+    const card = document.getElementById('tilt-card');
+    const container = document.getElementById('interactive-container');
+
+    container.addEventListener('mousemove', (e) => {
+      if (window.innerWidth < 900) {
+        card.style.transform = 'none';
+        return;
+      }
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      // Calculate rotation angles based on mouse offsets (max 12 degrees tilt)
+      const rotY = (x / rect.width) * 12;
+      const rotX = -(y / rect.height) * 12;
+      
+      card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(10px)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0)';
+      card.style.transition = 'transform 0.5s ease';
+    });
+    
+    container.addEventListener('mouseenter', () => {
+      card.style.transition = 'none';
+    });
+
+
+    // --- NOTIFY ME SUBMIT SIMULATOR ---
+    function handleNotifySubmit(event) {
+      event.preventDefault();
+      const emailInput = document.getElementById('subscriber-email');
+      const submitBtn = document.getElementById('submit-btn');
+      const messageBox = document.getElementById('message-box');
+
+      if (!emailInput.value) return;
+
+      submitBtn.textContent = 'Verifying...';
+      submitBtn.disabled = true;
+
+      // Simulate a premium verification & server response delay
+      setTimeout(() => {
+        submitBtn.textContent = 'Notify Me';
+        submitBtn.disabled = false;
+        
+        // Show success animation
+        messageBox.classList.remove('error');
+        messageBox.classList.add('success');
+        messageBox.innerHTML = `✓ Coordinates locked! We will notify you at arrival.`;
+        
+        // Add log entry to console
+        addConsoleLog(`User subscription verified: ${emailInput.value}`, 'success');
+        
+        // Clear input
+        emailInput.value = '';
+      }, 1200);
+    }
+
+
+    // --- REALTIME TELEMETRY SYSTEM LOGGER ---
+    const telemetryCoords = document.getElementById('telemetry-coords');
+    const progressPct = document.getElementById('progress-pct');
+    const logsContainer = document.getElementById('console-logs-container');
+    const progressBar = document.getElementById('progress-bar-el');
+
+    // Simulate coordinates matching tourist hotspots
+    const touristCoords = [
+      { name: "Meghalaya, India", lat: 25.4670, lon: 91.3662 },
+      { name: "Phuket, Thailand", lat: 7.8804, lon: 98.3923 },
+      { name: "Ubud, Bali", lat: -8.5069, lon: 115.2625 },
+      { name: "Kuala Lumpur, MY", lat: 3.1390, lon: 101.6869 },
+      { name: "Marina Bay, SG", lat: 1.2878, lon: 103.8590 },
+      { name: "Ha Long Bay, VN", lat: 20.9758, lon: 107.0460 },
+      { name: "Downtown Dubai", lat: 25.2048, lon: 55.2708 }
+    ];
+
+    let currentCoordIdx = 0;
+    
+    // Cycle GPS telemetry
+    function updateTelemetryCoords() {
+      const coord = touristCoords[currentCoordIdx];
+      
+      // Jitter coord values slightly for realism
+      const latJitter = coord.lat + (Math.random() - 0.5) * 0.005;
+      const lonJitter = coord.lon + (Math.random() - 0.5) * 0.005;
+      
+      telemetryCoords.textContent = `${latJitter.toFixed(4)}° ${latJitter >= 0 ? 'N' : 'S'}, ${lonJitter.toFixed(4)}° ${lonJitter >= 0 ? 'E' : 'W'}`;
+      
+      // Cycle indices
+      currentCoordIdx = (currentCoordIdx + 1) % touristCoords.length;
+      
+      // Post log
+      addConsoleLog(`Geo-caching assets for target destination: [${coord.name}]`, 'info');
+    }
+    
+    // Periodic GPS cycle
+    setInterval(updateTelemetryCoords, 8000);
+    updateTelemetryCoords(); // Initial call
+
+    // Ticking progress percentage slightly
+    let baseProgress = 87.42;
+    setInterval(() => {
+      // oscillate slightly, simulating dynamic loading ratio
+      const jitter = (Math.random() - 0.45) * 0.02;
+      baseProgress += jitter;
+      if (baseProgress > 94) baseProgress = 87.42; // reset/cap
+      progressPct.textContent = `${baseProgress.toFixed(2)}%`;
+      progressBar.style.width = `${baseProgress}%`;
+    }, 4000);
+
+    // Logging helpers
+    const sampleLogMessages = [
+      "Optimizing image CDN assets for Southeast Asia region...",
+      "Clearing client page bundle cache entries...",
+      "Validating JWT secret auth token expiration rules...",
+      "Caching destination packages JSON responses...",
+      "Rebuilding site layout map using Outfit google fonts...",
+      "Connecting to Neon serverless cloud DB instance...",
+      "Testing ping-back endpoint latency: 12ms",
+      "Compressing itinerary media banners into WebP format..."
+    ];
+
+    function addConsoleLog(text, type = 'info') {
+      const logItem = document.createElement('div');
+      logItem.className = `log-item ${type}`;
+      logItem.textContent = `> ${text}`;
+      
+      logsContainer.appendChild(logItem);
+      
+      // Remove first log item if overflow
+      if (logsContainer.children.length > 5) {
+        logsContainer.removeChild(logsContainer.firstElementChild);
+      }
+      
+      // Scroll to bottom
+      logsContainer.scrollTop = logsContainer.scrollHeight;
+    }
+
+    // Seed logs randomly
+    setInterval(() => {
+      const idx = Math.floor(Math.random() * sampleLogMessages.length);
+      const types = ['info', 'info', 'success'];
+      const randType = types[Math.floor(Math.random() * types.length)];
+      addConsoleLog(sampleLogMessages[idx], randType);
+    }, 6000);
+
+  </script>
+</body>
+</html>

@@ -384,7 +384,7 @@ var b = e(n(), 1),
                                 (0, x.jsx)(r, {
                                   type: `submit`,
                                   size: `lg`,
-                                  className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-8 rounded-2xl uppercase tracking-widest transition-all shadow-xl`,
+                                  className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-4 rounded-2xl uppercase tracking-widest transition-all shadow-xl`,
                                   disabled: n,
                                   children: n
                                     ? `Processing...`

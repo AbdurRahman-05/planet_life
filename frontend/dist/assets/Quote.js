@@ -241,7 +241,7 @@ var S = e(r(), 1),
                                   }
                                   T(2);
                                 },
-                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-7 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
+                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-4 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
                                 children: `Next Step`,
                               }),
                               (0, C.jsxs)(`div`, {
@@ -394,7 +394,7 @@ var S = e(r(), 1),
                                     e(`/`));
                                 },
                                 disabled: E,
-                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-7 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
+                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-4 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
                                 children: E
                                   ? `Processing...`
                                   : `Submit Inquiry`,

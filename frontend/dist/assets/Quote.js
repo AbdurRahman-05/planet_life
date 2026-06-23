@@ -1,0 +1,541 @@
+import { a as e } from "./rolldown-runtime.js";
+import { s as t, v as n, x as r } from "./vendor-react.js";
+import { i, n as a } from "./AdminContext.js";
+import { F as o, i as s, j as c, m as l, u } from "./lucide-react.js";
+import {
+  a as d,
+  c as f,
+  h as p,
+  i as m,
+  n as h,
+  o as g,
+  p as _,
+  r as v,
+  s as y,
+} from "./index.js";
+import { n as b, t as x } from "./card.js";
+var S = e(r(), 1),
+  C = n(),
+  w = () => {
+    let e = t(),
+      { toast: n } = p(),
+      { contactContent: r } = a(),
+      [w, T] = (0, S.useState)(1),
+      [E, D] = (0, S.useState)(!1),
+      [O, k] = (0, S.useState)({
+        travelMonth: ``,
+        duration: ``,
+        numPersons: ``,
+        name: ``,
+        email: ``,
+        whatsapp: ``,
+        language: ``,
+      }),
+      A = (e) => {
+        let { name: t, value: n } = e.target;
+        k((e) => ({ ...e, [t]: n }));
+      },
+      j = (e, t) => {
+        k((n) => ({ ...n, [e]: t }));
+      };
+    return (0, C.jsxs)(`div`, {
+      className: `min-h-screen relative overflow-hidden font-sans`,
+      children: [
+        (0, C.jsx)(`video`, {
+          autoPlay: !0,
+          loop: !0,
+          muted: !0,
+          playsInline: !0,
+          className: `absolute inset-0 w-full h-full object-cover`,
+          children: (0, C.jsx)(`source`, { src: _, type: `video/mp4` }),
+        }),
+        (0, C.jsx)(`div`, {
+          className: `absolute inset-0 bg-black/50 backdrop-blur-[2px]`,
+        }),
+        (0, C.jsxs)(`div`, {
+          className: `container mx-auto px-3 mobile:px-4 relative z-10 py-8 mobile:py-10 md:py-12 pt-24 mobile:pt-28 md:pt-32`,
+          children: [
+            (0, C.jsxs)(`div`, {
+              className: `text-center mb-8 mobile:mb-12 md:mb-16 text-white max-w-4xl mx-auto`,
+              children: [
+                (0, C.jsx)(`h1`, {
+                  className: `text-2xl xs:text-3xl mobile:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 mobile:mb-6 md:mb-8 uppercase tracking-tighter leading-tight font-heading text-white`,
+                  children: `Your Dream Holiday Awaits`,
+                }),
+                (0, C.jsx)(`p`, {
+                  className: `max-w-2xl mx-auto text-white/80 text-sm mobile:text-base md:text-lg lg:text-xl font-medium leading-relaxed font-sans`,
+                  children: `Experience precision travel planning. Customized international journeys tailored to your soul.`,
+                }),
+              ],
+            }),
+            (0, C.jsxs)(`div`, {
+              className: `flex flex-col items-center justify-center`,
+              children: [
+                (0, C.jsx)(x, {
+                  className: `w-full max-w-md bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border-none p-2`,
+                  children: (0, C.jsxs)(b, {
+                    className: `p-8`,
+                    children: [
+                      (0, C.jsxs)(`div`, {
+                        className: `text-center mb-10`,
+                        children: [
+                          (0, C.jsx)(`h3`, {
+                            className: `font-bold text-primary uppercase text-[10px] tracking-[0.4em] mb-3 font-heading`,
+                            children: `Get Your Customized Itinerary`,
+                          }),
+                          (0, C.jsx)(`h2`, {
+                            className: `text-2xl font-bold text-foreground font-heading uppercase tracking-tight`,
+                            children: `Request A Quote`,
+                          }),
+                        ],
+                      }),
+                      w === 1
+                        ? (0, C.jsxs)(`div`, {
+                            className: `space-y-6`,
+                            children: [
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Travel Month`,
+                                  }),
+                                  (0, C.jsxs)(h, {
+                                    value: O.travelMonth,
+                                    onValueChange: (e) => j(`travelMonth`, e),
+                                    children: [
+                                      (0, C.jsx)(d, {
+                                        className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                        children: (0, C.jsx)(g, {
+                                          placeholder: `Select Month`,
+                                        }),
+                                      }),
+                                      (0, C.jsx)(v, {
+                                        className: `bg-white text-gray-900`,
+                                        children: [
+                                          `January`,
+                                          `February`,
+                                          `March`,
+                                          `April`,
+                                          `May`,
+                                          `June`,
+                                          `July`,
+                                          `August`,
+                                          `September`,
+                                          `October`,
+                                          `November`,
+                                          `December`,
+                                        ].map((e) =>
+                                          (0, C.jsx)(
+                                            m,
+                                            { value: e, children: e },
+                                            e,
+                                          ),
+                                        ),
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Duration`,
+                                  }),
+                                  (0, C.jsxs)(h, {
+                                    value: O.duration,
+                                    onValueChange: (e) => j(`duration`, e),
+                                    children: [
+                                      (0, C.jsx)(d, {
+                                        className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                        children: (0, C.jsx)(g, {
+                                          placeholder: `Select Duration`,
+                                        }),
+                                      }),
+                                      (0, C.jsxs)(v, {
+                                        className: `bg-white text-gray-900`,
+                                        children: [
+                                          (0, C.jsx)(m, {
+                                            value: `3-5`,
+                                            children: `3-5 Days`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `5-7`,
+                                            children: `5-7 Days`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `7-10`,
+                                            children: `7-10 Days`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `10+`,
+                                            children: `10+ Days`,
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Number of Persons`,
+                                  }),
+                                  (0, C.jsxs)(h, {
+                                    value: O.numPersons,
+                                    onValueChange: (e) => j(`numPersons`, e),
+                                    children: [
+                                      (0, C.jsx)(d, {
+                                        className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                        children: (0, C.jsx)(g, {
+                                          placeholder: `Select Persons`,
+                                        }),
+                                      }),
+                                      (0, C.jsxs)(v, {
+                                        className: `bg-white text-gray-900`,
+                                        children: [
+                                          (0, C.jsx)(m, {
+                                            value: `solo`,
+                                            children: `Solo`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `couple`,
+                                            children: `Couple`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `family-3`,
+                                            children: `Family (3)`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `family-4`,
+                                            children: `Family (4+)`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `group`,
+                                            children: `Group`,
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsx)(i, {
+                                onClick: () => {
+                                  if (
+                                    !O.travelMonth ||
+                                    !O.duration ||
+                                    !O.numPersons
+                                  ) {
+                                    n({
+                                      title: `Missing Fields`,
+                                      description: `Please fill in all fields to proceed.`,
+                                      variant: `destructive`,
+                                    });
+                                    return;
+                                  }
+                                  T(2);
+                                },
+                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-7 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
+                                children: `Next Step`,
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `flex justify-center gap-2 mt-4`,
+                                children: [
+                                  (0, C.jsx)(`div`, {
+                                    className: `w-8 h-1.5 rounded-full bg-red-600`,
+                                  }),
+                                  (0, C.jsx)(`div`, {
+                                    className: `w-1.5 h-1.5 rounded-full bg-gray-200`,
+                                  }),
+                                ],
+                              }),
+                            ],
+                          })
+                        : (0, C.jsxs)(`div`, {
+                            className: `space-y-6`,
+                            children: [
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Name`,
+                                  }),
+                                  (0, C.jsx)(f, {
+                                    name: `name`,
+                                    placeholder: `Your Name`,
+                                    value: O.name,
+                                    onChange: A,
+                                    className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Email Address`,
+                                  }),
+                                  (0, C.jsx)(f, {
+                                    name: `email`,
+                                    type: `email`,
+                                    placeholder: `youremail@gmail.com`,
+                                    value: O.email,
+                                    onChange: A,
+                                    className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `WhatsApp Number`,
+                                  }),
+                                  (0, C.jsxs)(`div`, {
+                                    className: `flex`,
+                                    children: [
+                                      (0, C.jsx)(`div`, {
+                                        className: `bg-gray-100 border border-r-0 border-gray-100 rounded-l-xl px-4 flex items-center text-gray-900 font-bold text-sm`,
+                                        children: `🇮🇳 +91`,
+                                      }),
+                                      (0, C.jsx)(f, {
+                                        name: `whatsapp`,
+                                        placeholder: `9876543210`,
+                                        value: O.whatsapp,
+                                        onChange: A,
+                                        className: `bg-gray-50 border-gray-100 rounded-l-none text-gray-900 h-12 rounded-r-xl`,
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, C.jsx)(y, {
+                                    className: `text-red-600 font-extrabold uppercase text-[10px]`,
+                                    children: `Select Language`,
+                                  }),
+                                  (0, C.jsxs)(h, {
+                                    value: O.language,
+                                    onValueChange: (e) => j(`language`, e),
+                                    children: [
+                                      (0, C.jsx)(d, {
+                                        className: `bg-gray-50 border-gray-100 text-gray-900 h-12 rounded-xl`,
+                                        children: (0, C.jsx)(g, {
+                                          placeholder: `Language`,
+                                        }),
+                                      }),
+                                      (0, C.jsxs)(v, {
+                                        className: `bg-white text-gray-900`,
+                                        children: [
+                                          (0, C.jsx)(m, {
+                                            value: `english`,
+                                            children: `English`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `hindi`,
+                                            children: `Hindi`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `tamil`,
+                                            children: `Tamil`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `malayalam`,
+                                            children: `Malayalam`,
+                                          }),
+                                          (0, C.jsx)(m, {
+                                            value: `kannada`,
+                                            children: `Kannada`,
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsx)(i, {
+                                onClick: async (t) => {
+                                  if (
+                                    (t.preventDefault(),
+                                    !O.name ||
+                                      !O.email ||
+                                      !O.whatsapp ||
+                                      !O.language)
+                                  ) {
+                                    n({
+                                      title: `Missing Fields`,
+                                      description: `Please fill in all fields to submit.`,
+                                      variant: `destructive`,
+                                    });
+                                    return;
+                                  }
+                                  D(!0);
+                                  let i = `*New Full Quote Request - Planet Life*%0A%0A*Name:* ${O.name}%0A*WhatsApp:* ${O.whatsapp}%0A*Email:* ${O.email}%0A*Month:* ${O.travelMonth}%0A*Duration:* ${O.duration}%0A*Persons:* ${O.numPersons}%0A*Preferred Language:* ${O.language}`,
+                                    a = r.phone.replace(/[^0-9]/g, ``),
+                                    o = `https://wa.me/${a.length === 10 ? `91${a}` : a}?text=${i}`;
+                                  (await new Promise((e) => setTimeout(e, 800)),
+                                    n({
+                                      title: `Redirecting to Travel Desk...`,
+                                      description: `Connecting you with our travel experts.`,
+                                    }),
+                                    window.open(o, `_blank`),
+                                    D(!1),
+                                    e(`/`));
+                                },
+                                disabled: E,
+                                className: `w-full bg-red-600 hover:bg-black text-white font-extrabold py-7 rounded-xl mt-4 uppercase tracking-widest transition-all shadow-lg`,
+                                children: E
+                                  ? `Processing...`
+                                  : `Submit Inquiry`,
+                              }),
+                              (0, C.jsxs)(`div`, {
+                                className: `flex justify-center gap-2 mt-4`,
+                                children: [
+                                  (0, C.jsx)(`div`, {
+                                    className: `w-1.5 h-1.5 rounded-full bg-gray-200`,
+                                  }),
+                                  (0, C.jsx)(`div`, {
+                                    className: `w-8 h-1.5 rounded-full bg-red-600`,
+                                  }),
+                                ],
+                              }),
+                              (0, C.jsx)(i, {
+                                variant: `link`,
+                                onClick: () => T(1),
+                                className: `w-full text-xs text-gray-400 font-bold uppercase tracking-wider`,
+                                children: `Back to previous step`,
+                              }),
+                            ],
+                          }),
+                    ],
+                  }),
+                }),
+                (0, C.jsxs)(`div`, {
+                  className: `mt-8 mobile:mt-10 md:mt-12 bg-white text-black rounded-xl mobile:rounded-2xl p-4 mobile:p-5 md:p-6 lg:p-8 w-full max-w-5xl shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 mobile:gap-5 md:gap-6`,
+                  children: [
+                    (0, C.jsxs)(`div`, {
+                      className: `flex items-center gap-3`,
+                      children: [
+                        (0, C.jsx)(`div`, {
+                          className: `bg-red-50 p-2 rounded-full`,
+                          children: (0, C.jsx)(u, {
+                            className: `w-5 h-5 text-red-600 fill-red-600`,
+                          }),
+                        }),
+                        (0, C.jsxs)(`div`, {
+                          className: `flex flex-col`,
+                          children: [
+                            (0, C.jsx)(`span`, {
+                              className: `text-sm font-extrabold uppercase`,
+                              children: `4.9 Ratings`,
+                            }),
+                            (0, C.jsx)(`span`, {
+                              className: `text-[10px] text-black/50 font-bold`,
+                              children: `Google Reviews`,
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, C.jsx)(`div`, {
+                      className: `hidden md:block h-8 w-px bg-gray-100`,
+                    }),
+                    (0, C.jsxs)(`div`, {
+                      className: `flex items-center gap-3`,
+                      children: [
+                        (0, C.jsx)(`div`, {
+                          className: `bg-red-50 p-2 rounded-full`,
+                          children: (0, C.jsx)(c, {
+                            className: `w-5 h-5 text-red-600`,
+                          }),
+                        }),
+                        (0, C.jsxs)(`div`, {
+                          className: `flex flex-col`,
+                          children: [
+                            (0, C.jsx)(`span`, {
+                              className: `text-sm font-extrabold uppercase`,
+                              children: `24/7 Support`,
+                            }),
+                            (0, C.jsx)(`span`, {
+                              className: `text-[10px] text-black/50 font-bold`,
+                              children: `Trip Assistance`,
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, C.jsx)(`div`, {
+                      className: `hidden md:block h-8 w-px bg-gray-100`,
+                    }),
+                    (0, C.jsxs)(`div`, {
+                      className: `flex items-center gap-3`,
+                      children: [
+                        (0, C.jsx)(`div`, {
+                          className: `bg-red-50 p-2 rounded-full`,
+                          children: (0, C.jsx)(l, {
+                            className: `w-5 h-5 text-red-600`,
+                          }),
+                        }),
+                        (0, C.jsxs)(`div`, {
+                          className: `flex flex-col`,
+                          children: [
+                            (0, C.jsx)(`span`, {
+                              className: `text-sm font-extrabold uppercase`,
+                              children: `100% Secure`,
+                            }),
+                            (0, C.jsx)(`span`, {
+                              className: `text-[10px] text-black/50 font-bold`,
+                              children: `Payment Protection`,
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, C.jsx)(`div`, {
+                      className: `hidden md:block h-8 w-px bg-gray-100`,
+                    }),
+                    (0, C.jsxs)(`div`, {
+                      className: `flex items-center gap-4`,
+                      children: [
+                        (0, C.jsx)(`div`, {
+                          className: `bg-primary/10 p-3 rounded-full`,
+                          children: (0, C.jsx)(o, {
+                            className: `w-5 h-5 text-primary`,
+                          }),
+                        }),
+                        (0, C.jsxs)(`div`, {
+                          className: `flex flex-col`,
+                          children: [
+                            (0, C.jsx)(`span`, {
+                              className: `text-xs font-bold uppercase tracking-wider font-heading`,
+                              children: `Customized`,
+                            }),
+                            (0, C.jsx)(`span`, {
+                              className: `text-[10px] text-muted-foreground font-bold font-heading`,
+                              children: `Tailor-made Trips`,
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    });
+  };
+export { w as default };

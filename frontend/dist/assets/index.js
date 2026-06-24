@@ -5245,7 +5245,8 @@ var _s = `/assets/images/malaysia_main_new-BlYp5fos.jpg`,
   ml = () => {
     let { destinations: e, homeContent: t } = ke(),
       [n, r] = (0, B.useState)(!1),
-      i = (0, B.useRef)(null);
+      i = (0, B.useRef)(null),
+      gl = window.location.pathname;
     (0, B.useEffect)(
       () => () => {
         i.current && clearTimeout(i.current);
@@ -5290,7 +5291,7 @@ var _s = `/assets/images/malaysia_main_new-BlYp5fos.jpg`,
                 children: [
                   (0, V.jsx)(a, {
                     to: `/`,
-                    className: `font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm`,
+                    className: `font-bold hover:underline underline-offset-4 transition-all text-white font-sans uppercase text-sm ${gl === `/` ? `underline` : ``}`,
                     children: `Home`,
                   }),
                   (0, V.jsxs)(ss, {
@@ -5301,7 +5302,7 @@ var _s = `/assets/images/malaysia_main_new-BlYp5fos.jpg`,
                       (0, V.jsxs)(cs, {
                         onMouseEnter: o,
                         onMouseLeave: s,
-                        className: `flex items-center gap-1 font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm outline-none cursor-default`,
+                        className: `flex items-center gap-1 font-bold hover:underline underline-offset-4 transition-all text-white font-sans uppercase text-sm outline-none cursor-default ${gl.startsWith(`/destination`) ? `underline` : ``}`,
                         children: [
                           `Destinations `,
                           (0, V.jsx)(ze, { className: `w-4 h-4` }),
@@ -5416,17 +5417,17 @@ var _s = `/assets/images/malaysia_main_new-BlYp5fos.jpg`,
                   }),
                   (0, V.jsx)(a, {
                     to: `/packages`,
-                    className: `font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm`,
+                    className: `font-bold hover:underline underline-offset-4 transition-all text-white font-sans uppercase text-sm ${gl === `/packages` ? `underline` : ``}`,
                     children: `Packages`,
                   }),
                   (0, V.jsx)(a, {
                     to: `/about`,
-                    className: `font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm`,
+                    className: `font-bold hover:underline underline-offset-4 transition-all text-white font-sans uppercase text-sm ${gl === `/about` ? `underline` : ``}`,
                     children: `About Us`,
                   }),
                   (0, V.jsx)(a, {
                     to: `/contact`,
-                    className: `font-bold hover:text-black/70 transition-colors text-white font-sans uppercase text-sm`,
+                    className: `font-bold hover:underline underline-offset-4 transition-all text-white font-sans uppercase text-sm ${gl === `/contact` ? `underline` : ``}`,
                     children: `Contact`,
                   }),
                 ],

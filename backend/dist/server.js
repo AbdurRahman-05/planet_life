@@ -86,6 +86,7 @@ function getGemini() {
 }
 
 const hostingerPort = process.env.PORT;
+const PORT = hostingerPort || process.env.PORT || 3000;
 let app;
 try {
     // Determine project root directory cleanly
@@ -99,7 +100,6 @@ try {
     }
     
     const frontendPath = path_1.default.join(projectRoot, 'frontend/dist');
-    const PORT = hostingerPort || process.env.PORT || 3000;
 
     const envPath = path_1.default.join(projectRoot, 'backend/.env');
     let envLoaded = false;

@@ -41,13 +41,9 @@ var S = e(r(), 1),
     return (0, C.jsxs)(`div`, {
       className: `min-h-screen relative overflow-hidden font-sans`,
       children: [
-        (0, C.jsx)(`video`, {
-          autoPlay: !0,
-          loop: !0,
-          muted: !0,
-          playsInline: !0,
-          className: `absolute inset-0 w-full h-full object-cover`,
-          children: (0, C.jsx)(`source`, { src: _, type: `video/mp4` }),
+        (0, C.jsx)(`div`, {
+          className: `absolute inset-0 w-full h-full bg-cover bg-center`,
+          style: { backgroundImage: `url('/hero-bg.jpg')` },
         }),
         (0, C.jsx)(`div`, {
           className: `absolute inset-0 bg-black/50 backdrop-blur-[2px]`,

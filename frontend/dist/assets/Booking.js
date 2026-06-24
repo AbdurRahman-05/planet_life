@@ -13,6 +13,7 @@ import {
 import {
   a as h,
   c as g,
+  f as imgRes,
   h as _,
   i as v,
   n as y,
@@ -110,22 +111,10 @@ var E = e(a(), 1),
       {
         className: `min-h-screen relative overflow-hidden font-sans`,
         children: [
-          L.video
-            ? (0, O.jsx)(`video`, {
-                autoPlay: !0,
-                loop: !0,
-                muted: !0,
-                playsInline: !0,
-                className: `absolute inset-0 w-full h-full object-cover`,
-                children: (0, O.jsx)(`source`, {
-                  src: ((e) => (e ? k[e] || e : null))(L.video),
-                  type: `video/mp4`,
-                }),
-              })
-            : (0, O.jsx)(`div`, {
-                className: `absolute inset-0 w-full h-full bg-cover bg-center`,
-                style: { backgroundImage: `url(${L.destinationImage})` },
-              }),
+          (0, O.jsx)(`div`, {
+            className: `absolute inset-0 w-full h-full bg-cover bg-center`,
+            style: { backgroundImage: `url(${imgRes(L.destinationImage) || '/hero-bg.jpg'})` },
+          }),
           (0, O.jsx)(`div`, {
             className: `absolute inset-0 bg-black/50 backdrop-blur-[2px]`,
           }),

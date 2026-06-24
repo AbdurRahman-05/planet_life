@@ -63,7 +63,7 @@ async function uploadToCloudinary(localPath: string, folder: string) {
 
 const defaultHomeContent = {
   heroTitle: "Customized International Adventures",
-  heroSubtitle: "Experience the epitome of luxury and adventure with our carefully curated international journeys.",
+  heroSubtitle: "Experience the epitome of luxury and adventure with Planet Life, the best travel agency in Madurai offering carefully curated international and domestic journeys.",
   destinationsTitle: "Trending Destinations",
   destinationsSubtitle: "Explore our most popular international destinations, handpicked for your perfect vacation.",
   communityTitle: "Happy Customers, Happy Stories",
@@ -106,9 +106,9 @@ const defaultHomeContent = {
 
 const defaultAboutContent = {
   heroTitle: "About Planet Life",
-  heroSubtitle: "Creating unforgettable travel experiences since day one",
+  heroSubtitle: "Creating unforgettable travel experiences since day one as Madurai's best tourist providers",
   ourStoryTitle: "Our Story",
-  ourStoryText: "Planet Life was founded with a simple vision: to make world-class travel experiences accessible to everyone. We believe that travel is not just about visiting new places; it's about creating memories, discovering cultures, and connecting with the world.\n\nOur team of travel experts carefully curates each destination and package, ensuring that every detail is perfect. From the moment you contact us to the moment you return home, we're committed to providing exceptional service and unforgettable experiences.\n\nWith thousands of satisfied travelers and a 4.9 Google rating, we've established ourselves as a trusted name in premium travel. Our passion is your adventure, and we're here to make your dream vacation a reality.",
+  ourStoryText: "Planet Life was founded with a simple vision: to make world-class travel experiences accessible to everyone. We believe that travel is not just about visiting new places; it's about creating memories, discovering cultures, and connecting with the world.\n\nOur team of travel experts carefully curates each destination and package, ensuring that every detail is perfect. From the moment you contact us to the moment you return home, we're committed to providing exceptional service and unforgettable experiences.\n\nAs the leading tour operators in Madurai, Tamil Nadu, we provide everything from international vacation packages to custom domestic trips. We are proud to be recognized among the best travel agents in Madurai for providing worry-free, premium journeys. With thousands of satisfied travelers and a 4.9 Google rating, we've established ourselves as a trusted name in premium travel. Our passion is your adventure, and we're here to make your dream vacation a reality.",
   founderTitle: "Meet Our Founder",
   founderText: "\"Travel isn't just about seeing new places; it's about the transformation that happens within us when we step outside our comfort zone.\"\n\nDriven by an insatiable wanderlust and a deep curiosity for the world's diverse cultures, our founder established Planet Life with a singular mission: to share the magic of travel with others.\n\nWith years of personal exploration across continents, he understands that the best journeys are those that are authentic, immersive, and worry-free. His passion lies in crafting experiences that go beyond the guidebook, connecting travelers with the heart and soul of each destination.",
   founderImage: "founder.jpg", // Will be uploaded if in assets
@@ -118,7 +118,7 @@ const defaultAboutContent = {
 
 const defaultContactContent = {
   heroTitle: "Get in Touch",
-  heroSubtitle: "Ready to plan your next adventure? We're here to help!",
+  heroSubtitle: "Ready to plan your next adventure? Contact Planet Life, the top travel agency in Madurai, to speak with our travel experts.",
   sectionTitle: "Contact Information",
   sectionText: "Have questions about our packages or need help planning your trip? Reach out to us through any of the following channels:",
   phone: "+919994553297",
@@ -130,7 +130,7 @@ const defaultContactContent = {
 
 const defaultPackagesContent = {
   heroTitle: "Our Travel Packages",
-  heroSubtitle: "Find the perfect package for your next adventure"
+  heroSubtitle: "Find the perfect package for your next adventure with Madurai's premier travel operator"
 };
 
 async function main() {

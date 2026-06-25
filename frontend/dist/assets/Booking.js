@@ -18,7 +18,7 @@ import {
   i as v,
   n as y,
   o as b,
-  p as x,
+  p as heroVideoPath,
   r as S,
   s as C,
 } from "./index.js";
@@ -26,7 +26,7 @@ import { n as w, t as T } from "./card.js";
 var E = e(a(), 1),
   D = `/assets/videos/malaysia_video-B66WC7Av.mp4`,
   O = i(),
-  k = { "hero-video.mp4": x, "malaysia_video.mp4": D },
+  k = { "hero-video.mp4": heroVideoPath, "malaysia_video.mp4": D },
   A = () => {
     let { packageId: e } = t(),
       i = r(),
@@ -111,9 +111,18 @@ var E = e(a(), 1),
       {
         className: `min-h-screen relative overflow-hidden font-sans`,
         children: [
-          (0, O.jsx)(`div`, {
-            className: `absolute inset-0 w-full h-full bg-cover bg-center`,
-            style: { backgroundImage: `url(${imgRes(L.destinationImage) || '/hero-bg.jpg'})` },
+          (0, O.jsx)(`video`, {
+            autoPlay: !0,
+            loop: !0,
+            muted: !0,
+            playsInline: !0,
+            preload: `metadata`,
+            poster: `/hero-bg.jpg`,
+            className: `absolute inset-0 w-full h-full object-cover`,
+            children: (0, O.jsx)(`source`, {
+              src: heroVideoPath,
+              type: `video/mp4`,
+            }),
           }),
           (0, O.jsx)(`div`, {
             className: `absolute inset-0 bg-black/50 backdrop-blur-[2px]`,

@@ -6286,6 +6286,7 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
       },
       children: (0, V.jsxs)(Cl, {
         className: `max-w-[420px] w-[95vw] bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-white/20 overflow-hidden p-0`,
+        closeClassName: `text-white bg-black/80 hover:bg-black rounded-full p-2 right-4 top-4 opacity-100 hover:opacity-100 transition-all duration-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:outline-none focus:outline-none [&>svg]:w-5 [&>svg]:h-5`,
         children: [
           (0, V.jsxs)(`div`, {
             className: `w-full h-32 sm:h-36 overflow-hidden relative`,

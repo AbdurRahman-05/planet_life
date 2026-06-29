@@ -5469,6 +5469,259 @@ var Qi = () => {
           }),
         ],
       }),
+      (0, P.jsx)(`section`, {
+        className: `lg:hidden bg-[#0a0a0a] py-8 mobile:py-10 md:py-12 relative overflow-hidden`,
+        children: (0, P.jsx)(`div`, {
+          className: `container mx-auto px-4 mobile:px-6`,
+          children: (0, P.jsxs)(`div`, {
+            className: `bg-white/10 backdrop-blur-xl rounded-2xl p-5 mobile:p-6 md:p-8 border border-white/20 shadow-2xl max-w-lg mx-auto`,
+            children: [
+              (0, P.jsxs)(`div`, {
+                className: `text-center mb-6`,
+                children: [
+                  (0, P.jsx)(`h3`, {
+                    className: `text-white text-xl mobile:text-2xl font-bold font-heading mb-1`,
+                    children: `Plan Your Trip`,
+                  }),
+                  (0, P.jsx)(`p`, {
+                    className: `text-white/70 text-xs mobile:text-sm`,
+                    children: `Tell us your preferences & we\u2019ll craft your dream journey`,
+                  }),
+                ],
+              }),
+              (0, P.jsxs)(`form`, {
+                id: `heroLeadFormMobile`,
+                onSubmit: function (ev) {
+                  ev.preventDefault();
+                  var fd = new FormData(ev.target);
+                  var dest = fd.get(`destination`) || `Not specified`;
+                  var trip = fd.get(`tripType`) || `Not specified`;
+                  var name = fd.get(`name`) || ``;
+                  var phone = fd.get(`phone`) || ``;
+                  var month = fd.get(`travelMonth`) || `Not specified`;
+                  var msg =
+                    `*New Trip Inquiry*%0A%0A*Name:* ` +
+                    encodeURIComponent(name) +
+                    `%0A*Phone:* ` +
+                    encodeURIComponent(phone) +
+                    `%0A*Destination:* ` +
+                    encodeURIComponent(dest) +
+                    `%0A*Trip Type:* ` +
+                    encodeURIComponent(trip) +
+                    `%0A*Travel Month:* ` +
+                    encodeURIComponent(month);
+                  window.open(
+                    `https://wa.me/919994553297?text=` + msg,
+                    `_blank`,
+                  );
+                },
+                className: `space-y-4`,
+                children: [
+                  (0, P.jsx)(`div`, {
+                    children: (0, P.jsxs)(`select`, {
+                      name: `destination`,
+                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      style: {
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundPosition: `right 12px center`,
+                      },
+                      children: [
+                        (0, P.jsx)(`option`, {
+                          value: ``,
+                          disabled: !0,
+                          selected: !0,
+                          className: `text-gray-900 bg-white`,
+                          children: `Select Destination`,
+                        }),
+                        ...[...(e || [])]
+                          .sort((a, b) => a.name.localeCompare(b.name))
+                          .map((t) =>
+                            (0, P.jsx)(
+                              `option`,
+                              {
+                                value: t.name,
+                                className: `text-gray-900 bg-white`,
+                                children: t.name,
+                              },
+                              t.id + `-mobile`,
+                            ),
+                          ),
+                        (0, P.jsx)(`option`, {
+                          value: `Other`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Other`,
+                        }),
+                      ],
+                    }),
+                  }),
+                  (0, P.jsx)(`div`, {
+                    children: (0, P.jsxs)(`select`, {
+                      name: `tripType`,
+                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      style: {
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundPosition: `right 12px center`,
+                      },
+                      children: [
+                        (0, P.jsx)(`option`, {
+                          value: ``,
+                          disabled: !0,
+                          selected: !0,
+                          className: `text-gray-900 bg-white`,
+                          children: `Select Trip Type`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Family`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Family`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Couple`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Couple`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Corporate`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Corporate`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Friends`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Friends`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Solo`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Solo`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `Honeymoon`,
+                          className: `text-gray-900 bg-white`,
+                          children: `Honeymoon`,
+                        }),
+                      ],
+                    }),
+                  }),
+                  (0, P.jsx)(`div`, {
+                    children: (0, P.jsx)(`input`, {
+                      name: `name`,
+                      type: `text`,
+                      required: !0,
+                      placeholder: `Your Name`,
+                      className: `w-full bg-white/10 border border-white/30 text-white placeholder-white/50 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all`,
+                    }),
+                  }),
+                  (0, P.jsx)(`div`, {
+                    children: (0, P.jsx)(`input`, {
+                      name: `phone`,
+                      type: `tel`,
+                      required: !0,
+                      placeholder: `WhatsApp Number`,
+                      className: `w-full bg-white/10 border border-white/30 text-white placeholder-white/50 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all`,
+                    }),
+                  }),
+                  (0, P.jsx)(`div`, {
+                    children: (0, P.jsxs)(`select`, {
+                      name: `travelMonth`,
+                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      style: {
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundPosition: `right 12px center`,
+                      },
+                      children: [
+                        (0, P.jsx)(`option`, {
+                          value: ``,
+                          disabled: !0,
+                          selected: !0,
+                          className: `text-gray-900 bg-white`,
+                          children: `Travel Month`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `January`,
+                          className: `text-gray-900 bg-white`,
+                          children: `January`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `February`,
+                          className: `text-gray-900 bg-white`,
+                          children: `February`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `March`,
+                          className: `text-gray-900 bg-white`,
+                          children: `March`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `April`,
+                          className: `text-gray-900 bg-white`,
+                          children: `April`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `May`,
+                          className: `text-gray-900 bg-white`,
+                          children: `May`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `June`,
+                          className: `text-gray-900 bg-white`,
+                          children: `June`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `July`,
+                          className: `text-gray-900 bg-white`,
+                          children: `July`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `August`,
+                          className: `text-gray-900 bg-white`,
+                          children: `August`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `September`,
+                          className: `text-gray-900 bg-white`,
+                          children: `September`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `October`,
+                          className: `text-gray-900 bg-white`,
+                          children: `October`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `November`,
+                          className: `text-gray-900 bg-white`,
+                          children: `November`,
+                        }),
+                        (0, P.jsx)(`option`, {
+                          value: `December`,
+                          className: `text-gray-900 bg-white`,
+                          children: `December`,
+                        }),
+                      ],
+                    }),
+                  }),
+                  (0, P.jsx)(`button`, {
+                    type: `submit`,
+                    className: `w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-xl uppercase text-base tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]`,
+                    children: `Submit Inquiry`,
+                  }),
+                  (0, P.jsxs)(`div`, {
+                    className: `flex items-center justify-center gap-4 mt-2 text-white/50 text-[10px] uppercase tracking-widest`,
+                    children: [
+                      (0, P.jsx)(`span`, { children: `Instant Reply` }),
+                      (0, P.jsx)(`span`, { children: `\u00B7` }),
+                      (0, P.jsx)(`span`, { children: `24/7 Support` }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        }),
+      }),
       (0, P.jsxs)(`section`, {
         className: `py-12 mobile:py-16 md:py-24 bg-gray-50 overflow-hidden`,
         children: [

@@ -36,8 +36,8 @@ import {
   b as r,
   i,
   n as a,
-  o,
-  s,
+  o as useLocationHook,
+  s as useNavigateHook,
   t as c,
   v as l,
   x as u,
@@ -5913,7 +5913,7 @@ var _s = `/assets/images/malaysia_main_new-BlYp5fos.jpg`,
     });
   },
   gl = () => {
-    let { pathname: e, hash: t } = o();
+    let { pathname: e, hash: t } = useLocationHook();
     return (
       (0, B.useEffect)(() => {
         if (t) {
@@ -6258,7 +6258,7 @@ Bl.displayName = fe.displayName;
 var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
   Hl = ({ isOpen: e, onClose: t, destinations: n }) => {
     let { toast: r } = ut(),
-      i = s(),
+      i = useNavigateHook(),
       { contactContent: a } = ke(),
       [o, c] = (0, B.useState)(1),
       [l, u] = (0, B.useState)(!1),
@@ -6805,7 +6805,7 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
   ),
   Xl = (0, B.lazy)(() =>
     Z(
-      () => import(`./About.js`),
+      () => import(`./About.js?v=2`),
       __vite__mapDeps([15, 1, 2, 3, 4, 5, 12, 7, 6]),
     ),
   ),
@@ -6858,10 +6858,10 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
   ou = () => (0, V.jsx)(yl, {}),
   su = () => {
     let { isLoading: e, destinations: t } = ke(),
-      r = o(),
-      a = s(),
+      r = useLocationHook(),
+      a = useNavigateHook(),
       c = (0, B.useRef)(r.pathname),
-      l = (0, B.useRef)(new Set([r.pathname])),
+      visitedPathsRef = (0, B.useRef)(new Set([r.pathname])),
       [u, d] = (0, B.useState)(!1);
     if (
       ((0, B.useEffect)(() => {
@@ -6878,7 +6878,8 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
             !n &&
             !i &&
             !a &&
-            (l.current.has(r.pathname) || (d(!0), l.current.add(r.pathname)));
+            (visitedPathsRef.current.has(r.pathname) ||
+              (d(!0), visitedPathsRef.current.add(r.pathname)));
       }, [r.pathname, r.search]),
       e)
     )

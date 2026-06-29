@@ -537,11 +537,10 @@ ${text}
     }));
 
     // Caching-optimized Static File Serving (Registered AFTER API routes)
-    // 1. Vite built hashed assets: immutable for 1 year
+    // 1. Vite built hashed assets: immutable caching disabled for development updates
     app.use('/assets', express_1.default.static(path_1.default.join(frontendPath, 'assets'), {
         etag: true,
-        maxAge: '365d',
-        immutable: true,
+        maxAge: 0,
         index: false
     }));
     

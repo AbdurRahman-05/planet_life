@@ -69,43 +69,43 @@ var T = e(r(), 1),
   });
 O.displayName = `MarqueeColumn`;
 var k = () => {
-    let { homeContent: e } = s(),
-      t = (0, T.useMemo)(
-        () =>
-          e?.communityImages && e.communityImages.length > 0
-            ? e.communityImages
-            : w,
-        [e?.communityImages],
-      ),
-      [n, r, i] = (0, T.useMemo)(() => {
-        if (t.length === 0) return [[], [], []];
-        let e = [...t];
-        for (; e.length < 45; ) e = [...e, ...t];
-        let n = [],
-          r = [],
-          i = [];
-        return (
-          e.forEach((e, t) => {
-            t % 3 == 0 ? n.push(e) : t % 3 == 1 ? r.push(e) : i.push(e);
-          }),
-          [n, r, i]
-        );
-      }, [t]);
-    return (0, E.jsxs)(`div`, {
-      className: `h-full w-full overflow-hidden flex gap-2 mobile:gap-4 relative`,
-      children: [
-        (0, E.jsx)(O, { images: n, speed: `100s` }),
-        (0, E.jsx)(O, { images: r, reverse: !0, speed: `90s` }),
-        (0, E.jsx)(O, { images: i, speed: `110s` }),
-        (0, E.jsx)(`div`, {
-          className: `absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none`,
+  let { homeContent: e } = s(),
+    t = (0, T.useMemo)(
+      () =>
+        e?.communityImages && e.communityImages.length > 0
+          ? e.communityImages
+          : w,
+      [e?.communityImages],
+    ),
+    [n, r, i] = (0, T.useMemo)(() => {
+      if (t.length === 0) return [[], [], []];
+      let e = [...t];
+      for (; e.length < 45;) e = [...e, ...t];
+      let n = [],
+        r = [],
+        i = [];
+      return (
+        e.forEach((e, t) => {
+          t % 3 == 0 ? n.push(e) : t % 3 == 1 ? r.push(e) : i.push(e);
         }),
-        (0, E.jsx)(`div`, {
-          className: `absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none`,
-        }),
-      ],
-    });
-  },
+        [n, r, i]
+      );
+    }, [t]);
+  return (0, E.jsxs)(`div`, {
+    className: `h-full w-full overflow-hidden flex gap-2 mobile:gap-4 relative`,
+    children: [
+      (0, E.jsx)(O, { images: n, speed: `100s` }),
+      (0, E.jsx)(O, { images: r, reverse: !0, speed: `90s` }),
+      (0, E.jsx)(O, { images: i, speed: `110s` }),
+      (0, E.jsx)(`div`, {
+        className: `absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none`,
+      }),
+      (0, E.jsx)(`div`, {
+        className: `absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-10 pointer-events-none`,
+      }),
+    ],
+  });
+},
   A = (e) => m[e] || u,
   j = () => {
     let { aboutContent: e } = s(),
@@ -147,118 +147,166 @@ var k = () => {
         }),
         (0, E.jsx)(`section`, {
           className: `py-12 mobile:py-16 md:py-24 bg-[#0a0a0a] text-white overflow-hidden`,
-          children: (0, E.jsx)(`div`, {
+          children: (0, E.jsxs)(`div`, {
             className: `container mx-auto px-3 mobile:px-4`,
-            children: (0, E.jsxs)(`div`, {
-              className: `flex flex-col lg:flex-row items-center gap-8 mobile:gap-12 md:gap-16`,
-              children: [
-                (0, E.jsx)(`div`, {
-                  className: `lg:w-1/2`,
-                  children: (0, E.jsx)(C, {
-                    direction: `left`,
-                    children: (0, E.jsxs)(`div`, {
-                      className: `relative`,
+            children: [
+              (0, E.jsxs)(`div`, {
+                className: `flex flex-col lg:flex-row items-start gap-8 mobile:gap-12 md:gap-16`,
+                children: [
+                  (0, E.jsx)(`div`, {
+                    className: `lg:w-1/2`,
+                    children: (0, E.jsx)(C, {
+                      direction: `left`,
+                      children: (0, E.jsxs)(`div`, {
+                        className: `relative`,
+                        children: [
+                          (0, E.jsx)(`div`, {
+                            className: `absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-red-600`,
+                          }),
+                          (0, E.jsx)(`div`, {
+                            className: `absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-red-600`,
+                          }),
+                          (0, E.jsx)(`img`, {
+                            src: g(e.ourStoryImage || `logo.png`),
+                            alt: `Planet Life Logo`,
+                            className: `rounded-lg shadow-2xl w-full h-[250px] mobile:h-[350px] sm:h-[400px] lg:h-[500px] object-contain relative z-10`,
+                          }),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, E.jsx)(`div`, {
+                    className: `lg:w-1/2`,
+                    children: (0, E.jsxs)(C, {
+                      direction: `right`,
                       children: [
-                        (0, E.jsx)(`div`, {
-                          className: `absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-red-600`,
+                        (0, E.jsx)(`h2`, {
+                          className: `text-2xl xs:text-3xl mobile:text-4xl md:text-5xl font-heading font-bold mb-4 mobile:mb-6 md:mb-8 text-white leading-tight uppercase tracking-tight`,
+                          children: e.ourStoryTitle,
                         }),
                         (0, E.jsx)(`div`, {
-                          className: `absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-red-600`,
+                          className: `w-20 h-1 bg-primary rounded-full mb-8`,
                         }),
-                        (0, E.jsx)(`img`, {
-                          src: g(e.ourStoryImage || `logo.png`),
-                          alt: `Planet Life Logo`,
-                          className: `rounded-lg shadow-2xl w-full h-[250px] mobile:h-[350px] sm:h-[400px] lg:h-[500px] object-contain relative z-10`,
+                        (0, E.jsxs)(`div`, {
+                          className: `relative mb-8`,
+                          children: [
+                            (0, E.jsx)(h, {
+                              className: `absolute -left-10 -top-4 w-12 h-12 text-primary/10 rotate-180`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-lg text-white/80 font-medium leading-relaxed text-justify whitespace-pre-line`,
+                              children: e.ourStoryText,
+                            }),
+                          ],
                         }),
                       ],
                     }),
                   }),
+                ],
+              }),
+              (0, E.jsx)(C, {
+                direction: `up`,
+                children: (0, E.jsxs)(`div`, {
+                  className: `mt-16 w-full`,
+                  children: [
+                    (0, E.jsx)(`h3`, {
+                      className: `text-red-500 font-black tracking-[0.4em] uppercase text-center text-xs md:text-sm mb-8 block drop-shadow-lg`,
+                      children: `Planet Life Achievements`,
+                    }),
+                    (0, E.jsxs)(`div`, {
+                      className: `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full`,
+                      children: [
+                        (0, E.jsxs)(`div`, {
+                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          children: [
+                            (0, E.jsx)(`h1`, {
+                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                              children: `7+ Years`,
+                            }),
+                            (0, E.jsx)(`h2`, {
+                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
+                              children: `Experience in this industry`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-xs text-white/50 mt-2 font-medium`,
+                              children: `Crafting journeys with expertise and deep local knowledge.`,
+                            }),
+                          ],
+                        }),
+                        (0, E.jsxs)(`div`, {
+                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          children: [
+                            (0, E.jsx)(`h1`, {
+                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                              children: `6000+`,
+                            }),
+                            (0, E.jsx)(`h2`, {
+                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
+                              children: `Itineraries Crafted`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-xs text-white/50 mt-2 font-medium`,
+                              children: `Carefully planned itineraries tailored to perfection.`,
+                            }),
+                          ],
+                        }),
+                        (0, E.jsxs)(`div`, {
+                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          children: [
+                            (0, E.jsx)(`h1`, {
+                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                              children: `20k+`,
+                            }),
+                            (0, E.jsx)(`h2`, {
+                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
+                              children: `Happy Clients`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-xs text-white/50 mt-2 font-medium`,
+                              children: `Trusted by thousands of solo and group travelers.`,
+                            }),
+                          ],
+                        }),
+                        (0, E.jsxs)(`div`, {
+                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          children: [
+                            (0, E.jsx)(`h1`, {
+                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                              children: `80+`,
+                            }),
+                            (0, E.jsx)(`h2`, {
+                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
+                              children: `Strangers Trips`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-xs text-white/50 mt-2 font-medium`,
+                              children: `80+ Strangers trip to International Trip successfully completed.`,
+                            }),
+                          ],
+                        }),
+                        (0, E.jsxs)(`div`, {
+                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          children: [
+                            (0, E.jsx)(`h1`, {
+                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                              children: `80+`,
+                            }),
+                            (0, E.jsx)(`h2`, {
+                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
+                              children: `Malaysia Group Trips`,
+                            }),
+                            (0, E.jsx)(`p`, {
+                              className: `text-xs text-white/50 mt-2 font-medium`,
+                              children: `80+ Group Trip arranged to Malaysia successfully.`,
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
                 }),
-                (0, E.jsx)(`div`, {
-                  className: `lg:w-1/2`,
-                  children: (0, E.jsxs)(C, {
-                    direction: `right`,
-                    children: [
-                      (0, E.jsx)(`h2`, {
-                        className: `text-2xl xs:text-3xl mobile:text-4xl md:text-5xl font-heading font-bold mb-4 mobile:mb-6 md:mb-8 text-white leading-tight uppercase tracking-tight`,
-                        children: e.ourStoryTitle,
-                      }),
-                      (0, E.jsx)(`div`, {
-                        className: `w-20 h-1 bg-primary rounded-full mb-8`,
-                      }),
-                      (0, E.jsxs)(`div`, {
-                        className: `relative mb-8`,
-                        children: [
-                          (0, E.jsx)(h, {
-                            className: `absolute -left-10 -top-4 w-12 h-12 text-primary/10 rotate-180`,
-                          }),
-                          (0, E.jsx)(`p`, {
-                            className: `text-lg text-white/80 font-medium leading-relaxed text-justify whitespace-pre-line`,
-                            children: e.ourStoryText,
-                          }),
-                        ],
-                      }),
-                      (0, E.jsxs)(`div`, {
-                        className: `mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full`,
-                        children: [
-                          (0, E.jsxs)(`div`, {
-                            className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                            children: [
-                              (0, E.jsx)(`h1`, {
-                                className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                                children: `7+ Years`,
-                              }),
-                              (0, E.jsx)(`h2`, {
-                                className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                                children: `Experience in this industry`,
-                              }),
-                              (0, E.jsx)(`p`, {
-                                className: `text-xs text-white/50 mt-2 font-medium`,
-                                children: `Crafting journeys with expertise and deep local knowledge.`,
-                              }),
-                            ],
-                          }),
-                          (0, E.jsxs)(`div`, {
-                            className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                            children: [
-                              (0, E.jsx)(`h1`, {
-                                className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                                children: `6000+`,
-                              }),
-                              (0, E.jsx)(`h2`, {
-                                className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                                children: `Itineraries Crafted`,
-                              }),
-                              (0, E.jsx)(`p`, {
-                                className: `text-xs text-white/50 mt-2 font-medium`,
-                                children: `Carefully planned itineraries tailored to perfection.`,
-                              }),
-                            ],
-                          }),
-                          (0, E.jsxs)(`div`, {
-                            className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                            children: [
-                              (0, E.jsx)(`h1`, {
-                                className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                                children: `20k+`,
-                              }),
-                              (0, E.jsx)(`h2`, {
-                                className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                                children: `Happy Clients`,
-                              }),
-                              (0, E.jsx)(`p`, {
-                                className: `text-xs text-white/50 mt-2 font-medium`,
-                                children: `Trusted by thousands of solo and group travelers.`,
-                              }),
-                            ],
-                          }),
-                        ],
-                      }),
-                    ],
-                  }),
-                }),
-              ],
-            }),
+              }),
+            ],
           }),
         }),
         (0, E.jsxs)(`section`, {
@@ -309,7 +357,7 @@ var k = () => {
                           children: [
                             (0, E.jsx)(`div`, {
                               className: `text-6xl mobile:text-7xl md:text-8xl font-heading font-black text-red-600 select-none`,
-                              children: `15+`,
+                              children: `80+`,
                             }),
                             (0, E.jsxs)(`div`, {
                               className: `bg-red-600/20 border border-red-600/30 p-3 mobile:p-4 rounded-xl mobile:rounded-2xl backdrop-blur-md`,

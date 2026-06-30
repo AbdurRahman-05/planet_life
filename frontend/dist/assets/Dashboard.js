@@ -23,17 +23,17 @@ var M = e(r(), 1),
   N = n(),
   P = ({ packages: e, onChange: t }) => {
     let n = () => {
-        let n = {
-          id: `pkg-${Date.now()}`,
-          duration: ``,
-          nights: 0,
-          days: 0,
-          price: 0,
-          inclusions: [],
-          itinerary: [],
-        };
-        t([...e, n]);
-      },
+      let n = {
+        id: `pkg-${Date.now()}`,
+        duration: ``,
+        nights: 0,
+        days: 0,
+        price: 0,
+        inclusions: [],
+        itinerary: [],
+      };
+      t([...e, n]);
+    },
       r = (n) => {
         let r = [...e];
         (r.splice(n, 1), t(r));
@@ -73,11 +73,11 @@ var M = e(r(), 1),
         let i = [...e];
         i[n].itinerary &&
           (i[n].itinerary.splice(r, 1),
-          (i[n].itinerary = i[n].itinerary.map((e, t) => ({
-            ...e,
-            day: t + 1,
-          }))),
-          t(i));
+            (i[n].itinerary = i[n].itinerary.map((e, t) => ({
+              ...e,
+              day: t + 1,
+            }))),
+            t(i));
       },
       p = (n, r) => {
         let i = [...e];
@@ -396,135 +396,135 @@ var M = e(r(), 1),
       className: `space-y-4 ${r}`,
       children: u
         ? (0, N.jsxs)(`div`, {
-            className: `relative rounded-md overflow-hidden border w-full aspect-video bg-muted flex items-center justify-center`,
-            children: [
-              g
-                ? (0, N.jsx)(`video`, {
-                    src: u,
-                    controls: !0,
-                    className: `w-full h-full object-cover`,
-                  })
-                : (0, N.jsx)(`img`, {
-                    src: u,
-                    alt: `Preview`,
-                    className: `w-full h-full object-cover`,
-                  }),
-              (0, N.jsx)(i, {
-                type: `button`,
-                variant: `destructive`,
-                size: `icon`,
-                className: `absolute top-2 right-2 rounded-full w-8 h-8 opacity-80 hover:opacity-100`,
-                onClick: m,
-                disabled: a,
-                children: (0, N.jsx)(h, { className: `h-4 w-4` }),
+          className: `relative rounded-md overflow-hidden border w-full aspect-video bg-muted flex items-center justify-center`,
+          children: [
+            g
+              ? (0, N.jsx)(`video`, {
+                src: u,
+                controls: !0,
+                className: `w-full h-full object-cover`,
+              })
+              : (0, N.jsx)(`img`, {
+                src: u,
+                alt: `Preview`,
+                className: `w-full h-full object-cover`,
               }),
-              a &&
-                (0, N.jsxs)(`div`, {
-                  className: `absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white`,
-                  children: [
-                    (0, N.jsx)(s, { className: `h-8 w-8 animate-spin mb-2` }),
-                    (0, N.jsx)(`span`, {
-                      className: `text-sm font-medium`,
-                      children: `Uploading to Cloudinary...`,
-                    }),
-                  ],
+            (0, N.jsx)(i, {
+              type: `button`,
+              variant: `destructive`,
+              size: `icon`,
+              className: `absolute top-2 right-2 rounded-full w-8 h-8 opacity-80 hover:opacity-100`,
+              onClick: m,
+              disabled: a,
+              children: (0, N.jsx)(h, { className: `h-4 w-4` }),
+            }),
+            a &&
+            (0, N.jsxs)(`div`, {
+              className: `absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white`,
+              children: [
+                (0, N.jsx)(s, { className: `h-8 w-8 animate-spin mb-2` }),
+                (0, N.jsx)(`span`, {
+                  className: `text-sm font-medium`,
+                  children: `Uploading to Cloudinary...`,
                 }),
-            ],
-          })
+              ],
+            }),
+          ],
+        })
         : (0, N.jsxs)(`div`, {
-            className: `relative border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center gap-2 bg-muted/50 hover:bg-muted transition-colors`,
-            children: [
-              (0, N.jsx)(l, { className: `h-8 w-8 text-muted-foreground` }),
-              (0, N.jsx)(`div`, {
-                className: `text-sm font-medium`,
-                children: `Click or drag file to upload`,
+          className: `relative border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center gap-2 bg-muted/50 hover:bg-muted transition-colors`,
+          children: [
+            (0, N.jsx)(l, { className: `h-8 w-8 text-muted-foreground` }),
+            (0, N.jsx)(`div`, {
+              className: `text-sm font-medium`,
+              children: `Click or drag file to upload`,
+            }),
+            (0, N.jsx)(`div`, {
+              className: `text-xs text-muted-foreground`,
+              children: `Supports JPG, PNG, WEBP, MP4 (max 50MB)`,
+            }),
+            (0, N.jsx)(`input`, {
+              ref: f,
+              type: `file`,
+              className: `absolute inset-0 w-full h-full opacity-0 cursor-pointer`,
+              accept: `image/*,video/*`,
+              onChange: p,
+              disabled: a,
+            }),
+            a &&
+            (0, N.jsx)(`div`, {
+              className: `absolute inset-0 bg-background/80 flex items-center justify-center`,
+              children: (0, N.jsx)(s, {
+                className: `h-6 w-6 animate-spin text-primary`,
               }),
-              (0, N.jsx)(`div`, {
-                className: `text-xs text-muted-foreground`,
-                children: `Supports JPG, PNG, WEBP, MP4 (max 50MB)`,
-              }),
-              (0, N.jsx)(`input`, {
-                ref: f,
-                type: `file`,
-                className: `absolute inset-0 w-full h-full opacity-0 cursor-pointer`,
-                accept: `image/*,video/*`,
-                onChange: p,
-                disabled: a,
-              }),
-              a &&
-                (0, N.jsx)(`div`, {
-                  className: `absolute inset-0 bg-background/80 flex items-center justify-center`,
-                  children: (0, N.jsx)(s, {
-                    className: `h-6 w-6 animate-spin text-primary`,
-                  }),
-                }),
-            ],
-          }),
+            }),
+          ],
+        }),
     });
   },
   I = ({ initialData: e, onSubmit: t, onCancel: n }) => {
     let [r, a] = (0, M.useState)({
-        id: ``,
-        name: ``,
-        country: ``,
-        description: ``,
-        image: ``,
-        video: ``,
-        featured: !1,
-        whyVisit: [],
-        packages: [],
-      }),
+      id: ``,
+      name: ``,
+      country: ``,
+      description: ``,
+      image: ``,
+      video: ``,
+      featured: !1,
+      whyVisit: [],
+      packages: [],
+    }),
       [c, d] = (0, M.useState)(!1),
       { toast: f } = b();
     (0, M.useEffect)(() => {
       e && a(e);
     }, [e]);
     let m = async (e) => {
-        let t = e.target.files?.[0];
-        if (!t) return;
-        let n = localStorage.getItem(`adminToken`) || ``;
-        if (!n) {
-          f({
-            title: `Authentication Error`,
-            description: `You must be logged in as an administrator to use this feature.`,
-            variant: `destructive`,
-          });
-          return;
-        }
-        d(!0);
-        try {
-          let e = await o.parsePackageDocument(t, n);
-          if (e && e.success && e.data) {
-            let t = e.data,
-              n = (t.packages || []).map((e, t) => ({
-                ...e,
-                id: e.id || `pkg-${Date.now()}-${t}`,
-              }));
-            (a((e) => ({
+      let t = e.target.files?.[0];
+      if (!t) return;
+      let n = localStorage.getItem(`adminToken`) || ``;
+      if (!n) {
+        f({
+          title: `Authentication Error`,
+          description: `You must be logged in as an administrator to use this feature.`,
+          variant: `destructive`,
+        });
+        return;
+      }
+      d(!0);
+      try {
+        let e = await o.parsePackageDocument(t, n);
+        if (e && e.success && e.data) {
+          let t = e.data,
+            n = (t.packages || []).map((e, t) => ({
               ...e,
-              id: t.id || e.id,
-              name: t.name || e.name,
-              country: t.country || e.country,
-              description: t.description || e.description,
-              whyVisit: t.whyVisit || e.whyVisit,
-              packages: n.length > 0 ? n : e.packages,
-            })),
-              f({
-                title: `Import Successful!`,
-                description: `Extracted details for "${t.name || `new package`}" successfully.`,
-              }));
-          } else throw Error(`Invalid response format received from server.`);
-        } catch (e) {
-          f({
-            title: `Import Failed`,
-            description:
-              e.message || `An error occurred while parsing the document.`,
-            variant: `destructive`,
-          });
-        } finally {
-          (d(!1), (e.target.value = ``));
-        }
-      },
+              id: e.id || `pkg-${Date.now()}-${t}`,
+            }));
+          (a((e) => ({
+            ...e,
+            id: t.id || e.id,
+            name: t.name || e.name,
+            country: t.country || e.country,
+            description: t.description || e.description,
+            whyVisit: t.whyVisit || e.whyVisit,
+            packages: n.length > 0 ? n : e.packages,
+          })),
+            f({
+              title: `Import Successful!`,
+              description: `Extracted details for "${t.name || `new package`}" successfully.`,
+            }));
+        } else throw Error(`Invalid response format received from server.`);
+      } catch (e) {
+        f({
+          title: `Import Failed`,
+          description:
+            e.message || `An error occurred while parsing the document.`,
+          variant: `destructive`,
+        });
+      } finally {
+        (d(!1), (e.target.value = ``));
+      }
+    },
       h = (e) => {
         let { name: t, value: n } = e.target;
         a((e) => ({ ...e, [t]: n }));
@@ -556,61 +556,61 @@ var M = e(r(), 1),
             className: `space-y-8`,
             children: [
               !e &&
-                (0, N.jsxs)(`div`, {
-                  className: `bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-3`,
-                  children: [
-                    (0, N.jsxs)(`div`, {
-                      className: `flex items-center space-x-2 text-primary`,
-                      children: [
-                        (0, N.jsx)(p, { className: `h-5 w-5` }),
-                        (0, N.jsx)(`h4`, {
-                          className: `font-bold text-sm`,
-                          children: `AI-Powered Package Import`,
-                        }),
-                      ],
-                    }),
-                    (0, N.jsx)(`p`, {
-                      className: `text-xs text-muted-foreground`,
-                      children: `Upload a Word document (.docx), PDF (.pdf), or Text file (.txt) containing your package details (itinerary, inclusions, price, etc.) to automatically populate this form.`,
-                    }),
-                    (0, N.jsxs)(`div`, {
-                      className: `flex items-center gap-4`,
-                      children: [
-                        (0, N.jsx)(v, {
-                          id: `import-doc`,
-                          type: `file`,
-                          accept: `.docx,.pdf,.txt`,
-                          className: `hidden`,
-                          onChange: m,
-                          disabled: c,
-                        }),
-                        (0, N.jsx)(i, {
-                          type: `button`,
-                          variant: `outline`,
-                          size: `sm`,
-                          disabled: c,
-                          onClick: () =>
-                            document.getElementById(`import-doc`)?.click(),
-                          children: c
-                            ? (0, N.jsxs)(N.Fragment, {
-                                children: [
-                                  (0, N.jsx)(s, {
-                                    className: `mr-2 h-4 w-4 animate-spin`,
-                                  }),
-                                  `Analyzing Document...`,
-                                ],
-                              })
-                            : (0, N.jsxs)(N.Fragment, {
-                                children: [
-                                  (0, N.jsx)(l, { className: `mr-2 h-4 w-4` }),
-                                  `Upload Package Document`,
-                                ],
+              (0, N.jsxs)(`div`, {
+                className: `bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-3`,
+                children: [
+                  (0, N.jsxs)(`div`, {
+                    className: `flex items-center space-x-2 text-primary`,
+                    children: [
+                      (0, N.jsx)(p, { className: `h-5 w-5` }),
+                      (0, N.jsx)(`h4`, {
+                        className: `font-bold text-sm`,
+                        children: `AI-Powered Package Import`,
+                      }),
+                    ],
+                  }),
+                  (0, N.jsx)(`p`, {
+                    className: `text-xs text-muted-foreground`,
+                    children: `Upload a Word document (.docx), PDF (.pdf), or Text file (.txt) containing your package details (itinerary, inclusions, price, etc.) to automatically populate this form.`,
+                  }),
+                  (0, N.jsxs)(`div`, {
+                    className: `flex items-center gap-4`,
+                    children: [
+                      (0, N.jsx)(v, {
+                        id: `import-doc`,
+                        type: `file`,
+                        accept: `.docx,.pdf,.txt`,
+                        className: `hidden`,
+                        onChange: m,
+                        disabled: c,
+                      }),
+                      (0, N.jsx)(i, {
+                        type: `button`,
+                        variant: `outline`,
+                        size: `sm`,
+                        disabled: c,
+                        onClick: () =>
+                          document.getElementById(`import-doc`)?.click(),
+                        children: c
+                          ? (0, N.jsxs)(N.Fragment, {
+                            children: [
+                              (0, N.jsx)(s, {
+                                className: `mr-2 h-4 w-4 animate-spin`,
                               }),
-                        }),
-                      ],
-                    }),
-                  ],
-                }),
+                              `Analyzing Document...`,
+                            ],
+                          })
+                          : (0, N.jsxs)(N.Fragment, {
+                            children: [
+                              (0, N.jsx)(l, { className: `mr-2 h-4 w-4` }),
+                              `Upload Package Document`,
+                            ],
+                          }),
+                      }),
+                    ],
+                  }),
+                ],
+              }),
               (0, N.jsxs)(`div`, {
                 className: `space-y-4`,
                 children: [
@@ -792,10 +792,10 @@ var M = e(r(), 1),
                         ),
                       ),
                       r.whyVisit.length === 0 &&
-                        (0, N.jsx)(`p`, {
-                          className: `text-sm text-muted-foreground italic`,
-                          children: `No reasons added yet.`,
-                        }),
+                      (0, N.jsx)(`p`, {
+                        className: `text-sm text-muted-foreground italic`,
+                        children: `No reasons added yet.`,
+                      }),
                     ],
                   }),
                 ],
@@ -861,9 +861,9 @@ var M = e(r(), 1),
       r(e);
     }, [e]);
     let P = (e) => {
-        let { name: t, value: n } = e.target;
-        r((e) => ({ ...e, [t]: n }));
-      },
+      let { name: t, value: n } = e.target;
+      r((e) => ({ ...e, [t]: n }));
+    },
       I = () => {
         (c(null),
           f({
@@ -890,7 +890,7 @@ var M = e(r(), 1),
       B = (e) => {
         if (
           (e.preventDefault(),
-          !l.title || !l.image || !l.date || !l.price || !l.month || !l.link)
+            !l.title || !l.image || !l.date || !l.price || !l.month || !l.link)
         ) {
           alert(`Please fill in all required fields (marked with *).`);
           return;
@@ -1038,304 +1038,304 @@ var M = e(r(), 1),
                         children: `Stranger Trips Section`,
                       }),
                       !p &&
-                        (0, N.jsxs)(i, {
-                          type: `button`,
-                          onClick: I,
-                          size: `sm`,
-                          children: [
-                            (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
-                            ` Add Package`,
-                          ],
-                        }),
+                      (0, N.jsxs)(i, {
+                        type: `button`,
+                        onClick: I,
+                        size: `sm`,
+                        children: [
+                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                          ` Add Package`,
+                        ],
+                      }),
                     ],
                   }),
                   p &&
-                    (0, N.jsxs)(E, {
-                      className: `border-2 border-primary/20 bg-muted/30`,
-                      children: [
-                        (0, N.jsx)(T, {
-                          children: (0, N.jsx)(C, {
-                            className: `text-base font-bold`,
-                            children: s
-                              ? `Edit Stranger Package`
-                              : `Add Stranger Package`,
+                  (0, N.jsxs)(E, {
+                    className: `border-2 border-primary/20 bg-muted/30`,
+                    children: [
+                      (0, N.jsx)(T, {
+                        children: (0, N.jsx)(C, {
+                          className: `text-base font-bold`,
+                          children: s
+                            ? `Edit Stranger Package`
+                            : `Add Stranger Package`,
+                        }),
+                      }),
+                      (0, N.jsxs)(w, {
+                        className: `space-y-4`,
+                        children: [
+                          (0, N.jsxs)(`div`, {
+                            className: `grid grid-cols-1 md:grid-cols-2 gap-4`,
+                            children: [
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-title`,
+                                    children: `Package Title *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-title`,
+                                    value: l.title || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        title: e.target.value,
+                                      })),
+                                    placeholder: `e.g. Kashmir Strangers Tour`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-month`,
+                                    children: `Travel Month *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-month`,
+                                    value: l.month || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        month: e.target.value,
+                                      })),
+                                    placeholder: `e.g. January`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-date`,
+                                    children: `Travel Dates *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-date`,
+                                    value: l.date || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        date: e.target.value,
+                                      })),
+                                    placeholder: `e.g. Jan 10-18, 2026`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-price`,
+                                    children: `Price *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-price`,
+                                    value: l.price || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        price: e.target.value,
+                                      })),
+                                    placeholder: `e.g. ₹14,999`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-note`,
+                                    children: `Note (Optional)`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-note`,
+                                    value: l.note || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        note: e.target.value,
+                                      })),
+                                    placeholder: `e.g. Flight Excl.`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-link`,
+                                    children: `Package Link *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `pkg-link`,
+                                    value: l.link || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        link: e.target.value,
+                                      })),
+                                    placeholder: `e.g. /destination/kashmir?pkg=kashmir-strangers-4n5d`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `pkg-status`,
+                                    children: `Trip Status`,
+                                  }),
+                                  (0, N.jsxs)(`select`, {
+                                    id: `pkg-status`,
+                                    value: l.status || ``,
+                                    onChange: (e) =>
+                                      f((t) => ({
+                                        ...t,
+                                        status: e.target.value,
+                                      })),
+                                    className: `w-full bg-white border border-gray-200 rounded-md p-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20`,
+                                    children: [
+                                      (0, N.jsx)(`option`, {
+                                        value: ``,
+                                        children: `Select Status (Optional)`,
+                                      }),
+                                      (0, N.jsx)(`option`, {
+                                        value: `upcoming`,
+                                        children: `Upcoming`,
+                                      }),
+                                      (0, N.jsx)(`option`, {
+                                        value: `finished`,
+                                        children: `Finished`,
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                            ],
                           }),
-                        }),
-                        (0, N.jsxs)(w, {
-                          className: `space-y-4`,
-                          children: [
-                            (0, N.jsxs)(`div`, {
-                              className: `grid grid-cols-1 md:grid-cols-2 gap-4`,
-                              children: [
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-title`,
-                                      children: `Package Title *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-title`,
-                                      value: l.title || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          title: e.target.value,
-                                        })),
-                                      placeholder: `e.g. Kashmir Strangers Tour`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-month`,
-                                      children: `Travel Month *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-month`,
-                                      value: l.month || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          month: e.target.value,
-                                        })),
-                                      placeholder: `e.g. January`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-date`,
-                                      children: `Travel Dates *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-date`,
-                                      value: l.date || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          date: e.target.value,
-                                        })),
-                                      placeholder: `e.g. Jan 10-18, 2026`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-price`,
-                                      children: `Price *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-price`,
-                                      value: l.price || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          price: e.target.value,
-                                        })),
-                                      placeholder: `e.g. ₹14,999`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-note`,
-                                      children: `Note (Optional)`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-note`,
-                                      value: l.note || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          note: e.target.value,
-                                        })),
-                                      placeholder: `e.g. Flight Excl.`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-link`,
-                                      children: `Package Link *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `pkg-link`,
-                                      value: l.link || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          link: e.target.value,
-                                        })),
-                                      placeholder: `e.g. /destination/kashmir?pkg=kashmir-strangers-4n5d`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `pkg-status`,
-                                      children: `Trip Status`,
-                                    }),
-                                    (0, N.jsxs)(`select`, {
-                                      id: `pkg-status`,
-                                      value: l.status || ``,
-                                      onChange: (e) =>
-                                        f((t) => ({
-                                          ...t,
-                                          status: e.target.value,
-                                        })),
-                                      className: `w-full bg-white border border-gray-200 rounded-md p-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20`,
-                                      children: [
-                                        (0, N.jsx)(`option`, {
-                                          value: ``,
-                                          children: `Select Status (Optional)`,
-                                        }),
-                                        (0, N.jsx)(`option`, {
-                                          value: `upcoming`,
-                                          children: `Upcoming`,
-                                        }),
-                                        (0, N.jsx)(`option`, {
-                                          value: `finished`,
-                                          children: `Finished`,
-                                        }),
-                                      ],
-                                    }),
-                                  ],
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, { children: `Package Image *` }),
-                                (0, N.jsx)(F, {
-                                  onUpload: (e) =>
-                                    f((t) => ({ ...t, image: e })),
-                                  defaultImage: l.image,
-                                  folder: `planet_life/stranger_trips`,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `flex gap-2 justify-end pt-2`,
-                              children: [
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  variant: `outline`,
-                                  onClick: () => m(!1),
-                                  children: `Cancel`,
-                                }),
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  onClick: B,
-                                  children: s
-                                    ? `Update Package`
-                                    : `Add Package`,
-                                }),
-                              ],
-                            }),
-                          ],
-                        }),
-                      ],
-                    }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, { children: `Package Image *` }),
+                              (0, N.jsx)(F, {
+                                onUpload: (e) =>
+                                  f((t) => ({ ...t, image: e })),
+                                defaultImage: l.image,
+                                folder: `planet_life/stranger_trips`,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `flex gap-2 justify-end pt-2`,
+                            children: [
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                variant: `outline`,
+                                onClick: () => m(!1),
+                                children: `Cancel`,
+                              }),
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                onClick: B,
+                                children: s
+                                  ? `Update Package`
+                                  : `Add Package`,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
                   (0, N.jsx)(`div`, {
                     className: `grid gap-4 mt-2`,
                     children:
                       (n.strangerTrips || []).length === 0
                         ? (0, N.jsx)(`p`, {
-                            className: `text-sm text-muted-foreground py-4 text-center`,
-                            children: `No packages added. Default packages will be shown on the home page.`,
-                          })
+                          className: `text-sm text-muted-foreground py-4 text-center`,
+                          children: `No packages added. Default packages will be shown on the home page.`,
+                        })
                         : (n.strangerTrips || []).map((e) =>
-                            (0, N.jsxs)(
-                              `div`,
-                              {
-                                className: `flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
-                                children: [
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex items-center gap-4`,
-                                    children: [
-                                      (0, N.jsx)(`img`, {
-                                        src: y(e.image),
-                                        alt: e.title,
-                                        className: `w-16 h-16 object-cover rounded bg-muted`,
-                                      }),
-                                      (0, N.jsxs)(`div`, {
-                                        children: [
-                                          (0, N.jsx)(`h4`, {
-                                            className: `font-bold text-sm`,
-                                            children: e.title,
-                                          }),
-                                          (0, N.jsxs)(`p`, {
-                                            className: `text-xs text-muted-foreground`,
-                                            children: [
-                                              e.month,
-                                              ` | `,
-                                              e.date,
-                                              ` | `,
-                                              e.price,
-                                              e.status &&
-                                                (0, N.jsx)(`span`, {
-                                                  className: `ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase ${e.status === `upcoming` ? `bg-emerald-100 text-emerald-800` : `bg-zinc-100 text-zinc-800`}`,
-                                                  children: e.status,
-                                                }),
-                                            ],
-                                          }),
-                                          e.note &&
+                          (0, N.jsxs)(
+                            `div`,
+                            {
+                              className: `flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
+                              children: [
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex items-center gap-4`,
+                                  children: [
+                                    (0, N.jsx)(`img`, {
+                                      src: y(e.image),
+                                      alt: e.title,
+                                      className: `w-16 h-16 object-cover rounded bg-muted`,
+                                    }),
+                                    (0, N.jsxs)(`div`, {
+                                      children: [
+                                        (0, N.jsx)(`h4`, {
+                                          className: `font-bold text-sm`,
+                                          children: e.title,
+                                        }),
+                                        (0, N.jsxs)(`p`, {
+                                          className: `text-xs text-muted-foreground`,
+                                          children: [
+                                            e.month,
+                                            ` | `,
+                                            e.date,
+                                            ` | `,
+                                            e.price,
+                                            e.status &&
                                             (0, N.jsx)(`span`, {
-                                              className: `text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold`,
-                                              children: e.note,
+                                              className: `ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase ${e.status === `upcoming` ? `bg-emerald-100 text-emerald-800` : `bg-zinc-100 text-zinc-800`}`,
+                                              children: e.status,
                                             }),
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex gap-2`,
-                                    children: [
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `outline`,
-                                        size: `sm`,
-                                        onClick: () => R(e),
-                                        children: [
-                                          (0, N.jsx)(d, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Edit`,
-                                        ],
-                                      }),
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `destructive`,
-                                        size: `sm`,
-                                        onClick: () => z(e.id),
-                                        children: [
-                                          (0, N.jsx)(u, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Delete`,
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                ],
-                              },
-                              e.id,
-                            ),
+                                          ],
+                                        }),
+                                        e.note &&
+                                        (0, N.jsx)(`span`, {
+                                          className: `text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold`,
+                                          children: e.note,
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex gap-2`,
+                                  children: [
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `outline`,
+                                      size: `sm`,
+                                      onClick: () => R(e),
+                                      children: [
+                                        (0, N.jsx)(d, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Edit`,
+                                      ],
+                                    }),
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `destructive`,
+                                      size: `sm`,
+                                      onClick: () => z(e.id),
+                                      children: [
+                                        (0, N.jsx)(u, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Delete`,
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            },
+                            e.id,
                           ),
+                        ),
                   }),
                 ],
               }),
@@ -1425,7 +1425,7 @@ var M = e(r(), 1),
                       (0, N.jsx)(`div`, {
                         className: `grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 max-h-[400px] overflow-y-auto p-2 border rounded-lg bg-muted/10`,
                         children: (n.communityImages &&
-                        n.communityImages.length > 0
+                          n.communityImages.length > 0
                           ? n.communityImages
                           : S
                         ).map((e, t) =>
@@ -1458,17 +1458,17 @@ var M = e(r(), 1),
                       }),
                       !n.communityImages || n.communityImages.length === 0
                         ? (0, N.jsx)(`div`, {
-                            className: `text-xs text-muted-foreground bg-muted/30 p-3 rounded-lg border border-dashed`,
-                            children: `Showing the 48 default WhatsApp stories. Any delete or upload action will create your custom community images list.`,
-                          })
+                          className: `text-xs text-muted-foreground bg-muted/30 p-3 rounded-lg border border-dashed`,
+                          children: `Showing the 48 default WhatsApp stories. Any delete or upload action will create your custom community images list.`,
+                        })
                         : (0, N.jsxs)(`div`, {
-                            className: `text-xs text-green-600 bg-green-50/50 dark:bg-green-950/20 p-3 rounded-lg border border-green-200 dark:border-green-900/30`,
-                            children: [
-                              `Showing `,
-                              n.communityImages.length,
-                              ` custom community images.`,
-                            ],
-                          }),
+                          className: `text-xs text-green-600 bg-green-50/50 dark:bg-green-950/20 p-3 rounded-lg border border-green-200 dark:border-green-900/30`,
+                          children: [
+                            `Showing `,
+                            n.communityImages.length,
+                            ` custom community images.`,
+                          ],
+                        }),
                       (0, N.jsxs)(`div`, {
                         className: `max-w-sm mt-2`,
                         children: [
@@ -1498,153 +1498,153 @@ var M = e(r(), 1),
                         children: `Google Reviews Section`,
                       }),
                       !A &&
-                        (0, N.jsxs)(i, {
-                          type: `button`,
-                          onClick: V,
-                          size: `sm`,
-                          children: [
-                            (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
-                            ` Add Review`,
-                          ],
-                        }),
+                      (0, N.jsxs)(i, {
+                        type: `button`,
+                        onClick: V,
+                        size: `sm`,
+                        children: [
+                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                          ` Add Review`,
+                        ],
+                      }),
                     ],
                   }),
                   A &&
-                    (0, N.jsxs)(E, {
-                      className: `border-2 border-primary/20 bg-muted/30`,
-                      children: [
-                        (0, N.jsx)(T, {
-                          children: (0, N.jsx)(C, {
-                            className: `text-base font-bold`,
-                            children: h === null ? `Add Review` : `Edit Review`,
+                  (0, N.jsxs)(E, {
+                    className: `border-2 border-primary/20 bg-muted/30`,
+                    children: [
+                      (0, N.jsx)(T, {
+                        children: (0, N.jsx)(C, {
+                          className: `text-base font-bold`,
+                          children: h === null ? `Add Review` : `Edit Review`,
+                        }),
+                      }),
+                      (0, N.jsxs)(w, {
+                        className: `space-y-4`,
+                        children: [
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, {
+                                htmlFor: `review-name`,
+                                children: `Reviewer Name *`,
+                              }),
+                              (0, N.jsx)(v, {
+                                id: `review-name`,
+                                value: O.name || ``,
+                                onChange: (e) =>
+                                  k((t) => ({ ...t, name: e.target.value })),
+                                placeholder: `e.g. Vignesh Kumar`,
+                              }),
+                            ],
                           }),
-                        }),
-                        (0, N.jsxs)(w, {
-                          className: `space-y-4`,
-                          children: [
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, {
-                                  htmlFor: `review-name`,
-                                  children: `Reviewer Name *`,
-                                }),
-                                (0, N.jsx)(v, {
-                                  id: `review-name`,
-                                  value: O.name || ``,
-                                  onChange: (e) =>
-                                    k((t) => ({ ...t, name: e.target.value })),
-                                  placeholder: `e.g. Vignesh Kumar`,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, {
-                                  htmlFor: `review-text`,
-                                  children: `Review Text *`,
-                                }),
-                                (0, N.jsx)(D, {
-                                  id: `review-text`,
-                                  value: O.text || ``,
-                                  onChange: (e) =>
-                                    k((t) => ({ ...t, text: e.target.value })),
-                                  placeholder: `e.g. Had an amazing trip! Highly recommend Planet Life.`,
-                                  rows: 3,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `flex gap-2 justify-end pt-2`,
-                              children: [
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  variant: `outline`,
-                                  onClick: () => j(!1),
-                                  children: `Cancel`,
-                                }),
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  onClick: W,
-                                  children:
-                                    h === null ? `Add Review` : `Update Review`,
-                                }),
-                              ],
-                            }),
-                          ],
-                        }),
-                      ],
-                    }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, {
+                                htmlFor: `review-text`,
+                                children: `Review Text *`,
+                              }),
+                              (0, N.jsx)(D, {
+                                id: `review-text`,
+                                value: O.text || ``,
+                                onChange: (e) =>
+                                  k((t) => ({ ...t, text: e.target.value })),
+                                placeholder: `e.g. Had an amazing trip! Highly recommend Planet Life.`,
+                                rows: 3,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `flex gap-2 justify-end pt-2`,
+                            children: [
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                variant: `outline`,
+                                onClick: () => j(!1),
+                                children: `Cancel`,
+                              }),
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                onClick: W,
+                                children:
+                                  h === null ? `Add Review` : `Update Review`,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
                   (0, N.jsx)(`div`, {
                     className: `grid gap-4 mt-2`,
                     children:
                       (n.reviews || []).length === 0
                         ? (0, N.jsx)(`p`, {
-                            className: `text-sm text-muted-foreground py-4 text-center`,
-                            children: `No reviews added. Default reviews will be shown on the home page.`,
-                          })
+                          className: `text-sm text-muted-foreground py-4 text-center`,
+                          children: `No reviews added. Default reviews will be shown on the home page.`,
+                        })
                         : (n.reviews || []).map((e, t) =>
-                            (0, N.jsxs)(
-                              `div`,
-                              {
-                                className: `flex items-start justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
-                                children: [
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex items-start gap-4`,
-                                    children: [
-                                      (0, N.jsx)(`div`, {
-                                        className: `w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-extrabold uppercase flex-shrink-0`,
-                                        children: e.name ? e.name[0] : `U`,
-                                      }),
-                                      (0, N.jsxs)(`div`, {
-                                        children: [
-                                          (0, N.jsx)(`h4`, {
-                                            className: `font-bold text-sm`,
-                                            children: e.name,
-                                          }),
-                                          (0, N.jsxs)(`p`, {
-                                            className: `text-xs text-muted-foreground mt-1 line-clamp-3`,
-                                            children: [`"`, e.text, `"`],
-                                          }),
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex gap-2 ml-4 flex-shrink-0`,
-                                    children: [
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `outline`,
-                                        size: `sm`,
-                                        onClick: () => H(t),
-                                        children: [
-                                          (0, N.jsx)(d, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Edit`,
-                                        ],
-                                      }),
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `destructive`,
-                                        size: `sm`,
-                                        onClick: () => U(t),
-                                        children: [
-                                          (0, N.jsx)(u, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Delete`,
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                ],
-                              },
-                              t,
-                            ),
+                          (0, N.jsxs)(
+                            `div`,
+                            {
+                              className: `flex items-start justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
+                              children: [
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex items-start gap-4`,
+                                  children: [
+                                    (0, N.jsx)(`div`, {
+                                      className: `w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-extrabold uppercase flex-shrink-0`,
+                                      children: e.name ? e.name[0] : `U`,
+                                    }),
+                                    (0, N.jsxs)(`div`, {
+                                      children: [
+                                        (0, N.jsx)(`h4`, {
+                                          className: `font-bold text-sm`,
+                                          children: e.name,
+                                        }),
+                                        (0, N.jsxs)(`p`, {
+                                          className: `text-xs text-muted-foreground mt-1 line-clamp-3`,
+                                          children: [`"`, e.text, `"`],
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex gap-2 ml-4 flex-shrink-0`,
+                                  children: [
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `outline`,
+                                      size: `sm`,
+                                      onClick: () => H(t),
+                                      children: [
+                                        (0, N.jsx)(d, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Edit`,
+                                      ],
+                                    }),
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `destructive`,
+                                      size: `sm`,
+                                      onClick: () => U(t),
+                                      children: [
+                                        (0, N.jsx)(u, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Delete`,
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            },
+                            t,
                           ),
+                        ),
                   }),
                 ],
               }),
@@ -1919,7 +1919,7 @@ var M = e(r(), 1),
                                   value: t.number,
                                   onChange: (t) =>
                                     s(e, `number`, t.target.value),
-                                  placeholder: `e.g. 5000+`,
+                                  placeholder: `e.g. 20000+`,
                                 }),
                               ],
                             }),
@@ -2066,15 +2066,15 @@ var M = e(r(), 1),
                         children: `Services Section`,
                       }),
                       !h &&
-                        (0, N.jsxs)(i, {
-                          type: `button`,
-                          onClick: S,
-                          size: `sm`,
-                          children: [
-                            (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
-                            ` Add Trip Type`,
-                          ],
-                        }),
+                      (0, N.jsxs)(i, {
+                        type: `button`,
+                        onClick: S,
+                        size: `sm`,
+                        children: [
+                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                          ` Add Trip Type`,
+                        ],
+                      }),
                     ],
                   }),
                   (0, N.jsxs)(`div`, {
@@ -2093,196 +2093,196 @@ var M = e(r(), 1),
                     ],
                   }),
                   h &&
-                    (0, N.jsxs)(E, {
-                      className: `border-2 border-primary/20 bg-muted/30`,
-                      children: [
-                        (0, N.jsx)(T, {
-                          children: (0, N.jsx)(C, {
-                            className: `text-base font-bold`,
-                            children:
-                              l === null ? `Add Trip Type` : `Edit Trip Type`,
-                          }),
+                  (0, N.jsxs)(E, {
+                    className: `border-2 border-primary/20 bg-muted/30`,
+                    children: [
+                      (0, N.jsx)(T, {
+                        children: (0, N.jsx)(C, {
+                          className: `text-base font-bold`,
+                          children:
+                            l === null ? `Add Trip Type` : `Edit Trip Type`,
                         }),
-                        (0, N.jsxs)(w, {
-                          className: `space-y-4`,
-                          children: [
-                            (0, N.jsxs)(`div`, {
-                              className: `grid grid-cols-2 gap-4`,
-                              children: [
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `trip-title`,
-                                      children: `Title *`,
-                                    }),
-                                    (0, N.jsx)(v, {
-                                      id: `trip-title`,
-                                      value: p.title || ``,
-                                      onChange: (e) =>
-                                        m((t) => ({
-                                          ...t,
-                                          title: e.target.value,
-                                        })),
-                                      placeholder: `e.g. Corporate Trips`,
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `space-y-2`,
-                                  children: [
-                                    (0, N.jsx)(x, {
-                                      htmlFor: `trip-icon`,
-                                      children: `Icon *`,
-                                    }),
-                                    (0, N.jsx)(`select`, {
-                                      id: `trip-icon`,
-                                      value: p.icon,
-                                      onChange: (e) =>
-                                        m((t) => ({
-                                          ...t,
-                                          icon: e.target.value,
-                                        })),
-                                      className: `w-full bg-white border border-gray-200 rounded-md p-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20`,
-                                      children: z.map((e) =>
-                                        (0, N.jsx)(
-                                          `option`,
-                                          { value: e, children: e },
-                                          e,
-                                        ),
+                      }),
+                      (0, N.jsxs)(w, {
+                        className: `space-y-4`,
+                        children: [
+                          (0, N.jsxs)(`div`, {
+                            className: `grid grid-cols-2 gap-4`,
+                            children: [
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `trip-title`,
+                                    children: `Title *`,
+                                  }),
+                                  (0, N.jsx)(v, {
+                                    id: `trip-title`,
+                                    value: p.title || ``,
+                                    onChange: (e) =>
+                                      m((t) => ({
+                                        ...t,
+                                        title: e.target.value,
+                                      })),
+                                    placeholder: `e.g. Corporate Trips`,
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `space-y-2`,
+                                children: [
+                                  (0, N.jsx)(x, {
+                                    htmlFor: `trip-icon`,
+                                    children: `Icon *`,
+                                  }),
+                                  (0, N.jsx)(`select`, {
+                                    id: `trip-icon`,
+                                    value: p.icon,
+                                    onChange: (e) =>
+                                      m((t) => ({
+                                        ...t,
+                                        icon: e.target.value,
+                                      })),
+                                    className: `w-full bg-white border border-gray-200 rounded-md p-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20`,
+                                    children: z.map((e) =>
+                                      (0, N.jsx)(
+                                        `option`,
+                                        { value: e, children: e },
+                                        e,
                                       ),
-                                    }),
-                                  ],
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, {
-                                  htmlFor: `trip-desc`,
-                                  children: `Description *`,
-                                }),
-                                (0, N.jsx)(D, {
-                                  id: `trip-desc`,
-                                  value: p.desc || ``,
-                                  onChange: (e) =>
-                                    m((t) => ({ ...t, desc: e.target.value })),
-                                  placeholder: `Description`,
-                                  rows: 2,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, { children: `Image *` }),
-                                (0, N.jsx)(F, {
-                                  onUpload: (e) =>
-                                    m((t) => ({ ...t, image: e })),
-                                  defaultImage: p.image,
-                                  folder: `planet_life/about/services`,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `flex gap-2 justify-end pt-2`,
-                              children: [
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  variant: `outline`,
-                                  onClick: () => g(!1),
-                                  children: `Cancel`,
-                                }),
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  onClick: A,
-                                  children:
-                                    l === null
-                                      ? `Add Trip Type`
-                                      : `Update Trip Type`,
-                                }),
-                              ],
-                            }),
-                          ],
-                        }),
-                      ],
-                    }),
+                                    ),
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, {
+                                htmlFor: `trip-desc`,
+                                children: `Description *`,
+                              }),
+                              (0, N.jsx)(D, {
+                                id: `trip-desc`,
+                                value: p.desc || ``,
+                                onChange: (e) =>
+                                  m((t) => ({ ...t, desc: e.target.value })),
+                                placeholder: `Description`,
+                                rows: 2,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, { children: `Image *` }),
+                              (0, N.jsx)(F, {
+                                onUpload: (e) =>
+                                  m((t) => ({ ...t, image: e })),
+                                defaultImage: p.image,
+                                folder: `planet_life/about/services`,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `flex gap-2 justify-end pt-2`,
+                            children: [
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                variant: `outline`,
+                                onClick: () => g(!1),
+                                children: `Cancel`,
+                              }),
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                onClick: A,
+                                children:
+                                  l === null
+                                    ? `Add Trip Type`
+                                    : `Update Trip Type`,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
                   (0, N.jsx)(`div`, {
                     className: `grid gap-4 mt-2`,
                     children:
                       (n.offeredTrips || []).length === 0
                         ? (0, N.jsx)(`p`, {
-                            className: `text-sm text-muted-foreground py-4 text-center`,
-                            children: `No custom trip types added. Default ones will be shown.`,
-                          })
+                          className: `text-sm text-muted-foreground py-4 text-center`,
+                          children: `No custom trip types added. Default ones will be shown.`,
+                        })
                         : (n.offeredTrips || []).map((e, t) =>
-                            (0, N.jsxs)(
-                              `div`,
-                              {
-                                className: `flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
-                                children: [
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex items-center gap-4`,
-                                    children: [
-                                      (0, N.jsx)(`img`, {
-                                        src: y(e.image),
-                                        alt: e.title,
-                                        className: `w-16 h-16 object-cover rounded bg-muted`,
-                                      }),
-                                      (0, N.jsxs)(`div`, {
-                                        children: [
-                                          (0, N.jsxs)(`h4`, {
-                                            className: `font-bold text-sm`,
-                                            children: [
-                                              e.title,
-                                              ` (`,
-                                              e.icon,
-                                              `)`,
-                                            ],
-                                          }),
-                                          (0, N.jsx)(`p`, {
-                                            className: `text-xs text-muted-foreground mt-1 line-clamp-2`,
-                                            children: e.desc,
-                                          }),
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                  (0, N.jsxs)(`div`, {
-                                    className: `flex gap-2 ml-4`,
-                                    children: [
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `outline`,
-                                        size: `sm`,
-                                        onClick: () => O(t),
-                                        children: [
-                                          (0, N.jsx)(d, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Edit`,
-                                        ],
-                                      }),
-                                      (0, N.jsxs)(i, {
-                                        type: `button`,
-                                        variant: `destructive`,
-                                        size: `sm`,
-                                        onClick: () => k(t),
-                                        children: [
-                                          (0, N.jsx)(u, {
-                                            className: `h-4 w-4 mr-1`,
-                                          }),
-                                          ` Delete`,
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                ],
-                              },
-                              t,
-                            ),
+                          (0, N.jsxs)(
+                            `div`,
+                            {
+                              className: `flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
+                              children: [
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex items-center gap-4`,
+                                  children: [
+                                    (0, N.jsx)(`img`, {
+                                      src: y(e.image),
+                                      alt: e.title,
+                                      className: `w-16 h-16 object-cover rounded bg-muted`,
+                                    }),
+                                    (0, N.jsxs)(`div`, {
+                                      children: [
+                                        (0, N.jsxs)(`h4`, {
+                                          className: `font-bold text-sm`,
+                                          children: [
+                                            e.title,
+                                            ` (`,
+                                            e.icon,
+                                            `)`,
+                                          ],
+                                        }),
+                                        (0, N.jsx)(`p`, {
+                                          className: `text-xs text-muted-foreground mt-1 line-clamp-2`,
+                                          children: e.desc,
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex gap-2 ml-4`,
+                                  children: [
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `outline`,
+                                      size: `sm`,
+                                      onClick: () => O(t),
+                                      children: [
+                                        (0, N.jsx)(d, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Edit`,
+                                      ],
+                                    }),
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `destructive`,
+                                      size: `sm`,
+                                      onClick: () => k(t),
+                                      children: [
+                                        (0, N.jsx)(u, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Delete`,
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            },
+                            t,
                           ),
+                        ),
                   }),
                 ],
               }),
@@ -2297,143 +2297,143 @@ var M = e(r(), 1),
                         children: `Visual Journey (Gallery)`,
                       }),
                       !R &&
-                        (0, N.jsxs)(i, {
-                          type: `button`,
-                          onClick: V,
-                          size: `sm`,
-                          children: [
-                            (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
-                            ` Add Gallery Image`,
-                          ],
-                        }),
+                      (0, N.jsxs)(i, {
+                        type: `button`,
+                        onClick: V,
+                        size: `sm`,
+                        children: [
+                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                          ` Add Gallery Image`,
+                        ],
+                      }),
                     ],
                   }),
                   R &&
-                    (0, N.jsxs)(E, {
-                      className: `border-2 border-primary/20 bg-muted/30`,
-                      children: [
-                        (0, N.jsx)(T, {
-                          children: (0, N.jsx)(C, {
-                            className: `text-base font-bold`,
-                            children:
-                              j === null
-                                ? `Add Gallery Image`
-                                : `Edit Gallery Image`,
+                  (0, N.jsxs)(E, {
+                    className: `border-2 border-primary/20 bg-muted/30`,
+                    children: [
+                      (0, N.jsx)(T, {
+                        children: (0, N.jsx)(C, {
+                          className: `text-base font-bold`,
+                          children:
+                            j === null
+                              ? `Add Gallery Image`
+                              : `Edit Gallery Image`,
+                        }),
+                      }),
+                      (0, N.jsxs)(w, {
+                        className: `space-y-4`,
+                        children: [
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, {
+                                htmlFor: `gallery-alt`,
+                                children: `Alt Text / Description *`,
+                              }),
+                              (0, N.jsx)(v, {
+                                id: `gallery-alt`,
+                                value: I.alt || ``,
+                                onChange: (e) =>
+                                  L((t) => ({ ...t, alt: e.target.value })),
+                                placeholder: `e.g. Bali sunset or happy travelers`,
+                              }),
+                            ],
                           }),
-                        }),
-                        (0, N.jsxs)(w, {
-                          className: `space-y-4`,
-                          children: [
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, {
-                                  htmlFor: `gallery-alt`,
-                                  children: `Alt Text / Description *`,
-                                }),
-                                (0, N.jsx)(v, {
-                                  id: `gallery-alt`,
-                                  value: I.alt || ``,
-                                  onChange: (e) =>
-                                    L((t) => ({ ...t, alt: e.target.value })),
-                                  placeholder: `e.g. Bali sunset or happy travelers`,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `space-y-2`,
-                              children: [
-                                (0, N.jsx)(x, { children: `Image *` }),
-                                (0, N.jsx)(F, {
-                                  onUpload: (e) => L((t) => ({ ...t, src: e })),
-                                  defaultImage: I.src,
-                                  folder: `planet_life/about/gallery`,
-                                }),
-                              ],
-                            }),
-                            (0, N.jsxs)(`div`, {
-                              className: `flex gap-2 justify-end pt-2`,
-                              children: [
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  variant: `outline`,
-                                  onClick: () => B(!1),
-                                  children: `Cancel`,
-                                }),
-                                (0, N.jsx)(i, {
-                                  type: `button`,
-                                  onClick: W,
-                                  children:
-                                    j === null ? `Add Image` : `Update Image`,
-                                }),
-                              ],
-                            }),
-                          ],
-                        }),
-                      ],
-                    }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, { children: `Image *` }),
+                              (0, N.jsx)(F, {
+                                onUpload: (e) => L((t) => ({ ...t, src: e })),
+                                defaultImage: I.src,
+                                folder: `planet_life/about/gallery`,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `flex gap-2 justify-end pt-2`,
+                            children: [
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                variant: `outline`,
+                                onClick: () => B(!1),
+                                children: `Cancel`,
+                              }),
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                onClick: W,
+                                children:
+                                  j === null ? `Add Image` : `Update Image`,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
                   (0, N.jsx)(`div`, {
                     className: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2`,
                     children:
                       (n.galleryImages || []).length === 0
                         ? (0, N.jsx)(`p`, {
-                            className: `text-sm text-muted-foreground py-4 col-span-full text-center`,
-                            children: `No custom gallery images. Default images will be shown.`,
-                          })
+                          className: `text-sm text-muted-foreground py-4 col-span-full text-center`,
+                          children: `No custom gallery images. Default images will be shown.`,
+                        })
                         : (n.galleryImages || []).map((e, t) =>
-                            (0, N.jsxs)(
-                              `div`,
-                              {
-                                className: `flex flex-col border rounded-lg bg-card text-card-foreground shadow-sm overflow-hidden`,
-                                children: [
-                                  (0, N.jsx)(`img`, {
-                                    src: y(e.src),
-                                    alt: e.alt,
-                                    className: `w-full h-32 object-cover bg-muted`,
-                                  }),
-                                  (0, N.jsxs)(`div`, {
-                                    className: `p-3 space-y-2 flex-grow flex flex-col justify-between`,
-                                    children: [
-                                      (0, N.jsx)(`p`, {
-                                        className: `text-xs font-semibold text-foreground truncate`,
-                                        children: e.alt,
-                                      }),
-                                      (0, N.jsxs)(`div`, {
-                                        className: `flex gap-2 justify-end`,
-                                        children: [
-                                          (0, N.jsxs)(i, {
-                                            type: `button`,
-                                            variant: `outline`,
-                                            size: `sm`,
-                                            onClick: () => H(t),
-                                            children: [
-                                              (0, N.jsx)(d, {
-                                                className: `h-3.5 w-3.5 mr-1`,
-                                              }),
-                                              ` Edit`,
-                                            ],
-                                          }),
-                                          (0, N.jsxs)(i, {
-                                            type: `button`,
-                                            variant: `destructive`,
-                                            size: `sm`,
-                                            onClick: () => U(t),
-                                            children: [
-                                              (0, N.jsx)(u, {
-                                                className: `h-3.5 w-3.5 mr-1`,
-                                              }),
-                                              ` Delete`,
-                                            ],
-                                          }),
-                                        ],
-                                      }),
-                                    ],
-                                  }),
-                                ],
-                              },
-                              t,
-                            ),
+                          (0, N.jsxs)(
+                            `div`,
+                            {
+                              className: `flex flex-col border rounded-lg bg-card text-card-foreground shadow-sm overflow-hidden`,
+                              children: [
+                                (0, N.jsx)(`img`, {
+                                  src: y(e.src),
+                                  alt: e.alt,
+                                  className: `w-full h-32 object-cover bg-muted`,
+                                }),
+                                (0, N.jsxs)(`div`, {
+                                  className: `p-3 space-y-2 flex-grow flex flex-col justify-between`,
+                                  children: [
+                                    (0, N.jsx)(`p`, {
+                                      className: `text-xs font-semibold text-foreground truncate`,
+                                      children: e.alt,
+                                    }),
+                                    (0, N.jsxs)(`div`, {
+                                      className: `flex gap-2 justify-end`,
+                                      children: [
+                                        (0, N.jsxs)(i, {
+                                          type: `button`,
+                                          variant: `outline`,
+                                          size: `sm`,
+                                          onClick: () => H(t),
+                                          children: [
+                                            (0, N.jsx)(d, {
+                                              className: `h-3.5 w-3.5 mr-1`,
+                                            }),
+                                            ` Edit`,
+                                          ],
+                                        }),
+                                        (0, N.jsxs)(i, {
+                                          type: `button`,
+                                          variant: `destructive`,
+                                          size: `sm`,
+                                          onClick: () => U(t),
+                                          children: [
+                                            (0, N.jsx)(u, {
+                                              className: `h-3.5 w-3.5 mr-1`,
+                                            }),
+                                            ` Delete`,
+                                          ],
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            },
+                            t,
                           ),
+                        ),
                   }),
                 ],
               }),
@@ -2929,10 +2929,10 @@ var M = e(r(), 1),
                             ),
                           ),
                           t.packages.length === 0 &&
-                            (0, N.jsx)(`p`, {
-                              className: `text-sm text-muted-foreground italic`,
-                              children: `No packages added yet.`,
-                            }),
+                          (0, N.jsx)(`p`, {
+                            className: `text-sm text-muted-foreground italic`,
+                            children: `No packages added yet.`,
+                          }),
                         ],
                       }),
                     ],
@@ -2948,12 +2948,12 @@ var M = e(r(), 1),
   },
   W = () => {
     let {
-        destinations: e,
-        deleteDestination: n,
-        addDestination: r,
-        updateDestination: o,
-        logout: s,
-      } = a(),
+      destinations: e,
+      deleteDestination: n,
+      addDestination: r,
+      updateDestination: o,
+      logout: s,
+    } = a(),
       [c, l] = (0, M.useState)(!1),
       [f, p] = (0, M.useState)(void 0),
       m = t(),
@@ -2969,151 +2969,151 @@ var M = e(r(), 1),
       };
     return c
       ? (0, N.jsx)(`div`, {
-          className: `container mx-auto py-20 px-4`,
-          children: (0, N.jsx)(I, {
-            initialData: f,
-            onSubmit: (e) => {
-              (f ? o(e) : r(e), l(!1));
-            },
-            onCancel: () => l(!1),
-          }),
-        })
+        className: `container mx-auto py-20 px-4`,
+        children: (0, N.jsx)(I, {
+          initialData: f,
+          onSubmit: (e) => {
+            (f ? o(e) : r(e), l(!1));
+          },
+          onCancel: () => l(!1),
+        }),
+      })
       : (0, N.jsxs)(`div`, {
-          className: `container mx-auto py-20 px-4`,
-          children: [
-            (0, N.jsxs)(`div`, {
-              className: `flex justify-between items-center mb-8`,
-              children: [
-                (0, N.jsx)(`h1`, {
-                  className: `text-3xl font-bold`,
-                  children: `Admin Dashboard`,
-                }),
-                (0, N.jsxs)(i, {
-                  variant: `destructive`,
-                  onClick: () => {
-                    (s(), m(`/admin/login`));
-                  },
-                  children: [
-                    (0, N.jsx)(g, { className: `mr-2 h-4 w-4` }),
-                    `Logout`,
-                  ],
-                }),
-              ],
-            }),
-            (0, N.jsxs)(j, {
-              defaultValue: `home`,
-              className: `space-y-6`,
-              children: [
-                (0, N.jsxs)(A, {
-                  className: `grid w-full grid-cols-5`,
-                  children: [
-                    (0, N.jsx)(O, { value: `home`, children: `Home` }),
-                    (0, N.jsx)(O, {
-                      value: `destinations`,
-                      children: `Destinations`,
+        className: `container mx-auto py-20 px-4`,
+        children: [
+          (0, N.jsxs)(`div`, {
+            className: `flex justify-between items-center mb-8`,
+            children: [
+              (0, N.jsx)(`h1`, {
+                className: `text-3xl font-bold`,
+                children: `Admin Dashboard`,
+              }),
+              (0, N.jsxs)(i, {
+                variant: `destructive`,
+                onClick: () => {
+                  (s(), m(`/admin/login`));
+                },
+                children: [
+                  (0, N.jsx)(g, { className: `mr-2 h-4 w-4` }),
+                  `Logout`,
+                ],
+              }),
+            ],
+          }),
+          (0, N.jsxs)(j, {
+            defaultValue: `home`,
+            className: `space-y-6`,
+            children: [
+              (0, N.jsxs)(A, {
+                className: `grid w-full grid-cols-5`,
+                children: [
+                  (0, N.jsx)(O, { value: `home`, children: `Home` }),
+                  (0, N.jsx)(O, {
+                    value: `destinations`,
+                    children: `Destinations`,
+                  }),
+                  (0, N.jsx)(O, { value: `packages`, children: `Packages` }),
+                  (0, N.jsx)(O, { value: `about`, children: `About` }),
+                  (0, N.jsx)(O, { value: `contact`, children: `Contact` }),
+                ],
+              }),
+              (0, N.jsx)(k, { value: `home`, children: (0, N.jsx)(R, {}) }),
+              (0, N.jsxs)(k, {
+                value: `destinations`,
+                className: `space-y-4`,
+                children: [
+                  (0, N.jsx)(`div`, {
+                    className: `flex justify-end`,
+                    children: (0, N.jsxs)(i, {
+                      onClick: v,
+                      children: [
+                        (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                        `Add New Destination`,
+                      ],
                     }),
-                    (0, N.jsx)(O, { value: `packages`, children: `Packages` }),
-                    (0, N.jsx)(O, { value: `about`, children: `About` }),
-                    (0, N.jsx)(O, { value: `contact`, children: `Contact` }),
-                  ],
-                }),
-                (0, N.jsx)(k, { value: `home`, children: (0, N.jsx)(R, {}) }),
-                (0, N.jsxs)(k, {
-                  value: `destinations`,
-                  className: `space-y-4`,
-                  children: [
-                    (0, N.jsx)(`div`, {
-                      className: `flex justify-end`,
-                      children: (0, N.jsxs)(i, {
-                        onClick: v,
-                        children: [
-                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
-                          `Add New Destination`,
-                        ],
-                      }),
-                    }),
-                    (0, N.jsx)(`div`, {
-                      className: `grid gap-4`,
-                      children: e.map((e) =>
-                        (0, N.jsx)(
-                          E,
-                          {
-                            children: (0, N.jsxs)(w, {
-                              className: `flex items-center justify-between p-6`,
-                              children: [
-                                (0, N.jsxs)(`div`, {
-                                  className: `flex items-center space-x-4`,
-                                  children: [
-                                    (0, N.jsx)(`img`, {
-                                      src: y(e.image),
-                                      alt: e.name,
-                                      className: `w-16 h-16 object-cover rounded`,
-                                    }),
-                                    (0, N.jsxs)(`div`, {
-                                      children: [
-                                        (0, N.jsx)(`h3`, {
-                                          className: `font-bold text-lg`,
-                                          children: e.name,
-                                        }),
-                                        (0, N.jsx)(`p`, {
-                                          className: `text-sm text-gray-500`,
-                                          children: e.country,
-                                        }),
-                                      ],
-                                    }),
-                                  ],
-                                }),
-                                (0, N.jsxs)(`div`, {
-                                  className: `flex space-x-2`,
-                                  children: [
-                                    (0, N.jsx)(i, {
-                                      variant: `outline`,
-                                      size: `icon`,
-                                      onClick: () => h(e),
-                                      children: (0, N.jsx)(d, {
-                                        className: `h-4 w-4`,
+                  }),
+                  (0, N.jsx)(`div`, {
+                    className: `grid gap-4`,
+                    children: e.map((e) =>
+                      (0, N.jsx)(
+                        E,
+                        {
+                          children: (0, N.jsxs)(w, {
+                            className: `flex items-center justify-between p-6`,
+                            children: [
+                              (0, N.jsxs)(`div`, {
+                                className: `flex items-center space-x-4`,
+                                children: [
+                                  (0, N.jsx)(`img`, {
+                                    src: y(e.image),
+                                    alt: e.name,
+                                    className: `w-16 h-16 object-cover rounded`,
+                                  }),
+                                  (0, N.jsxs)(`div`, {
+                                    children: [
+                                      (0, N.jsx)(`h3`, {
+                                        className: `font-bold text-lg`,
+                                        children: e.name,
                                       }),
-                                    }),
-                                    (0, N.jsx)(i, {
-                                      variant: `destructive`,
-                                      size: `icon`,
-                                      onClick: () => b(e.id),
-                                      children: (0, N.jsx)(u, {
-                                        className: `h-4 w-4`,
+                                      (0, N.jsx)(`p`, {
+                                        className: `text-sm text-gray-500`,
+                                        children: e.country,
                                       }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                              (0, N.jsxs)(`div`, {
+                                className: `flex space-x-2`,
+                                children: [
+                                  (0, N.jsx)(i, {
+                                    variant: `outline`,
+                                    size: `icon`,
+                                    onClick: () => h(e),
+                                    children: (0, N.jsx)(d, {
+                                      className: `h-4 w-4`,
                                     }),
-                                  ],
-                                }),
-                              ],
-                            }),
-                          },
-                          e.id,
-                        ),
+                                  }),
+                                  (0, N.jsx)(i, {
+                                    variant: `destructive`,
+                                    size: `icon`,
+                                    onClick: () => b(e.id),
+                                    children: (0, N.jsx)(u, {
+                                      className: `h-4 w-4`,
+                                    }),
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                        },
+                        e.id,
                       ),
-                    }),
-                  ],
-                }),
-                (0, N.jsxs)(k, {
-                  value: `packages`,
-                  className: `space-y-6`,
-                  children: [
-                    (0, N.jsx)(H, {}),
-                    (0, N.jsx)(U, {
-                      onEditDestination: (t) => {
-                        let n = e.find((e) => e.id === t);
-                        n && h(n);
-                      },
-                    }),
-                  ],
-                }),
-                (0, N.jsx)(k, { value: `about`, children: (0, N.jsx)(B, {}) }),
-                (0, N.jsx)(k, {
-                  value: `contact`,
-                  children: (0, N.jsx)(V, {}),
-                }),
-              ],
-            }),
-          ],
-        });
+                    ),
+                  }),
+                ],
+              }),
+              (0, N.jsxs)(k, {
+                value: `packages`,
+                className: `space-y-6`,
+                children: [
+                  (0, N.jsx)(H, {}),
+                  (0, N.jsx)(U, {
+                    onEditDestination: (t) => {
+                      let n = e.find((e) => e.id === t);
+                      n && h(n);
+                    },
+                  }),
+                ],
+              }),
+              (0, N.jsx)(k, { value: `about`, children: (0, N.jsx)(B, {}) }),
+              (0, N.jsx)(k, {
+                value: `contact`,
+                children: (0, N.jsx)(V, {}),
+              }),
+            ],
+          }),
+        ],
+      });
   };
 export { W as default };

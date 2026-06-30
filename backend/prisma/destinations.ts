@@ -1891,7 +1891,7 @@ export const destinations: Destination[] = [
         duration: "4 Days 3 Nights (South Kerala – Mist & Water)",
         nights: 3,
         days: 4,
-        price: 18000,
+        price: 18999,
         image: "kerala_adventure_1.jpg",
         inclusions: [
           "Pickup & Drop at Ernakulam Railway Station",
@@ -1956,7 +1956,7 @@ export const destinations: Destination[] = [
         duration: "5 Days 4 Nights (Munnar, Vagamon & Thekkady)",
         nights: 4,
         days: 5,
-        price: 4500,
+        price: 20999,
         image: "kerala_adventure_2.jpg",
         inclusions: [
           "Pickup & Drop at Ernakulam Railway Station",
@@ -2258,7 +2258,7 @@ export const destinations: Destination[] = [
         duration: "5 Days 4 Nights (Munnar, Thekkady & Alleppey)",
         nights: 4,
         days: 5,
-        price: 23000,
+        price: 23999,
         image: "kerala_main.jpg",
         inclusions: [
           "Pickup & Drop at Ernakulam Railway Station",
@@ -2359,7 +2359,7 @@ export const destinations: Destination[] = [
         duration: "5 Nights 6 Days",
         nights: 5,
         days: 6,
-        price: 24999,
+        price: 23999,
         image: "andaman_adventure_1.jpg",
         inclusions: [
           "Pick up & Drop at Veer Savarkar International Airport",
@@ -2446,7 +2446,7 @@ export const destinations: Destination[] = [
         duration: "3 Nights 4 Days",
         nights: 3,
         days: 4,
-        price: 16999,
+        price: 15999,
         image: "andaman_adventure_2.jpg",
         inclusions: [
           "Pick up & Drop at Veer Savarkar International Airport",
@@ -2793,7 +2793,7 @@ export const destinations: Destination[] = [
         duration: "4 Nights 5 Days (Economy)",
         nights: 4,
         days: 5,
-        price: 20999,
+        price: 18999,
         image: "kas_adventure_2.jpg",
         inclusions: [
           "4 Nights Stay (Shahzir villa / Palazzo Zaffrino / Siddiq palace deluxe)",
@@ -3110,7 +3110,7 @@ export const destinations: Destination[] = [
         duration: "2 Nights 3 Days (North & South Goa)",
         nights: 2,
         days: 3,
-        price: 18999,
+        price: 10999,
         image: "goa_adventure_1.jpg",
         inclusions: [
           "2 Nights Stay in 3★ AC Resort with Swimming Pool",
@@ -3160,7 +3160,7 @@ export const destinations: Destination[] = [
         duration: "3 Nights 4 Days (Extended Goa Experience)",
         nights: 3,
         days: 4,
-        price: 14000,
+        price: 13999,
         image: "goa_adventure_2.jpg",
         inclusions: [
           "3 Nights Accommodation in 3 Star AC Resort with Swimming Pool",
@@ -3324,7 +3324,7 @@ export const destinations: Destination[] = [
         duration: "02 Nights / 03 Days - Jaipur",
         nights: 2,
         days: 3,
-        price: 12500,
+        price: 12999,
         image: "raj_adventure_1.png",
         inclusions: [
           "02 Night’s Accommodation in hotel (Crestmount Ashapurna / Crestmont Royals)",
@@ -3374,7 +3374,7 @@ export const destinations: Destination[] = [
         duration: "04 Nights / 05 Days - Jodhpur & Jaisalmer",
         nights: 4,
         days: 5,
-        price: 23333,
+        price: 18999,
         image: "raj_adventure_2.png",
         inclusions: [
           "03 Night’s Accommodation in hotel + 01 Night in Desert Camp",
@@ -3445,7 +3445,7 @@ export const destinations: Destination[] = [
         duration: "05 Nights / 06 Days - Rajasthan Highlights",
         nights: 5,
         days: 6,
-        price: 17500,
+        price: 20999,
         image: "raj_adventure_3.png",
         inclusions: [
           "5 Nights Accommodation (2N Jaipur, 1N Pushkar, 2N Udaipur)",

@@ -6501,7 +6501,6 @@ var Qi = () => {
     const companies = [
         { name: "ARUTHRS NATYALAYA", logo: "/assets/images/arudhes.png" },
         { name: "ASK JEWELLERY", logo: "/assets/images/ask_jewellery.png" },
-        { name: "BHARAT PETROLEIUM", logo: "/assets/images/bharat_petrolium.png" },
         { name: "DIVA SECRET INTERNATIONAL", logo: "/assets/images/diva_secret.png" },
         { name: "DR AGARWALS HOSPITALS", logo: "/assets/images/images-removebg-preview.png" },
         { name: "GVG INFRASTRUCTURE", logo: "/assets/images/image.png" },

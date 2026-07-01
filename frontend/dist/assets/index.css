@@ -3132,6 +3132,9 @@ h6 {
 .marquee-paused .animate-marquee-vertical-reverse {
   animation-play-state: paused;
 }
+.achievements-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
 .file\:border-0::file-selector-button {
   border-width: 0;
 }

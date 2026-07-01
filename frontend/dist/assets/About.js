@@ -206,103 +206,209 @@ var k = () => {
               }),
               (0, E.jsx)(C, {
                 direction: `up`,
+                width: `100%`,
+                overflow: `visible`,
                 children: (0, E.jsxs)(`div`, {
                   className: `mt-16 w-full`,
                   children: [
                     (0, E.jsx)(`h3`, {
-                      className: `text-red-500 font-black tracking-[0.4em] uppercase text-center text-xs md:text-sm mb-8 block drop-shadow-lg`,
+                      className: `text-red-500 font-black tracking-[0.3em] pl-[0.3em] uppercase text-center text-xl md:text-3xl mb-8 block drop-shadow-lg`,
                       children: `Planet Life Achievements`,
                     }),
                     (0, E.jsxs)(`div`, {
-                      className: `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full`,
+                      className: `achievements-container relative w-full overflow-hidden flex gap-6 py-6`,
                       children: [
                         (0, E.jsxs)(`div`, {
-                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          className: `flex gap-6 shrink-0 animate-marquee`,
+                          style: { animationDuration: `25s` },
                           children: [
-                            (0, E.jsx)(`h1`, {
-                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                              children: `7+ Years`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `7+ Years`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Experience in this industry`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Crafting journeys with expertise and deep local knowledge.`,
+                                }),
+                              ],
                             }),
-                            (0, E.jsx)(`h2`, {
-                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                              children: `Experience in this industry`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `6000+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Itineraries Crafted`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Carefully planned itineraries tailored to perfection.`,
+                                }),
+                              ],
                             }),
-                            (0, E.jsx)(`p`, {
-                              className: `text-xs text-white/50 mt-2 font-medium`,
-                              children: `Crafting journeys with expertise and deep local knowledge.`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `20k+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Happy Clients`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Trusted by thousands of solo and group travelers.`,
+                                }),
+                              ],
+                            }),
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `80+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Strangers`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `80+ Strangers went to International Trips successfully completed.`,
+                                }),
+                              ],
+                            }),
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `80+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Malaysia Group Travel`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Successfully organized group travel to Malaysia for 80+ members.`,
+                                }),
+                              ],
                             }),
                           ],
                         }),
                         (0, E.jsxs)(`div`, {
-                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
+                          className: `flex gap-6 shrink-0 animate-marquee`,
+                          style: { animationDuration: `25s` },
+                          ariaHidden: `true`,
                           children: [
-                            (0, E.jsx)(`h1`, {
-                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                              children: `6000+`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `7+ Years`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Experience in this industry`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Crafting journeys with expertise and deep local knowledge.`,
+                                }),
+                              ],
                             }),
-                            (0, E.jsx)(`h2`, {
-                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                              children: `Itineraries Crafted`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `6000+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Itineraries Crafted`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Carefully planned itineraries tailored to perfection.`,
+                                }),
+                              ],
                             }),
-                            (0, E.jsx)(`p`, {
-                              className: `text-xs text-white/50 mt-2 font-medium`,
-                              children: `Carefully planned itineraries tailored to perfection.`,
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `20k+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Happy Clients`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Trusted by thousands of solo and group travelers.`,
+                                }),
+                              ],
+                            }),
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `80+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Strangers`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `80+ Strangers went to International Trips successfully completed.`,
+                                }),
+                              ],
+                            }),
+                            (0, E.jsxs)(`div`, {
+                              className: `w-[280px] sm:w-[320px] shrink-0 bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300 text-center flex flex-col items-center justify-center`,
+                              children: [
+                                (0, E.jsx)(`h1`, {
+                                  className: `text-5xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
+                                  children: `80+`,
+                                }),
+                                (0, E.jsx)(`h2`, {
+                                  className: `text-xs font-black tracking-widest text-white uppercase`,
+                                  children: `Malaysia Group Travel`,
+                                }),
+                                (0, E.jsx)(`p`, {
+                                  className: `text-sm text-white/80 mt-2 font-medium`,
+                                  children: `Successfully organized group travel to Malaysia for 80+ members.`,
+                                }),
+                              ],
                             }),
                           ],
                         }),
-                        (0, E.jsxs)(`div`, {
-                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                          children: [
-                            (0, E.jsx)(`h1`, {
-                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                              children: `20k+`,
-                            }),
-                            (0, E.jsx)(`h2`, {
-                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                              children: `Happy Clients`,
-                            }),
-                            (0, E.jsx)(`p`, {
-                              className: `text-xs text-white/50 mt-2 font-medium`,
-                              children: `Trusted by thousands of solo and group travelers.`,
-                            }),
-                          ],
+                        (0, E.jsx)(`div`, {
+                          className: `absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none`,
                         }),
-                        (0, E.jsxs)(`div`, {
-                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                          children: [
-                            (0, E.jsx)(`h1`, {
-                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                              children: `80+`,
-                            }),
-                            (0, E.jsx)(`h2`, {
-                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                              children: `Strangers`,
-                            }),
-                            (0, E.jsx)(`p`, {
-                              className: `text-xs text-white/50 mt-2 font-medium`,
-                              children: `80+ Strangers went to International Trips successfully completed.`,
-                            }),
-                          ],
-                        }),
-                        (0, E.jsxs)(`div`, {
-                          className: `bg-red-950/15 p-6 rounded-2xl border border-red-500/40 shadow-[0_0_20px_2px_rgba(239,68,68,0.35)] hover:shadow-[0_0_30px_5px_rgba(239,68,68,0.65)] hover:border-red-500/80 hover:bg-red-950/30 transition-all duration-300`,
-                          children: [
-                            (0, E.jsx)(`h1`, {
-                              className: `text-4xl font-heading font-black text-red-500 mb-2 tracking-tighter`,
-                              children: `80+`,
-                            }),
-                            (0, E.jsx)(`h2`, {
-                              className: `text-[10px] font-black tracking-widest text-white/70 uppercase`,
-                              children: `Malaysia Group Trips`,
-                            }),
-                            (0, E.jsx)(`p`, {
-                              className: `text-xs text-white/50 mt-2 font-medium`,
-                              children: `80+ members Group Trip arranged to Malaysia successfully.`,
-                            }),
-                          ],
+                        (0, E.jsx)(`div`, {
+                          className: `absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none`,
                         }),
                       ],
-                    }),
+                    })
                   ],
                 }),
               }),

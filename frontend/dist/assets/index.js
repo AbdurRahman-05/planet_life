@@ -6870,13 +6870,15 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
         let t = r.pathname.startsWith(`/admin`),
           n = r.pathname === `/quote`,
           i = r.pathname === `/privacy` || r.pathname === `/terms`,
+          o = r.pathname.startsWith(`/booking`),
           a = localStorage.getItem(`leadFormSubmitted`) === `true`;
-        new URLSearchParams(r.search).get(`lead`) === `true` && !t && !n && !i
+        new URLSearchParams(r.search).get(`lead`) === `true` && !t && !n && !i && !o
           ? d(!0)
           : r.pathname !== e &&
           !t &&
           !n &&
           !i &&
+          !o &&
           !a &&
           (visitedPathsRef.current.has(r.pathname) ||
             (d(!0), visitedPathsRef.current.add(r.pathname)));

@@ -6782,7 +6782,7 @@ var Vl = `/assets/images/lead_form_banner-B24LhMhq.png`,
   },
   Kl = (0, B.lazy)(() =>
     Z(
-      () => import(`./Home_v4.js`),
+      () => import(`./Home_v5.js`),
       __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8]),
     ),
   ),

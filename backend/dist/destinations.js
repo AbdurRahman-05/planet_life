@@ -29,7 +29,7 @@ exports.destinations = [
                 duration: "4 Nights 5 Days (Langkawi & KL)",
                 nights: 4,
                 days: 5,
-                price: 22999,
+                price: 29999,
                 image: "mal_adventure_3.jpg",
                 inclusions: [
                     "4 Nights Accommodation (2N Langkawi + 2N Kuala Lumpur)",
@@ -106,7 +106,7 @@ exports.destinations = [
                 duration: "3 Nights 4 Days (Kuala Lumpur)",
                 nights: 3,
                 days: 4,
-                price: 17999,
+                price: 21999,
                 image: "mal_adventure_4.jpg",
                 inclusions: [
                     "3 Nights Accommodation (3★ with breakfast)",
@@ -120,112 +120,109 @@ exports.destinations = [
                 itinerary: [
                     {
                         day: 1,
-                        title: "Arrival | KL City Tour + KL Tower",
-                        description: "Welcome to KL! Start with a city tour and panoramic views.",
+                        title: "Arrival & KL Tower",
+                        description: "Arrive in Kuala Lumpur and visit the famous KL Tower with Putrajaya enroute.",
                         activities: [
-                            "Pick-up from KL International Airport",
-                            "Enroute Putrajaya sightseeing with photo stop",
-                            "Half-day Kuala Lumpur City Tour (Merdeka Square, Sultan Abdul Samad Building)",
-                            "KL Tower Entry (Observation Deck)",
-                            "Transfer to hotel & overnight stay"
+                            "Airport pickup",
+                            "Putrajaya photostop",
+                            "KL Tower visit (Observation Deck)",
+                            "Check-in at hotel and overnight stay"
                         ]
                     },
                     {
                         day: 2,
-                        title: "Genting Highlands + Batu Caves",
-                        description: "Hills and culture — the perfect KL day trip.",
+                        title: "Genting Highlands & Batu Caves",
+                        description: "Enjoy a day trip to Genting Highlands and the historical Batu Caves.",
                         activities: [
                             "Breakfast at hotel",
-                            "Visit Batu Caves and Murugan Temple",
-                            "Proceed to Genting Highlands with 2-way Cable Car tickets",
-                            "Free time at Sky Avenue and theme parks",
-                            "Return to hotel and overnight stay"
+                            "Visit Batu Caves",
+                            "Genting Highlands excursion with 2-Way Cable Car ride",
+                            "Overnight stay in Kuala Lumpur"
                         ]
                     },
                     {
                         day: 3,
-                        title: "KLCC Aquarium / Leisure",
-                        description: "A day for shopping or marine exploration.",
+                        title: "Kuala Lumpur City Tour",
+                        description: "Explore the historic and modern landmarks of Kuala Lumpur.",
                         activities: [
                             "Breakfast at hotel",
-                            "Optional visit to KLCC Aquarium (at extra cost)",
-                            "Leisure time for shopping or optional add-on tours",
+                            "Full City Tour including King's Palace, National Mosque, Merdeka Square",
+                            "Photo stop at Petronas Twin Towers",
                             "Overnight stay in Kuala Lumpur"
                         ]
                     },
                     {
                         day: 4,
                         title: "Departure",
-                        description: "Say goodbye to Malaysia.",
+                        description: "Check-out and transfer to the airport.",
                         activities: [
-                            "Breakfast and hotel check-out",
-                            "Transfer to airport as per flight schedule"
+                            "Breakfast at hotel and check-out",
+                            "Private transfer to Kuala Lumpur Airport for departure flight"
                         ]
                     }
                 ]
             },
             {
                 id: "malaysia-3n4d-kl-adventurers",
-                duration: "3 Nights 4 Days (Kuala Lumpur Adventurers)",
+                duration: "3 Nights 4 Days (KL Adventure)",
                 nights: 3,
                 days: 4,
                 price: 24999,
                 image: "mal_adventure_1.jpg",
                 inclusions: [
-                    "3 Nights accommodation in 3-star hotel (twin sharing)",
-                    "Daily Indian meals (Breakfast, Lunch, Dinner)",
-                    "All transfers and sightseeing in private vehicles",
-                    "Local Malaysian guide",
-                    "Complimentary Putrajaya photo stop",
-                    "KL City Tour, Batu Caves, Genting Highlands with 2-way cable car",
-                    "Day trip to Malacca city",
-                    "KL Tower Observation Deck tickets",
-                    "Daily bottled water",
-                    "24x7 on-tour support"
+                    "3 Nights accommodation in 3-star hotel (Double/Twin sharing)",
+                    "Daily Breakfast",
+                    "Sunway Lagoon Theme Park 6-Park Multi-Entry Ticket",
+                    "Genting Highlands Trip with 2-Way Cable Car",
+                    "Batu Caves Visit",
+                    "KL Tower Observation Deck Ticket",
+                    "Private Airport Pick-up & Drop-off",
+                    "All Tours & Transfers on Private/SIC Basis"
                 ],
                 itinerary: [
                     {
                         day: 1,
-                        title: "Arrival & Kuala Lumpur City Tour",
-                        description: "Start your Malaysian adventure with a tour of the modern capital.",
+                        title: "Arrival in Kuala Lumpur & Night Lights",
+                        description: "Arrive in KL and experience the city's spectacular night lights.",
                         activities: [
-                            "Pickup from KL International Airport",
-                            "Short Putrajaya tour enroute",
-                            "KL City Tour: Merdeka Square, Thean Hou Temple, Petronas Twin Towers",
-                            "Symphony Lake Water Fountain Show at Suria KLCC",
+                            "Airport pick-up and private transfer to hotel",
+                            "Check-in and relax",
+                            "Evening visit to KL Tower Observation Deck for panoramic city views",
+                            "Walk the colorful Saloma Link bridge and explore Bukit Bintang street food",
                             "Overnight stay in Kuala Lumpur"
                         ]
                     },
                     {
                         day: 2,
-                        title: "Genting Highlands & Batu Caves",
-                        description: "Visit the iconic limestone caves and the cool hill resort of Genting.",
+                        title: "Batu Caves & Genting Highlands Day Trip",
+                        description: "Visit the iconic Batu Caves and soar up to Genting Highlands.",
                         activities: [
-                            "Visit Batu Caves (golden statue of Lord Murugan)",
-                            "Cable car ride to Genting Highlands",
-                            "Explore Chin Swee Temple",
-                            "Return to Kuala Lumpur for dinner and overnight stay"
+                            "Breakfast at hotel",
+                            "Visit the historic Batu Caves and Lord Murugan Temple",
+                            "Travel to Genting Highlands and ride the 2-way Awana Skyway Cable Car",
+                            "Free time to explore Genting Highlands theme parks and casinos",
+                            "Overnight stay in Kuala Lumpur"
                         ]
                     },
                     {
                         day: 3,
-                        title: "Malacca - UNESCO World Heritage Site",
-                        description: "A full day exploring the historic colonial charms of Malacca.",
+                        title: "Full Day Sunway Lagoon Theme Park",
+                        description: "Unleash the adventurer in you with access to 6 themed parks.",
                         activities: [
-                            "Full-day tour of Malacca city",
-                            "Visit Red Square, St. Paul's Church, and Dutch buildings",
-                            "Explore Cheng Hoon Teng Temple and Jonker Street",
-                            "Discover Melaka's development as a trading port"
+                            "Breakfast at hotel",
+                            "Transfer to Sunway Lagoon Theme Park",
+                            "Enjoy a full day of rides, slides, and wildlife encounters at the Water Park, Amusement Park, Wildlife Park, Extreme Park, Scream Park, and Nickelodeon Lost Lagoon",
+                            "Overnight stay in Kuala Lumpur"
                         ]
                     },
                     {
                         day: 4,
-                        title: "KL Tower & Departure",
-                        description: "Panoramic views and last-minute shopping before heading home.",
+                        title: "KL City Tour & Departure",
+                        description: "See the landmarks of Kuala Lumpur before checking out.",
                         activities: [
-                            "Visit Kuala Lumpur Tower (Menara KL) observation deck",
-                            "Last-minute shopping at local markets or malls",
-                            "Transfer to airport for return journey"
+                            "Breakfast at hotel and check-out",
+                            "Kuala Lumpur City Tour: Petronas Twin Towers (Photo stop), King's Palace, Merdeka Square",
+                            "Transfer to KL Airport for departure flight"
                         ]
                     }
                 ]
@@ -259,7 +256,7 @@ exports.destinations = [
                 duration: "3 Nights 4 Days (Pattaya & Bangkok)",
                 nights: 3,
                 days: 4,
-                price: 15999,
+                price: 19999,
                 image: "thailand_adventure_4.jpg",
                 inclusions: [
                     "Accommodation as mentioned",
@@ -323,7 +320,7 @@ exports.destinations = [
                 duration: "4 Nights 5 Days (Pattaya & Bangkok)",
                 nights: 4,
                 days: 5,
-                price: 19999,
+                price: 31999,
                 image: "thailand_adventure_5.jpg",
                 inclusions: [
                     "Accommodation as mentioned",
@@ -398,7 +395,7 @@ exports.destinations = [
                 duration: "4 Nights 5 Days (Phuket & Krabi)",
                 nights: 4,
                 days: 5,
-                price: 22000,
+                price: 29999,
                 image: "thailand_adventure_1.jpg",
                 inclusions: [
                     "4 Nights Hotel Accommodation (3★/4★ options)",
@@ -471,77 +468,64 @@ exports.destinations = [
                 ]
             },
             {
-                id: "thailand-4n5d-siam-sojourn",
-                duration: "4 Nights 5 Days (Thailand Siam Sojourn)",
-                nights: 4,
-                days: 5,
-                price: 27999,
+                id: "thailand-3n4d-phuket",
+                duration: "3 Nights 4 Days (Phuket Getaway)",
+                nights: 3,
+                days: 4,
+                price: 22999,
                 image: "thailand_adventure_2.jpg",
                 inclusions: [
-                    "2 Nights Golden Beach Hotel (Pattaya) & 2 Nights The Ecotel (Bangkok)",
-                    "Pattaya Tiger Park & Alcazar Show",
-                    "Half day Coral Island tour by speed boat",
-                    "Chao Phraya Princess Cruise dinner",
-                    "Safari World & Marine Park full day",
-                    "Half day Bangkok city & temple tour",
-                    "5 Daily breakfasts, all lunches & dinners as per itinerary",
-                    "Shopping at Indra Market",
-                    "English speaking guide",
-                    "All transfers on PVT basis"
+                    "3 Nights Hotel Accommodation in Phuket (3★/4★)",
+                    "Daily Hotel Breakfast",
+                    "Phi Phi & Khai Islands Speedboat Tour with Indian Buffet Lunch",
+                    "Phuket City Tour (Karon Viewpoint, Chalong Temple, Elephant Photo Stop)",
+                    "Private Airport Pick-up & Drop-off",
+                    "All Transfers & Sightseeing entry tickets as per itinerary"
                 ],
                 itinerary: [
                     {
                         day: 1,
-                        title: "Arrive Bangkok - Way to Pattaya",
-                        description: "Land in Bangkok and head straight to the fun city of Pattaya.",
+                        title: "Arrival Phuket + City Tour",
+                        description: "Arrive in Phuket and explore the local sights.",
                         activities: [
-                            "Arrive in Bangkok and transfer to Pattaya",
-                            "Visit Tiger Park (Photo with Tiger - Optional)",
-                            "Enjoy the spectacular Alcazar Cabaret Show",
-                            "Overnight stay in Pattaya"
+                            "Arrival at Phuket Airport and private transfer to hotel",
+                            "Visit Karon Viewpoint",
+                            "Elephant Sanctuary photo stop",
+                            "Visit Chalong Temple",
+                            "Overnight stay in Phuket"
                         ]
                     },
                     {
                         day: 2,
-                        title: "Coral Island Tour",
-                        description: "A day of sun and sea at Coral Island.",
+                        title: "Phi Phi & Khai Islands Speedboat Tour",
+                        description: "Full-day speed boat excursion to the stunning Phi Phi islands.",
                         activities: [
-                            "Coral Island Tour by speed boat",
-                            "Lunch at Indian Restaurant",
-                            "Free time for leisure or water activities",
-                            "Overnight stay in Pattaya"
+                            "Breakfast at hotel",
+                            "Phi Phi & Khai Islands Speedboat Tour (SIC)",
+                            "Snorkeling at Maya Bay & Pileh Lagoon",
+                            "Witness Monkey Beach",
+                            "Indian Buffet Lunch included",
+                            "Overnight stay in Phuket"
                         ]
                     },
                     {
                         day: 3,
-                        title: "Pattaya City Tour & Bangkok Dinner Cruise",
-                        description: "Tour Pattaya's landmarks and enjoy a romantic dinner cruise in Bangkok.",
+                        title: "Leisure Day / Optional Activities",
+                        description: "A day at leisure to explore the beaches, shop, or try watersports.",
                         activities: [
-                            "Pattaya City Tour (Big Buddha Temple & Gems Gallery)",
-                            "Transfer to Bangkok and check-in",
-                            "Evening Chao Phraya River Dinner Cruise",
-                            "Overnight stay in Bangkok"
+                            "Breakfast at hotel",
+                            "Spend the day relaxing at Patong beach or shopping at Jungceylon Mall",
+                            "Optional: FantaSea Show or Tiger Kingdom (at own cost)",
+                            "Overnight stay in Phuket"
                         ]
                     },
                     {
                         day: 4,
-                        title: "Full Day Safari World & Marine Park",
-                        description: "Experience Thailand's greatest open zoo and animal shows.",
+                        title: "Departure",
+                        description: "Airport transfer for departure flight.",
                         activities: [
-                            "Full day at Safari World & Marine Park",
-                            "Buffet lunch included",
-                            "Evening free for leisure",
-                            "Overnight stay in Bangkok"
-                        ]
-                    },
-                    {
-                        day: 5,
-                        title: "Bangkok City Tour & Departure",
-                        description: "Explore Bangkok's temples and markets before your flight.",
-                        activities: [
-                            "Bangkok City Tour (Golden Buddha, Marble Temple)",
-                            "Shopping at Indra Market",
-                            "Airport drop for return journey"
+                            "Breakfast at hotel and check-out",
+                            "Private transfer to Phuket Airport for departure"
                         ]
                     }
                 ]
@@ -574,10 +558,10 @@ exports.destinations = [
                 duration: "4 Nights 5 Days (Leisure & Nature)",
                 nights: 4,
                 days: 5,
-                price: 25000,
+                price: 24999,
                 image: "bali_adventure_4.jpg",
                 inclusions: [
-                    "4 Nights Stay in 3-Star Resort (Kuta/Nusa Dua)",
+                    "4 Nights Stay in 3-Star Resort",
                     "Daily Buffet Breakfast",
                     "Private Airport Pickup & Drop",
                     "Full-Day Kintamani Volcano Tour",
@@ -646,14 +630,14 @@ exports.destinations = [
                 ]
             },
             {
-                id: "bali-5n6d",
-                duration: "5 Nights 6 Days (Lempuyang & Nusa Penida)",
-                nights: 5,
-                days: 6,
-                price: 32500,
+                id: "bali-6n7d-standard",
+                duration: "6 Nights 7 Days (Lempuyang & Nusa Penida)",
+                nights: 6,
+                days: 7,
+                price: 32999,
                 image: "bali_adventure_1.jpg",
                 inclusions: [
-                    "5 Nights Stay at Radhana Kuta Bali",
+                    "6 Nights Stay in Selected Hotel/Resort",
                     "Daily Breakfast & 01 Mineral Water per day",
                     "Bali Visa cost included",
                     "Private transfers by Air-conditioned vehicle",
@@ -670,7 +654,7 @@ exports.destinations = [
                             "Airport pickup with Flower Garland",
                             "Visit Uluwatu Temple",
                             "Experience the Kecak Fire Dance at sunset",
-                            "Overnight stay at Radhana Kuta Bali"
+                            "Overnight stay at hotel"
                         ]
                     },
                     {
@@ -720,6 +704,16 @@ exports.destinations = [
                     },
                     {
                         day: 6,
+                        title: "Leisure & Shopping",
+                        description: "Enjoy a free day to explore Bali's markets or relax on the beach.",
+                        activities: [
+                            "Breakfast at hotel",
+                            "Spend the day at leisure for shopping or optional activities",
+                            "Overnight stay at hotel"
+                        ]
+                    },
+                    {
+                        day: 7,
                         title: "Departure",
                         description: "Final checkout and transfer.",
                         activities: [
@@ -731,14 +725,14 @@ exports.destinations = [
             },
             {
                 id: "bali-6n7d",
-                duration: "6 Nights 7 Days (Pool Villa & Adventure)",
+                duration: "6 Nights 7 Days (Honeymooners Paradise)",
                 nights: 6,
                 days: 7,
-                price: 50000,
+                price: 49999,
                 image: "bali_adventure_3.jpg",
                 inclusions: [
-                    "4 Nights at Risata Bali Resort (Superior Room)",
-                    "2 Nights at Alam Puisi (One Bedroom Pool Villa)",
+                    "4 Nights Stay in Premium Resort (Superior Room)",
+                    "2 Nights Stay in Luxury One-Bedroom Private Pool Villa",
                     "Daily Breakfast at hotel/villa",
                     "Day Trip to Nusa Penida with Lunch",
                     "River Rafting and ATV Tandem Ride KUBER",
@@ -752,7 +746,7 @@ exports.destinations = [
                         description: "Welcome to Bali.",
                         activities: [
                             "Private Airport transfer to hotel",
-                            "Check-in at Risata Bali Resort",
+                            "Check-in at resort",
                             "Overnight stay"
                         ]
                     },
@@ -796,7 +790,7 @@ exports.destinations = [
                             "Early Morning Kintamani Volcano View",
                             "Visit Tegallalang Rice Terrace",
                             "Bali Swing Aloha experience",
-                            "Transfer to Alam Puisi Pool Villa",
+                            "Transfer to your private pool villa",
                             "Overnight stay in Villa"
                         ]
                     },
@@ -849,7 +843,7 @@ exports.destinations = [
                 duration: "6 Days 5 Nights (Central & North Vietnam)",
                 nights: 5,
                 days: 6,
-                price: 32000,
+                price: 35999,
                 image: "viet_adventure_1.jpg",
                 inclusions: [
                     "5 Nights stay in 3/4★ hotels (Double/Twin sharing)",
@@ -929,11 +923,11 @@ exports.destinations = [
                 ]
             },
             {
-                id: "vietnam-8d7n-phuquoc-hanoi-sapa",
-                duration: "8 Days 7 Nights (Phu Quoc, Hanoi & Sapa)",
-                nights: 7,
-                days: 8,
-                price: 40000,
+                id: "vietnam-9d8n-phuquoc-hanoi-sapa",
+                duration: "8 Nights 9 Days (Phu Quoc, Hanoi & Sapa)",
+                nights: 8,
+                days: 9,
+                price: 49999,
                 image: "viet_adventure_2.jpg",
                 inclusions: [
                     "Accommodation in Twin/Double Sharing",
@@ -1024,11 +1018,22 @@ exports.destinations = [
                     },
                     {
                         day: 8,
-                        title: "Sapa - Hanoi - Departure",
-                        description: "Final return to Hanoi for your flight.",
+                        title: "Sapa - Hanoi & Free Evening",
+                        description: "Return to the capital city and enjoy a free evening.",
                         activities: [
-                            "Breakfast & checkout from Sapa",
-                            "Transfer to Hanoi Airport for departure flight"
+                            "Breakfast and check-out from Sapa",
+                            "Transfer back to Hanoi (approx 5.5 hours)",
+                            "Check-in at hotel and free time for shopping or relaxing",
+                            "Overnight in Hanoi"
+                        ]
+                    },
+                    {
+                        day: 9,
+                        title: "Hanoi - Departure",
+                        description: "Final breakfast and airport transfer.",
+                        activities: [
+                            "Breakfast at hotel and check-out",
+                            "Private transfer to Hanoi Airport for your departure flight"
                         ]
                     }
                 ]
@@ -1038,7 +1043,7 @@ exports.destinations = [
                 duration: "5 Days 4 Nights (Phu Quoc Adventure)",
                 nights: 4,
                 days: 5,
-                price: 45000,
+                price: 44999,
                 image: "viet_adventure_4.jpg",
                 inclusions: [
                     "Private airport pick-up & drop-off",
@@ -1118,7 +1123,7 @@ exports.destinations = [
                     "Daily Breakfast",
                     "3 Star Hotel Accommodation",
                     "Entry Tickets to Attractions",
-                    "Ha Long Bay Cruise",
+                    "Ninh Binh Excursion",
                     "City Tours"
                 ],
                 itinerary: [
@@ -1147,14 +1152,13 @@ exports.destinations = [
                     },
                     {
                         day: 3,
-                        title: "Ha Long Bay Cruise",
-                        description: "UNESCO World Heritage wonder",
+                        title: "Ninh Binh Day Trip (Hoa Lu & Tam Coc)",
+                        description: "Experience the majestic 'Ha Long Bay on Land' with ancient history and stunning river views.",
                         activities: [
-                            "Drive to Ha Long Bay",
-                            "Cruise through limestone karsts",
-                            "Visit Sung Sot Cave",
-                            "Kayaking and swimming",
-                            "Return to Hanoi"
+                            "Drive to Ninh Binh to visit Hoa Lu Ancient Capital",
+                            "Visit Dinh and Le Dynasties temples",
+                            "Enjoy a traditional rowboat ride through Tam Coc caves",
+                            "Return to Hanoi in the evening"
                         ]
                     },
                     {
@@ -1198,7 +1202,7 @@ exports.destinations = [
                 duration: "3 Nights 4 Days",
                 nights: 3,
                 days: 4,
-                price: 35000,
+                price: 34999,
                 image: "dubai_adventure_4.jpg",
                 inclusions: [
                     "Airport Pickup & Drop",
@@ -1258,10 +1262,10 @@ exports.destinations = [
             },
             {
                 id: "dubai-4n5d",
-                duration: "4 Nights 5 Days",
+                duration: "4 Nights 5 Days (Winter Special)",
                 nights: 4,
                 days: 5,
-                price: 42000,
+                price: 41999,
                 image: "dubai_adventure_5.jpg",
                 inclusions: [
                     "Airport Pickup & Drop (Private Transfers)",
@@ -1442,7 +1446,7 @@ exports.destinations = [
                 duration: "3 Nights 4 Days (Maafushi Island)",
                 nights: 3,
                 days: 4,
-                price: 34000,
+                price: 34999,
                 image: "mald_adventure_2.jpg",
                 inclusions: [
                     "3 Nights stay at Maafushi Island (3-Star/4-Star options)",
@@ -1532,7 +1536,7 @@ exports.destinations = [
                 duration: "3 Nights 4 Days (City & Wildlife)",
                 nights: 3,
                 days: 4,
-                price: 38000,
+                price: 37999,
                 image: "sing_adventure_2.jpg",
                 inclusions: [
                     "3 Nights accommodation at selected hotel (Standard/Premium)",
@@ -1588,6 +1592,79 @@ exports.destinations = [
                         ]
                     }
                 ]
+            },
+            {
+                id: "singapore-4n5d",
+                duration: "4 Nights 5 Days (Classic Singapore)",
+                nights: 4,
+                days: 5,
+                price: 49999,
+                image: "sing_adventure_3.jpg",
+                inclusions: [
+                    "4 Nights accommodation at selected hotel (Double/Twin sharing)",
+                    "Daily breakfast",
+                    "Universal Studios Singapore (Full Day Entry)",
+                    "Sentosa Island Tour (Cable Car, Madame Tussauds, Wings of Time)",
+                    "Gardens by the Bay (Flower Dome & Cloud Forest)",
+                    "Night Safari with Tram Ride",
+                    "Private Airport Transfers",
+                    "All Entry Tickets & Transfers as per Itinerary"
+                ],
+                itinerary: [
+                    {
+                        day: 1,
+                        title: "Arrival in Singapore + Night Safari",
+                        description: "Arrive in Singapore and explore the night safari.",
+                        activities: [
+                            "Airport pickup and private transfer to hotel",
+                            "Evening Night Safari with Tram Ride",
+                            "Overnight stay at hotel"
+                        ]
+                    },
+                    {
+                        day: 2,
+                        title: "Singapore City Tour & Gardens by the Bay",
+                        description: "Explore the City Hall, Merlion Park, and the spectacular gardens.",
+                        activities: [
+                            "Breakfast at hotel",
+                            "Half-day Singapore City Tour (Merlion Park, Chinatown, Little India)",
+                            "Afternoon visit to Gardens by the Bay (Flower Dome & Cloud Forest)",
+                            "Overnight stay at hotel"
+                        ]
+                    },
+                    {
+                        day: 3,
+                        title: "Universal Studios Singapore (USS) Full Day",
+                        description: "A thrilling day at Southeast Asia's first Hollywood movie theme park.",
+                        activities: [
+                            "Breakfast at hotel",
+                            "Full Day Universal Studios Singapore (Entry ticket included)",
+                            "Enjoy blockbuster rides, shows, and attractions",
+                            "Overnight stay at hotel"
+                        ]
+                    },
+                    {
+                        day: 4,
+                        title: "Sentosa Island Adventure",
+                        description: "Fun-filled day on Sentosa Island.",
+                        activities: [
+                            "Breakfast at hotel",
+                            "Sentosa Island Tour with Cable Car Ride",
+                            "Visit Madame Tussauds (4-in-1 experience)",
+                            "Watch the spectacular Wings of Time multi-sensory show",
+                            "Overnight stay at hotel"
+                        ]
+                    },
+                    {
+                        day: 5,
+                        title: "Departure",
+                        description: "Airport transfer for departure flight.",
+                        activities: [
+                            "Breakfast at hotel and check-out",
+                            "Private transfer to airport for departure"
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -1617,10 +1694,10 @@ exports.destinations = [
                 duration: "3 Nights 4 Days (Bentota & Colombo)",
                 nights: 3,
                 days: 4,
-                price: 22000,
+                price: 21999,
                 image: "sl_adventure_3.jpg",
                 inclusions: [
-                    "Accommodations with dinner and breakfast in 3/4 star hotel",
+                    "Accommodations with Breakfast Only in 3/4 star hotels",
                     "Transport in an A/C Vehicle with English speaking guide",
                     "Sightseeing as per itinerary (Madhu river, Turtle hatchery, Colombo City)",
                     "Value added tax included",
@@ -1677,10 +1754,10 @@ exports.destinations = [
                 duration: "4 Nights 5 Days (Kandy, Bentota & Colombo)",
                 nights: 4,
                 days: 5,
-                price: 28000,
+                price: 27999,
                 image: "sl_adventure_4.jpg",
                 inclusions: [
-                    "Accommodations with dinner and breakfast in 3 star hotels",
+                    "Accommodations with Breakfast Only in 3 star hotels",
                     "Transport in an A/C Vehicle with English speaking guide",
                     "Sightseeing as per itinerary (Elephant Orphanage, Kandy, Bentota, Colombo)",
                     "Value added tax included"

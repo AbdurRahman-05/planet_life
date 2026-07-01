@@ -5471,21 +5471,25 @@ var Qi = () => {
         ],
       }),
       (0, P.jsx)(`section`, {
-        className: `lg:hidden bg-gradient-to-b from-gray-900 to-black py-8 px-4`,
+        className: `lg:hidden py-8 px-4`,
+        style: { background: `linear-gradient(to bottom, #111827, #000000)` },
         children: (0, P.jsx)(`div`, {
           className: `max-w-md mx-auto`,
           children: (0, P.jsxs)(`div`, {
-            className: `bg-white/10 backdrop-blur-xl rounded-2xl p-5 border border-white/20 shadow-2xl w-full`,
+            className: `rounded-2xl p-5 shadow-2xl w-full`,
+            style: { background: `rgba(255,255,255,0.08)`, backdropFilter: `blur(24px)`, border: `1px solid rgba(255,255,255,0.15)` },
             children: [
               (0, P.jsxs)(`div`, {
                 className: `text-center mb-6`,
                 children: [
                   (0, P.jsx)(`h3`, {
-                    className: `text-white text-xl sm:text-2xl font-bold font-heading mb-1`,
+                    className: `text-xl sm:text-2xl font-bold font-heading mb-1`,
+                    style: { color: `#ffffff` },
                     children: `Plan Your Trip`,
                   }),
                   (0, P.jsx)(`p`, {
-                    className: `text-white/70 text-xs sm:text-sm`,
+                    className: `text-xs sm:text-sm`,
+                    style: { color: `rgba(255,255,255,0.7)` },
                     children: `Tell us your preferences \u0026 we\u2019ll craft your dream journey`,
                   }),
                 ],
@@ -5521,8 +5525,12 @@ var Qi = () => {
                   (0, P.jsx)(`div`, {
                     children: (0, P.jsxs)(`select`, {
                       name: `destination`,
-                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      className: `w-full rounded-xl px-3 py-2.5 text-sm transition-all appearance-none cursor-pointer`,
                       style: {
+                        background: `rgba(255,255,255,0.1)`,
+                        border: `1px solid rgba(255,255,255,0.3)`,
+                        color: `#ffffff`,
+                        outline: `none`,
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
                         backgroundRepeat: `no-repeat`,
                         backgroundPosition: `right 12px center`,
@@ -5532,7 +5540,7 @@ var Qi = () => {
                           value: ``,
                           disabled: !0,
                           selected: !0,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Select Destination`,
                         }),
                         ...[...(e || [])]
@@ -5542,7 +5550,7 @@ var Qi = () => {
                               `option`,
                               {
                                 value: t.name,
-                                className: `text-gray-900 bg-white`,
+                                style: { color: `#111`, background: `#fff` },
                                 children: t.name,
                               },
                               t.id,
@@ -5550,7 +5558,7 @@ var Qi = () => {
                           ),
                         (0, P.jsx)(`option`, {
                           value: `Other`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Other`,
                         }),
                       ],
@@ -5559,8 +5567,12 @@ var Qi = () => {
                   (0, P.jsx)(`div`, {
                     children: (0, P.jsxs)(`select`, {
                       name: `tripType`,
-                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      className: `w-full rounded-xl px-3 py-2.5 text-sm transition-all appearance-none cursor-pointer`,
                       style: {
+                        background: `rgba(255,255,255,0.1)`,
+                        border: `1px solid rgba(255,255,255,0.3)`,
+                        color: `#ffffff`,
+                        outline: `none`,
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
                         backgroundRepeat: `no-repeat`,
                         backgroundPosition: `right 12px center`,
@@ -5570,37 +5582,37 @@ var Qi = () => {
                           value: ``,
                           disabled: !0,
                           selected: !0,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Select Trip Type`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Family`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Family`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Couple`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Couple`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Corporate`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Corporate`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Friends`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Friends`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Solo`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Solo`,
                         }),
                         (0, P.jsx)(`option`, {
                           value: `Honeymoon`,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Honeymoon`,
                         }),
                       ],
@@ -5612,7 +5624,13 @@ var Qi = () => {
                       type: `text`,
                       required: !0,
                       placeholder: `Your Name`,
-                      className: `w-full bg-white/10 border border-white/30 text-white placeholder-white/50 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all`,
+                      className: `w-full rounded-xl px-3 py-2.5 text-sm transition-all`,
+                      style: {
+                        background: `rgba(255,255,255,0.1)`,
+                        border: `1px solid rgba(255,255,255,0.3)`,
+                        color: `#ffffff`,
+                        outline: `none`,
+                      },
                     }),
                   }),
                   (0, P.jsx)(`div`, {
@@ -5621,14 +5639,24 @@ var Qi = () => {
                       type: `tel`,
                       required: !0,
                       placeholder: `WhatsApp Number`,
-                      className: `w-full bg-white/10 border border-white/30 text-white placeholder-white/50 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all`,
+                      className: `w-full rounded-xl px-3 py-2.5 text-sm transition-all`,
+                      style: {
+                        background: `rgba(255,255,255,0.1)`,
+                        border: `1px solid rgba(255,255,255,0.3)`,
+                        color: `#ffffff`,
+                        outline: `none`,
+                      },
                     }),
                   }),
                   (0, P.jsx)(`div`, {
                     children: (0, P.jsxs)(`select`, {
                       name: `travelMonth`,
-                      className: `w-full bg-white/10 border border-white/30 text-white rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-white/60 focus:ring-1 focus:ring-white/30 transition-all appearance-none cursor-pointer`,
+                      className: `w-full rounded-xl px-3 py-2.5 text-sm transition-all appearance-none cursor-pointer`,
                       style: {
+                        background: `rgba(255,255,255,0.1)`,
+                        border: `1px solid rgba(255,255,255,0.3)`,
+                        color: `#ffffff`,
+                        outline: `none`,
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E")`,
                         backgroundRepeat: `no-repeat`,
                         backgroundPosition: `right 12px center`,
@@ -5638,13 +5666,13 @@ var Qi = () => {
                           value: ``,
                           disabled: !0,
                           selected: !0,
-                          className: `text-gray-900 bg-white`,
+                          style: { color: `#111`, background: `#fff` },
                           children: `Travel Month`,
                         }),
                         ...[`January`,`February`,`March`,`April`,`May`,`June`,`July`,`August`,`September`,`October`,`November`,`December`].map((m) =>
                           (0, P.jsx)(`option`, {
                             value: m,
-                            className: `text-gray-900 bg-white`,
+                            style: { color: `#111`, background: `#fff` },
                             children: m,
                           }, m),
                         ),
@@ -5653,11 +5681,12 @@ var Qi = () => {
                   }),
                   (0, P.jsx)(`button`, {
                     type: `submit`,
-                    className: `w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-xl uppercase text-base tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]`,
+                    className: `w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-xl uppercase text-base tracking-widest transition-all duration-300 shadow-lg`,
                     children: `Submit Inquiry`,
                   }),
                   (0, P.jsxs)(`div`, {
-                    className: `flex items-center justify-center gap-4 mt-2 text-white/50 text-[10px] uppercase tracking-widest`,
+                    className: `flex items-center justify-center gap-4 mt-2 text-[10px] uppercase tracking-widest`,
+                    style: { color: `rgba(255,255,255,0.5)` },
                     children: [
                       (0, P.jsx)(`span`, { children: `Instant Reply` }),
                       (0, P.jsx)(`span`, { children: `\u00B7` }),

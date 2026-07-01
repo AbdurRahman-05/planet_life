@@ -1,3 +1,4 @@
+// Build: 2026-07-01T09:05:00Z
 const __vite__mapDeps = (
   i,
   m = __vite__mapDeps,

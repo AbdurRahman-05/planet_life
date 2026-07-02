@@ -115,12 +115,12 @@
     // Patch History API for client-side routing
     const originalPushState = history.pushState;
     history.pushState = function() {
-      originalPushState.apply(this, arguments);
+      originalPushState.apply(history, arguments);
       checkAdminAuth();
     };
     const originalReplaceState = history.replaceState;
     history.replaceState = function() {
-      originalReplaceState.apply(this, arguments);
+      originalReplaceState.apply(history, arguments);
       checkAdminAuth();
     };
     window.addEventListener('popstate', checkAdminAuth);
@@ -154,7 +154,7 @@
         const fileInput = document.getElementById('import-doc');
         if (fileInput) {
           const containerDiv = fileInput.closest('.flex');
-          if (containerDiv && !document.getElementById('ai-text-import-container')) {
+          if (containerDiv && containerDiv.parentNode && !document.getElementById('ai-text-import-container')) {
             const wrapper = document.createElement('div');
             wrapper.id = 'ai-text-import-container';
             wrapper.style.marginTop = '15px';
@@ -214,7 +214,7 @@
           const emailInput = document.querySelector('input[type="email"]');
           if (passwordInput && emailInput) {
             const form = passwordInput.closest('form');
-            if (form && !document.getElementById('google-signin-btn-container')) {
+            if (form && form.parentNode && !document.getElementById('google-signin-btn-container')) {
               // Hide the original email/password form
               form.style.display = 'none';
 
@@ -275,7 +275,7 @@
           }
         }
         
-        if (foundTitleEl && !document.getElementById('injected-back-btn')) {
+        if (foundTitleEl && foundTitleEl.parentNode && !document.getElementById('injected-back-btn')) {
           const backBtn = document.createElement('button');
           backBtn.id = 'injected-back-btn';
           backBtn.textContent = '← Back / Cancel';

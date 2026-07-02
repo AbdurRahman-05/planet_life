@@ -246,10 +246,12 @@
 
         // --- BACK BUTTON INJECTOR ---
         const formTitles = ['Edit Destination', 'Add New Destination', 'Edit Stranger Package', 'Add Stranger Package', 'Edit Review', 'Add Review', 'Edit Trip Type', 'Add Trip Type'];
-        const titleEls = document.querySelectorAll('h2, h3, h4, span, div');
+        // VERY IMPORTANT: Do NOT query 'div' or 'span' generically. Target headings and specific title classes to prevent CPU spike.
+        const titleEls = document.querySelectorAll('h2, h3, h4, h5, .font-bold, .text-xl, .text-2xl, .text-lg');
         let foundTitleEl = null;
         for (let i = 0; i < titleEls.length; i++) {
-          if (formTitles.includes(titleEls[i].textContent)) {
+          const text = titleEls[i].textContent;
+          if (text && formTitles.includes(text.trim())) {
             foundTitleEl = titleEls[i];
             break;
           }

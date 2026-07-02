@@ -229,6 +229,40 @@ try {
         }
     }));
 
+    app.post('/api/auth/google', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { credential } = req.body;
+        if (!credential) {
+            res.status(400).json({ message: 'Missing Google credential' });
+            return;
+        }
+        try {
+            const googleRes = yield fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`);
+            if (!googleRes.ok) {
+                res.status(401).json({ message: 'Invalid Google token' });
+                return;
+            }
+            const payload = yield googleRes.json();
+            const email = payload.email;
+            
+            if (email !== 'planetlifeweb@gmail.com') {
+                res.status(403).json({ message: 'Access denied: This email is not authorized for the admin panel.' });
+                return;
+            }
+            
+            const admin = yield getPrisma().admin.findUnique({ where: { email } });
+            if (!admin) {
+                res.status(401).json({ message: 'Unauthorized Google account' });
+                return;
+            }
+            
+            const token = getJwt().sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+            res.status(200).json({ token });
+        }
+        catch (error) {
+            res.status(500).json({ message: 'Server error during Google auth', error: error.message });
+        }
+    }));
+
     // --- HEALTH CHECK / KEEP-ALIVE ---
     app.get('/api/ping', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -437,42 +471,45 @@ try {
             });
             return;
         }
-        if (!req.files || !req.files.file) {
-            res.status(400).json({ message: 'No file provided' });
-            return;
-        }
-        const file = Array.isArray(req.files.file) ? req.files.file[0] : req.files.file;
-        const ext = path_1.default.extname(file.name).toLowerCase();
         let text = '';
         try {
-            if (ext === '.docx') {
-                const mammoth = require('mammoth');
-                const mammothLib = mammoth.extractRawText ? mammoth : (mammoth.default || mammoth);
-                const result = yield mammothLib.extractRawText({ path: file.tempFilePath });
-                text = result.value;
-            }
-            else if (ext === '.pdf') {
-                const pdfParse = require('pdf-parse');
-                const dataBuffer = fs_1.default.readFileSync(file.tempFilePath);
-                const parsePdf = typeof pdfParse === 'function' ? pdfParse : (pdfParse.default || pdfParse);
-                if (typeof parsePdf === 'function') {
-                    const pdfData = yield parsePdf(dataBuffer);
-                    text = pdfData.text;
+            if (req.body && req.body.text) {
+                text = req.body.text;
+            } else if (req.files && req.files.file) {
+                const file = Array.isArray(req.files.file) ? req.files.file[0] : req.files.file;
+                const ext = path_1.default.extname(file.name).toLowerCase();
+                if (ext === '.docx') {
+                    const mammoth = require('mammoth');
+                    const mammothLib = mammoth.extractRawText ? mammoth : (mammoth.default || mammoth);
+                    const result = yield mammothLib.extractRawText({ path: file.tempFilePath });
+                    text = result.value;
                 }
-                else if (parsePdf && parsePdf.PDFParse) {
-                    const instance = new parsePdf.PDFParse({ data: dataBuffer });
-                    const pdfData = yield instance.getText();
-                    text = pdfData.text;
+                else if (ext === '.pdf') {
+                    const pdfParse = require('pdf-parse');
+                    const dataBuffer = fs_1.default.readFileSync(file.tempFilePath);
+                    const parsePdf = typeof pdfParse === 'function' ? pdfParse : (pdfParse.default || pdfParse);
+                    if (typeof parsePdf === 'function') {
+                        const pdfData = yield parsePdf(dataBuffer);
+                        text = pdfData.text;
+                    }
+                    else if (parsePdf && parsePdf.PDFParse) {
+                        const instance = new parsePdf.PDFParse({ data: dataBuffer });
+                        const pdfData = yield instance.getText();
+                        text = pdfData.text;
+                    }
+                    else {
+                        throw new Error('PDF parsing library was loaded but is not in a recognized format.');
+                    }
+                }
+                else if (ext === '.txt' || ext === '.md' || ext === '.json') {
+                    text = fs_1.default.readFileSync(file.tempFilePath, 'utf8');
                 }
                 else {
-                    throw new Error('PDF parsing library was loaded but is not in a recognized format.');
+                    res.status(400).json({ message: `Unsupported file type: ${ext}. Please upload a .docx, .pdf, or .txt file.` });
+                    return;
                 }
-            }
-            else if (ext === '.txt' || ext === '.md' || ext === '.json') {
-                text = fs_1.default.readFileSync(file.tempFilePath, 'utf8');
-            }
-            else {
-                res.status(400).json({ message: `Unsupported file type: ${ext}. Please upload a .docx, .pdf, or .txt file.` });
+            } else {
+                res.status(400).json({ message: 'No file or text provided' });
                 return;
             }
             if (!text || text.trim().length === 0) {
@@ -481,7 +518,7 @@ try {
             }
             const genAI = new (getGemini().GoogleGenerativeAI)(process.env.GEMINI_API_KEY);
             const model = genAI.getGenerativeModel({
-                model: 'gemini-2.0-flash',
+                model: 'gemini-flash-latest',
                 generationConfig: { responseMimeType: 'application/json' }
             });
             const prompt = `
@@ -519,12 +556,17 @@ Document text:
 ${text}
 `;
             const response = yield model.generateContent(prompt);
-            const resultText = response.response.text();
+            let resultText = response.response.text();
+            
+            // Fix: Strip markdown JSON blocks if Gemini returns them
+            resultText = resultText.replace(/```json/g, '').replace(/```/g, '').trim();
+            
             try {
                 const parsedJSON = JSON.parse(resultText);
                 res.status(200).json({ success: true, data: parsedJSON });
             }
             catch (jsonErr) {
+                console.error("JSON Parse Error:", jsonErr, "Raw Text:", resultText);
                 res.status(500).json({
                     message: 'Failed to parse Gemini response as JSON.',
                     rawResponse: resultText
@@ -532,6 +574,7 @@ ${text}
             }
         }
         catch (error) {
+            console.error("Parse Document Error:", error);
             res.status(500).json({ message: error.message });
         }
     }));

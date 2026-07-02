@@ -97,6 +97,203 @@
 <body>
   <div id="root"></div>
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    // --- ROUTE PROTECTION GUARD ---
+    function checkAdminAuth() {
+      const path = window.location.pathname;
+      // Protect any route under /admin (e.g. /admin/dashboard) except the login page itself
+      if (path.startsWith('/admin') && !path.startsWith('/admin/login')) {
+        const isAuth = localStorage.getItem('isAdminAuthenticated');
+        const token = localStorage.getItem('adminToken');
+        if (isAuth !== 'true' || !token) {
+          // Instantly redirect to login if unauthorized
+          window.location.href = '/admin/login';
+        }
+      }
+    }
+    // Patch History API for client-side routing
+    const originalPushState = history.pushState;
+    history.pushState = function() {
+      originalPushState.apply(this, arguments);
+      checkAdminAuth();
+    };
+    const originalReplaceState = history.replaceState;
+    history.replaceState = function() {
+      originalReplaceState.apply(this, arguments);
+      checkAdminAuth();
+    };
+    window.addEventListener('popstate', checkAdminAuth);
+    checkAdminAuth(); // Run immediately on load
+
+    window.onload = () => {
+      function handleGoogleResponse(response) {
+        fetch('/api/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ credential: response.credential })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.token) {
+            localStorage.setItem('isAdminAuthenticated', 'true');
+            localStorage.setItem('adminToken', data.token);
+            window.location.href = '/admin/dashboard';
+          } else {
+            alert('Google Sign-In Failed: ' + (data.message || 'Unknown error'));
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          alert('An error occurred during Google Sign-In.');
+        });
+      }
+
+      const observer = new MutationObserver(() => {
+        // --- AI IMPORT TEXTAREA INJECTOR ---
+        const fileInput = document.getElementById('import-doc');
+        if (fileInput) {
+          const containerDiv = fileInput.closest('.flex');
+          if (containerDiv && !document.getElementById('ai-text-import-container')) {
+            const wrapper = document.createElement('div');
+            wrapper.id = 'ai-text-import-container';
+            wrapper.style.marginTop = '15px';
+            wrapper.style.width = '100%';
+            
+            const label = document.createElement('p');
+            label.textContent = 'Or Paste Text Directly:';
+            label.style.fontSize = '12px';
+            label.style.fontWeight = 'bold';
+            label.style.marginBottom = '5px';
+            
+            const textarea = document.createElement('textarea');
+            textarea.id = 'ai-import-textarea';
+            textarea.style.width = '100%';
+            textarea.style.height = '100px';
+            textarea.style.border = '1px solid #ccc';
+            textarea.style.borderRadius = '5px';
+            textarea.style.padding = '8px';
+            textarea.placeholder = 'Paste itinerary details here...';
+            
+            const btn = document.createElement('button');
+            btn.textContent = 'Analyze Pasted Text';
+            btn.style.marginTop = '5px';
+            btn.style.padding = '6px 12px';
+            btn.style.backgroundColor = '#10B981';
+            btn.style.color = 'white';
+            btn.style.border = 'none';
+            btn.style.borderRadius = '5px';
+            btn.style.cursor = 'pointer';
+            btn.style.fontSize = '12px';
+            
+            btn.onclick = (e) => {
+              e.preventDefault();
+              if (!textarea.value.trim()) {
+                alert('Please paste some text first.');
+                return;
+              }
+              const file = new File([textarea.value], "pasted_import.txt", { type: "text/plain" });
+              const dataTransfer = new DataTransfer();
+              dataTransfer.items.add(file);
+              fileInput.files = dataTransfer.files;
+              fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+              btn.textContent = 'Analyzing...';
+              setTimeout(() => { btn.textContent = 'Analyze Pasted Text'; textarea.value = ''; }, 3000);
+            };
+            
+            wrapper.appendChild(label);
+            wrapper.appendChild(textarea);
+            wrapper.appendChild(btn);
+            containerDiv.parentNode.appendChild(wrapper);
+          }
+        }
+
+        // --- GOOGLE LOGIN INJECTOR ---
+        if (window.location.pathname.startsWith('/admin')) {
+          const passwordInput = document.querySelector('input[type="password"]');
+          const emailInput = document.querySelector('input[type="email"]');
+          if (passwordInput && emailInput) {
+            const form = passwordInput.closest('form');
+            if (form && !document.getElementById('google-signin-btn-container')) {
+              // Hide the original email/password form
+              form.style.display = 'none';
+
+              const container = document.createElement('div');
+              container.id = 'google-signin-btn-container';
+              container.style.marginTop = '20px';
+              container.style.marginBottom = '20px';
+              container.style.display = 'flex';
+              container.style.justifyContent = 'center';
+              container.style.width = '100%';
+              
+              // Insert the Google button container right before the hidden form
+              form.parentNode.insertBefore(container, form);
+              
+              if (window.google) {
+                google.accounts.id.initialize({
+                  // Replace this with your actual Google Client ID
+                  client_id: '330384693155-fd24vj2rgmbr0odcfbqpg9g77cfa2d9t.apps.googleusercontent.com',
+                  callback: handleGoogleResponse
+                });
+                google.accounts.id.renderButton(
+                  container,
+                  { theme: 'outline', size: 'large', width: '100%' }
+                );
+              }
+            }
+          }
+        }
+
+        // --- BACK BUTTON INJECTOR ---
+        const formTitles = ['Edit Destination', 'Add New Destination', 'Edit Stranger Package', 'Add Stranger Package', 'Edit Review', 'Add Review', 'Edit Trip Type', 'Add Trip Type'];
+        const titleEls = document.querySelectorAll('h2, h3, h4, span, div');
+        let foundTitleEl = null;
+        for (let i = 0; i < titleEls.length; i++) {
+          if (formTitles.includes(titleEls[i].textContent)) {
+            foundTitleEl = titleEls[i];
+            break;
+          }
+        }
+        
+        if (foundTitleEl && !document.getElementById('injected-back-btn')) {
+          const backBtn = document.createElement('button');
+          backBtn.id = 'injected-back-btn';
+          backBtn.textContent = '← Back / Cancel';
+          backBtn.style.display = 'block';
+          backBtn.style.marginBottom = '20px';
+          backBtn.style.padding = '8px 16px';
+          backBtn.style.backgroundColor = '#4B5563';
+          backBtn.style.color = 'white';
+          backBtn.style.borderRadius = '5px';
+          backBtn.style.border = 'none';
+          backBtn.style.cursor = 'pointer';
+          backBtn.style.fontWeight = 'bold';
+          backBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+          
+          backBtn.onclick = (e) => {
+            e.preventDefault();
+            const btns = document.querySelectorAll('button');
+            let cancelBtn = null;
+            for (let i = 0; i < btns.length; i++) {
+              if (btns[i].textContent === 'Cancel') {
+                cancelBtn = btns[i];
+                break;
+              }
+            }
+            if (cancelBtn) {
+              cancelBtn.click();
+            } else {
+              window.location.reload();
+            }
+          };
+          
+          foundTitleEl.parentNode.insertBefore(backBtn, foundTitleEl);
+        }
+      });
+      
+      observer.observe(document.body, { childList: true, subtree: true });
+    };
+  </script>
 </body>
 
 </html>

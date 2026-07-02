@@ -225,13 +225,14 @@
               container.style.display = 'flex';
               container.style.justifyContent = 'center';
               container.style.width = '100%';
+              container.innerHTML = '<p style="color:#666; font-size:14px;">Loading Secure Login...</p>';
               
               // Insert the Google button container right before the hidden form
               form.parentNode.insertBefore(container, form);
               
-              if (window.google) {
+              const attemptRender = () => {
+                container.innerHTML = ''; // clear loading text
                 google.accounts.id.initialize({
-                  // Replace this with your actual Google Client ID
                   client_id: '330384693155-fd24vj2rgmbr0odcfbqpg9g77cfa2d9t.apps.googleusercontent.com',
                   callback: handleGoogleResponse
                 });
@@ -239,6 +240,23 @@
                   container,
                   { theme: 'outline', size: 'large', width: '100%' }
                 );
+              };
+
+              if (window.google && window.google.accounts) {
+                attemptRender();
+              } else {
+                // Mobile networks can be slow. Poll until Google SDK is ready.
+                let attempts = 0;
+                const interval = setInterval(() => {
+                  attempts++;
+                  if (window.google && window.google.accounts) {
+                    clearInterval(interval);
+                    attemptRender();
+                  } else if (attempts > 50) { // Give up after 10 seconds
+                    clearInterval(interval);
+                    container.innerHTML = '<p style="color:red; font-size:14px; text-align:center;">Google Sign-In blocked or failed to load.<br>Please check your internet or disable tracking protection.</p>';
+                  }
+                }, 200);
               }
             }
           }

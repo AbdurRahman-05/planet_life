@@ -200,10 +200,100 @@
               btn.textContent = 'Analyzing...';
               setTimeout(() => { btn.textContent = 'Analyze Pasted Text'; textarea.value = ''; }, 3000);
             };
+
+            const pdfBtn = document.createElement('button');
+            pdfBtn.textContent = 'Convert to PDF';
+            pdfBtn.style.marginTop = '5px';
+            pdfBtn.style.marginLeft = '10px';
+            pdfBtn.style.padding = '6px 12px';
+            pdfBtn.style.backgroundColor = '#EF4444'; // PDF Red
+            pdfBtn.style.color = 'white';
+            pdfBtn.style.border = 'none';
+            pdfBtn.style.borderRadius = '5px';
+            pdfBtn.style.cursor = 'pointer';
+            pdfBtn.style.fontSize = '12px';
+            pdfBtn.style.fontWeight = 'bold';
+
+            pdfBtn.onclick = async (e) => {
+              e.preventDefault();
+              const pastedText = textarea.value.trim();
+              if (!pastedText) {
+                alert('Please paste some text first.');
+                return;
+              }
+              
+              pdfBtn.textContent = 'Generating PDF...';
+              pdfBtn.disabled = true;
+              
+              try {
+                const token = localStorage.getItem('adminToken');
+                const response = await fetch('/api/generate-itinerary-pdf', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                  },
+                  body: JSON.stringify({ text: pastedText })
+                });
+                
+                if (!response.ok) {
+                  let errMessage = 'Failed to generate PDF.';
+                  const contentType = response.headers.get('Content-Type');
+                  if (contentType && contentType.includes('application/json')) {
+                    try {
+                      const errData = await response.json();
+                      errMessage = errData.message || errMessage;
+                    } catch (parseErr) {
+                      // ignore
+                    }
+                  } else {
+                    const text = await response.text();
+                    if (text.includes('Cannot POST') || text.includes('not found') || response.status === 404 || text.includes('<!doctype html>') || text.includes('<!DOCTYPE html>')) {
+                      errMessage = 'API endpoint not found. Please restart the backend server (run "npm start" in the backend directory) to register the new PDF converter endpoint.';
+                    } else {
+                      errMessage = text.substring(0, 100) || errMessage;
+                    }
+                  }
+                  throw new Error(errMessage);
+                }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                
+                let filename = 'Convert_to_PDF.pdf';
+                const customFilename = response.headers.get('x-filename');
+                if (customFilename) {
+                  filename = customFilename;
+                } else {
+                  const contentDisposition = response.headers.get('Content-Disposition');
+                  if (contentDisposition) {
+                    const match = contentDisposition.match(/filename="?([^"]+)"?/);
+                    if (match) filename = match[1];
+                  }
+                }
+                
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                
+                textarea.value = '';
+              } catch (err) {
+                console.error(err);
+                alert(err.message || 'An error occurred during PDF generation.');
+              } finally {
+                pdfBtn.textContent = 'Convert to PDF';
+                pdfBtn.disabled = false;
+              }
+            };
             
             wrapper.appendChild(label);
             wrapper.appendChild(textarea);
             wrapper.appendChild(btn);
+            wrapper.appendChild(pdfBtn);
             containerDiv.parentNode.appendChild(wrapper);
           }
         }

@@ -211,6 +211,50 @@ try {
         }
     };
 
+    const generateContentWithFallback = (genAI, prompt, generationConfig) => __awaiter(void 0, void 0, void 0, function* () {
+        const modelsToTry = [
+            'gemini-2.5-flash',
+            'gemini-2.0-flash',
+            'gemini-flash-latest',
+            'gemini-1.5-flash'
+        ];
+        let lastError = null;
+        for (const modelName of modelsToTry) {
+            let retries = 2;
+            let delay = 1000;
+            while (retries > 0) {
+                try {
+                    console.log(`[Gemini Fallback] Attempting to use model: ${modelName} (${retries} retries remaining)...`);
+                    const model = genAI.getGenerativeModel({
+                        model: modelName,
+                        generationConfig: generationConfig
+                    });
+                    const response = yield model.generateContent(prompt);
+                    const text = response.response.text();
+                    if (text && text.trim().length > 0) {
+                        console.log(`[Gemini Fallback] Success using model: ${modelName}`);
+                        return text;
+                    }
+                }
+                catch (err) {
+                    lastError = err;
+                    console.warn(`[Gemini Fallback] Warning with model ${modelName}:`, err.message || err);
+                    const errMsg = String(err.message || err);
+                    if (errMsg.includes('503') || errMsg.includes('429') || errMsg.includes('Unavailable') || errMsg.includes('demand')) {
+                        retries--;
+                        if (retries > 0) {
+                            yield new Promise(resolve => setTimeout(resolve, delay));
+                            delay *= 2;
+                            continue;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        throw lastError || new Error("All Gemini models failed to generate content.");
+    });
+
     // --- AUTH ---
     app.post('/api/auth/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { email, password } = req.body;
@@ -525,10 +569,6 @@ try {
                 return;
             }
             const genAI = new (getGemini().GoogleGenerativeAI)(process.env.GEMINI_API_KEY);
-            const model = genAI.getGenerativeModel({
-                model: 'gemini-flash-latest',
-                generationConfig: { responseMimeType: 'application/json' }
-            });
             const prompt = `
 You are an expert travel assistant. Analyze the following document text which contains details of a travel package or itinerary, and extract the information in a structured JSON format.
 
@@ -563,23 +603,48 @@ Ensure the output is ONLY valid JSON matching the schema above. If details like 
 Document text:
 ${text}
 `;
-            const response = yield model.generateContent(prompt);
-            let resultText = response.response.text();
+            const resultTextRaw = yield generateContentWithFallback(genAI, prompt, { responseMimeType: 'application/json', temperature: 0.1 });
+            let resultText = resultTextRaw.replace(/```json/g, '').replace(/```/g, '').trim();
             
-            // Fix: Strip markdown JSON blocks if Gemini returns them
-            resultText = resultText.replace(/```json/g, '').replace(/```/g, '').trim();
-            
+            let data;
             try {
-                const parsedJSON = JSON.parse(resultText);
-                res.status(200).json({ success: true, data: parsedJSON });
+                data = JSON.parse(resultText);
             }
             catch (jsonErr) {
-                console.error("JSON Parse Error:", jsonErr, "Raw Text:", resultText);
-                res.status(500).json({
-                    message: 'Failed to parse Gemini response as JSON.',
-                    rawResponse: resultText
-                });
+                const start = resultText.indexOf('{');
+                if (start !== -1) {
+                    let testText = resultText.substring(start);
+                    let parsed = false;
+                    for (let len = testText.length; len > 0; len--) {
+                        if (testText[len - 1] === '}') {
+                            try {
+                                data = JSON.parse(testText.substring(0, len));
+                                parsed = true;
+                                break;
+                            }
+                            catch (inner) {
+                                // continue
+                            }
+                        }
+                    }
+                    if (!parsed) {
+                        console.error("JSON Parse Error after scanning:", jsonErr, "Raw Text:", resultText);
+                        res.status(500).json({
+                            message: 'Failed to parse Gemini response as JSON.',
+                            rawResponse: resultText
+                        });
+                        return;
+                    }
+                } else {
+                    console.error("JSON Parse Error (no opening brace):", jsonErr, "Raw Text:", resultText);
+                    res.status(500).json({
+                        message: 'Failed to parse Gemini response as JSON.',
+                        rawResponse: resultText
+                    });
+                    return;
+                }
             }
+            res.status(200).json({ success: true, data });
         }
         catch (error) {
             console.error("Parse Document Error:", error);
@@ -603,49 +668,6 @@ ${text}
         try {
             console.log("[PDF Generation] Request received. Parsing text using Gemini...");
             const genAI = new (getGemini().GoogleGenerativeAI)(process.env.GEMINI_API_KEY);
-            const generateContentWithFallback = (genAI, prompt, generationConfig) => __awaiter(void 0, void 0, void 0, function* () {
-                const modelsToTry = [
-                    'gemini-2.5-flash',
-                    'gemini-2.0-flash',
-                    'gemini-flash-latest',
-                    'gemini-1.5-flash'
-                ];
-                let lastError = null;
-                for (const modelName of modelsToTry) {
-                    let retries = 2;
-                    let delay = 1000;
-                    while (retries > 0) {
-                        try {
-                            console.log(`[PDF Generation] Attempting to use model: ${modelName} (${retries} retries remaining)...`);
-                            const model = genAI.getGenerativeModel({
-                                model: modelName,
-                                generationConfig: generationConfig
-                            });
-                            const response = yield model.generateContent(prompt);
-                            const text = response.response.text();
-                            if (text && text.trim().length > 0) {
-                                console.log(`[PDF Generation] Success using model: ${modelName}`);
-                                return text;
-                            }
-                        }
-                        catch (err) {
-                            lastError = err;
-                            console.warn(`[PDF Generation] Warning with model ${modelName}:`, err.message || err);
-                            const errMsg = String(err.message || err);
-                            if (errMsg.includes('503') || errMsg.includes('429') || errMsg.includes('Unavailable') || errMsg.includes('demand')) {
-                                retries--;
-                                if (retries > 0) {
-                                    yield new Promise(resolve => setTimeout(resolve, delay));
-                                    delay *= 2;
-                                    continue;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                throw lastError || new Error("All Gemini models failed to generate content.");
-            });
             const prompt = `
 You are an expert travel assistant. Analyze the following document text which contains details of a travel package or itinerary, and extract/generate the information in a structured JSON format.
 Ensure you infer details if they are missing:

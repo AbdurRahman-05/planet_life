@@ -4953,6 +4953,181 @@ function Zi(e, t, n) {
     { stop: () => cancelAnimationFrame(a) }
   );
 }
+var TrustedSection = ({ content, resolver }) => {
+    const defaultCompanies = [
+        { name: "ARUTHRS NATYALAYA", logo: "/assets/images/arudhes.png" },
+        { name: "ASK JEWELLERY", logo: "/assets/images/ask_jewellery.png" },
+        { name: "DIVA SECRET INTERNATIONAL", logo: "/assets/images/diva_secret.png" },
+        { name: "DR AGARWALS HOSPITALS", logo: "/assets/images/images-removebg-preview.png" },
+        { name: "GVG INFRASTRUCTURE", logo: "/assets/images/image.png" },
+        { name: "GWC DATA AI", logo: "/assets/images/gwc_data ai.png" },
+        { name: "NEW TECH CHENNAI", logo: "/assets/images/new_tech_chennai.png" },
+        { name: "SUPREME ELECTRO CONTROL", logo: "/assets/images/supreme_electro_control.png" },
+        { name: "ZOHO", logo: "/assets/images/zoho.png" }
+    ];
+    const companies = content.trustedCompanies && content.trustedCompanies.length > 0 ? content.trustedCompanies : defaultCompanies;
+    const [active, setActive] = (0, F.useState)(companies[0] || { name: "ARUDHES", logo: "/assets/images/arudhes.png" });
+
+    (0, F.useEffect)(() => {
+        if (companies.length === 0) return;
+        const timer = setInterval(() => {
+            setActive(currentActive => {
+                const currentIndex = companies.findIndex(c => c.name === currentActive.name);
+                const nextIndex = (currentIndex + 1) % companies.length;
+                return companies[nextIndex];
+            });
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [companies]);
+
+    (0, F.useEffect)(() => {
+        if (companies.length > 0) {
+            const exists = companies.some(c => c.name === active.name);
+            if (!exists) {
+                setActive(companies[0]);
+            }
+        }
+    }, [companies, active.name]);
+
+    return (0, P.jsxs)("section", {
+        className: "trusted-section",
+        children: [
+            (0, P.jsx)("style", {
+                dangerouslySetInnerHTML: {
+                    __html: `
+                        .trusted-section { min-height:100vh; padding:120px 8%; position:relative; overflow:hidden; background:#030303; color:white; font-family:"Outfit","Inter",sans-serif; display:flex; align-items:center; }
+                        .grid-bg { position:absolute; inset:0; background: radial-gradient(circle at 20% 30%, rgba(239,68,68,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(220,38,38,0.05) 0%, transparent 50%), linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px); background-size:100% 100%, 100% 100%, 60px 60px, 60px 60px; pointer-events:none; }
+                        .trusted-section::before { content:""; position:absolute; width:500px; height:500px; background:radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 70%); top:10%; right:-10%; pointer-events:none; animation: drift 20s infinite alternate ease-in-out; }
+                        .trusted-section::after { content:""; position:absolute; width:600px; height:600px; background:radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%); bottom:-20%; left:-10%; pointer-events:none; animation: drift-reverse 25s infinite alternate ease-in-out; }
+                        @keyframes drift { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-80px, 50px) scale(1.1); } }
+                        @keyframes drift-reverse { 0% { transform: translate(0, 0) scale(1.1); } 100% { transform: translate(100px, -60px) scale(0.9); } }
+                        .trusted-container { position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:80px; align-items:center; width:100%; max-width:1400px; margin:0 auto; }
+                        .left-content { display:flex; flex-direction:column; }
+                        .trusted-tag { color:#ef4444; font-size:11px; letter-spacing:6px; font-weight:800; margin-bottom:16px; text-transform: uppercase; display:inline-flex; align-items:center; gap:10px; }
+                        .trusted-tag::after { content:""; width:40px; height:1px; background:#ef4444; }
+                        .trusted-title { font-size:64px; line-height:1.1; font-weight:900; margin-bottom:24px; color: white !important; text-transform: uppercase; letter-spacing:-2px; }
+                        .trusted-title span { color:#ef4444; background: linear-gradient(to right, #ef4444, #f87171); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+                        .trusted-desc { font-size:16px; color:rgba(255,255,255,0.6); line-height:1.6; margin-bottom:40px; max-width:520px; }
+                        .preview-card { background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter:blur(30px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:40px; min-height:260px; display:flex; align-items:center; justify-content:space-between; gap:36px; transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.4); }
+                        .preview-card::before { content:""; position:absolute; inset:-1px; background:linear-gradient(135deg, rgba(239,68,68,0.3) 0%, transparent 50%, rgba(255,255,255,0.05) 100%); border-radius:24px; z-index:-1; pointer-events:none; }
+                        .preview-card:hover { border-color:rgba(239,68,68,0.4); box-shadow:0 30px 60px rgba(239,68,68,0.1); }
+                        .preview-logo-wrapper { background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.05); border-radius:20px; width:130px; height:130px; display:flex; align-items:center; justify-content:center; padding:18px; position:relative; overflow:hidden; flex-shrink:0; }
+                        .preview-logo-wrapper::after { content:""; position:absolute; width:100%; height:2px; background:linear-gradient(90deg, transparent, rgba(239,68,68,0.6), transparent); animation:scan 3s infinite linear; }
+                        @keyframes scan { 0% { top:-10%; } 100% { top:110%; } }
+                        .preview-logo { max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+                        .preview-info { flex:1; display:flex; flex-direction:column; justify-content:center; }
+                        .preview-status { color:#ef4444; font-size:10px; font-weight:800; letter-spacing:3px; margin-bottom:8px; text-transform: uppercase; }
+                        .preview-title { font-size:26px; font-weight:900; color: white !important; text-transform: uppercase; letter-spacing:-1px; margin-bottom:12px; line-height:1.2; }
+                        .preview-meta { font-size:12px; color:rgba(255,255,255,0.4); font-family:monospace; display:flex; flex-direction:column; gap:4px; }
+                        .company-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+                        .company-card { height:120px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); backdrop-filter:blur(20px); border-radius:20px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position:relative; overflow:hidden; padding:24px; }
+                        .company-card img { max-width:100%; max-height:100%; object-fit:contain; opacity:0.4; filter:grayscale(1); transition:all 0.3s ease; }
+                        .company-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(239,68,68,0.15) 0%, transparent 70%); opacity:0; transition:all 0.3s ease; pointer-events:none; }
+                        .company-card:hover { transform:translateY(-5px); border-color:rgba(239,68,68,0.3); background:rgba(255,255,255,0.04); }
+                        .company-card:hover img { opacity:0.95; filter:grayscale(0); transform:scale(1.05); }
+                        .company-card.active { border-color:#ef4444; background:rgba(239,68,68,0.05); box-shadow:0 10px 30px rgba(239,68,68,0.15); transform:translateY(-5px); }
+                        .company-card.active img { opacity:1; filter:grayscale(0); }
+                        .company-card.active::before { opacity:1; }
+                        @media(max-width:1100px) { .trusted-container { gap:50px; } .trusted-title { font-size:52px; } }
+                        @media(max-width:900px) {
+                            .trusted-section { padding:80px 4%; }
+                            .trusted-container { grid-template-columns:1fr; gap:40px; }
+                            .trusted-title { font-size:40px; text-align:center; }
+                            .trusted-tag { justify-content:center; }
+                            .trusted-tag::after { display:none; }
+                            .trusted-desc { text-align:center; margin-left:auto; margin-right:auto; }
+                            .preview-card { padding:32px; flex-direction:column; text-align:center; gap:24px; }
+                            .preview-logo-wrapper { width:120px; height:120px; }
+                            .preview-info { align-items:center; }
+                            .company-grid { display:flex; overflow-x:auto; gap:14px; padding:10px 4px; scroll-snap-type:x mandatory; scrollbar-width:none; }
+                            .company-grid::-webkit-scrollbar { display:none; }
+                            .company-card { min-width:130px; height:100px; flex-shrink:0; scroll-snap-align:center; }
+                        }
+                    `
+                }
+            }),
+            (0, P.jsx)("div", { className: "grid-bg" }),
+            (0, P.jsxs)("div", {
+                className: "trusted-container",
+                children: [
+                    (0, P.jsxs)("div", {
+                        className: "left-content",
+                        children: [
+                            (0, P.jsx)("div", { className: "trusted-tag", children: "TRUSTED PARTNERS" }),
+                            (0, P.jsx)("h2", {
+                                className: "trusted-title",
+                                children: (() => {
+                                    let title = content.trustedTitle || "Trusted By Leading Organizations";
+                                    let words = title.split(" ");
+                                    if (words.length > 1) {
+                                        let lastWord = words.pop();
+                                        return (0, P.jsxs)(P.Fragment, {
+                                            children: [
+                                                words.join(" "),
+                                                " ",
+                                                (0, P.jsx)("span", { children: lastWord })
+                                            ]
+                                        });
+                                    }
+                                    return title;
+                                })()
+                            }),
+                            (0, P.jsx)("p", {
+                                className: "trusted-desc",
+                                children: content.trustedSubtitle || "We engineer seamless, ultra-premium travel operations for global industry pioneers. Empowering enterprises with bespoke execution and 24/7 VIP desk support."
+                            }),
+                            active && (0, P.jsxs)("div", {
+                                className: "preview-card",
+                                children: [
+                                    (0, P.jsx)("div", {
+                                        className: "preview-logo-wrapper",
+                                        children: (0, P.jsx)("img", {
+                                            className: "preview-logo",
+                                            src: resolver(active.logo),
+                                            alt: active.name
+                                        })
+                                    }),
+                                    (0, P.jsxs)("div", {
+                                        className: "preview-info",
+                                        children: [
+                                            (0, P.jsx)("div", { className: "preview-status", children: "VERIFIED PARTNER" }),
+                                            (0, P.jsx)("h3", {
+                                                className: "preview-title",
+                                                children: active.name
+                                            }),
+                                            (0, P.jsxs)("div", {
+                                                className: "preview-meta",
+                                                children: [
+                                                    (0, P.jsx)("span", { children: "> Status: Active Cooperation" }),
+                                                    (0, P.jsx)("span", { children: "> Priority: 24/7 VIP Desk Support" })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    (0, P.jsx)("div", {
+                        className: "company-grid",
+                        children: companies.map((company, index) => (
+                            (0, P.jsx)("div", {
+                                key: index,
+                                className: `company-card ${active && active.name === company.name ? "active" : ""}`,
+                                onMouseEnter: () => setActive(company),
+                                onClick: () => setActive(company),
+                                children: (0, P.jsx)("img", {
+                                    src: resolver(company.logo),
+                                    alt: company.name
+                                })
+                            })
+                        ))
+                    })
+                ]
+            })
+        ]
+    });
+};
 var Qi = () => {
   let { destinations: e, homeContent: n, contactContent: r } = u(),
     { toast: i } = C(),
@@ -6474,159 +6649,7 @@ var Qi = () => {
           ],
         }),
       }),
-(() => {
-    const [active, setActive] = (0, F.useState)({ name: "ARUDHES", logo: "/assets/images/arudhes.png" });
-    const companies = [
-        { name: "ARUTHRS NATYALAYA", logo: "/assets/images/arudhes.png" },
-        { name: "ASK JEWELLERY", logo: "/assets/images/ask_jewellery.png" },
-        { name: "DIVA SECRET INTERNATIONAL", logo: "/assets/images/diva_secret.png" },
-        { name: "DR AGARWALS HOSPITALS", logo: "/assets/images/images-removebg-preview.png" },
-        { name: "GVG INFRASTRUCTURE", logo: "/assets/images/image.png" },
-        { name: "GWC DATA AI", logo: "/assets/images/gwc_data ai.png" },
-        { name: "NEW TECH CHENNAI", logo: "/assets/images/new_tech_chennai.png" },
-        { name: "SUPREME ELECTRO CONTROL", logo: "/assets/images/supreme_electro_control.png" },
-        { name: "ZOHO", logo: "/assets/images/zoho.png" }
-    ];
-
-    (0, F.useEffect)(() => {
-        const timer = setInterval(() => {
-            setActive(currentActive => {
-                const currentIndex = companies.findIndex(c => c.name === currentActive.name);
-                const nextIndex = (currentIndex + 1) % companies.length;
-                return companies[nextIndex];
-            });
-        }, 3000);
-        return () => clearInterval(timer);
-    }, []);
-
-    return (0, P.jsxs)("section", {
-        className: "trusted-section",
-        children: [
-            (0, P.jsx)("style", {
-                dangerouslySetInnerHTML: {
-                    __html: `
-                        .trusted-section { min-height:100vh; padding:120px 8%; position:relative; overflow:hidden; background:#030303; color:white; font-family:"Outfit","Inter",sans-serif; display:flex; align-items:center; }
-                        .grid-bg { position:absolute; inset:0; background: radial-gradient(circle at 20% 30%, rgba(239,68,68,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(220,38,38,0.05) 0%, transparent 50%), linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px); background-size:100% 100%, 100% 100%, 60px 60px, 60px 60px; pointer-events:none; }
-                        .trusted-section::before { content:""; position:absolute; width:500px; height:500px; background:radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 70%); top:10%; right:-10%; pointer-events:none; animation: drift 20s infinite alternate ease-in-out; }
-                        .trusted-section::after { content:""; position:absolute; width:600px; height:600px; background:radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%); bottom:-20%; left:-10%; pointer-events:none; animation: drift-reverse 25s infinite alternate ease-in-out; }
-                        @keyframes drift { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-80px, 50px) scale(1.1); } }
-                        @keyframes drift-reverse { 0% { transform: translate(0, 0) scale(1.1); } 100% { transform: translate(100px, -60px) scale(0.9); } }
-                        .trusted-container { position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:80px; align-items:center; width:100%; max-width:1400px; margin:0 auto; }
-                        .left-content { display:flex; flex-direction:column; }
-                        .trusted-tag { color:#ef4444; font-size:11px; letter-spacing:6px; font-weight:800; margin-bottom:16px; text-transform: uppercase; display:inline-flex; align-items:center; gap:10px; }
-                        .trusted-tag::after { content:""; width:40px; height:1px; background:#ef4444; }
-                        .trusted-title { font-size:64px; line-height:1.1; font-weight:900; margin-bottom:24px; color: white !important; text-transform: uppercase; letter-spacing:-2px; }
-                        .trusted-title span { color:#ef4444; background: linear-gradient(to right, #ef4444, #f87171); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-                        .trusted-desc { font-size:16px; color:rgba(255,255,255,0.6); line-height:1.6; margin-bottom:40px; max-width:520px; }
-                        .preview-card { background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter:blur(30px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:40px; min-height:260px; display:flex; align-items:center; justify-content:space-between; gap:36px; transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.4); }
-                        .preview-card::before { content:""; position:absolute; inset:-1px; background:linear-gradient(135deg, rgba(239,68,68,0.3) 0%, transparent 50%, rgba(255,255,255,0.05) 100%); border-radius:24px; z-index:-1; pointer-events:none; }
-                        .preview-card:hover { border-color:rgba(239,68,68,0.4); box-shadow:0 30px 60px rgba(239,68,68,0.1); }
-                        .preview-logo-wrapper { background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.05); border-radius:20px; width:130px; height:130px; display:flex; align-items:center; justify-content:center; padding:18px; position:relative; overflow:hidden; flex-shrink:0; }
-                        .preview-logo-wrapper::after { content:""; position:absolute; width:100%; height:2px; background:linear-gradient(90deg, transparent, rgba(239,68,68,0.6), transparent); animation:scan 3s infinite linear; }
-                        @keyframes scan { 0% { top:-10%; } 100% { top:110%; } }
-                        .preview-logo { max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
-                        .preview-info { flex:1; display:flex; flex-direction:column; justify-content:center; }
-                        .preview-status { color:#ef4444; font-size:10px; font-weight:800; letter-spacing:3px; margin-bottom:8px; text-transform: uppercase; }
-                        .preview-title { font-size:26px; font-weight:900; color: white !important; text-transform: uppercase; letter-spacing:-1px; margin-bottom:12px; line-height:1.2; }
-                        .preview-meta { font-size:12px; color:rgba(255,255,255,0.4); font-family:monospace; display:flex; flex-direction:column; gap:4px; }
-                        .company-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-                        .company-card { height:120px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); backdrop-filter:blur(20px); border-radius:20px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position:relative; overflow:hidden; padding:24px; }
-                        .company-card img { max-width:100%; max-height:100%; object-fit:contain; opacity:0.4; filter:grayscale(1); transition:all 0.3s ease; }
-                        .company-card::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(239,68,68,0.15) 0%, transparent 70%); opacity:0; transition:all 0.3s ease; pointer-events:none; }
-                        .company-card:hover { transform:translateY(-5px); border-color:rgba(239,68,68,0.3); background:rgba(255,255,255,0.04); }
-                        .company-card:hover img { opacity:0.95; filter:grayscale(0); transform:scale(1.05); }
-                        .company-card.active { border-color:#ef4444; background:rgba(239,68,68,0.05); box-shadow:0 10px 30px rgba(239,68,68,0.15); transform:translateY(-5px); }
-                        .company-card.active img { opacity:1; filter:grayscale(0); }
-                        .company-card.active::before { opacity:1; }
-                        @media(max-width:1100px) { .trusted-container { gap:50px; } .trusted-title { font-size:52px; } }
-                        @media(max-width:900px) {
-                            .trusted-section { padding:80px 4%; }
-                            .trusted-container { grid-template-columns:1fr; gap:40px; }
-                            .trusted-title { font-size:40px; text-align:center; }
-                            .trusted-tag { justify-content:center; }
-                            .trusted-tag::after { display:none; }
-                            .trusted-desc { text-align:center; margin-left:auto; margin-right:auto; }
-                            .preview-card { padding:32px; flex-direction:column; text-align:center; gap:24px; }
-                            .preview-logo-wrapper { width:120px; height:120px; }
-                            .preview-info { align-items:center; }
-                            .company-grid { display:flex; overflow-x:auto; gap:14px; padding:10px 4px; scroll-snap-type:x mandatory; scrollbar-width:none; }
-                            .company-grid::-webkit-scrollbar { display:none; }
-                            .company-card { min-width:130px; height:100px; flex-shrink:0; scroll-snap-align:center; }
-                        }
-                    `
-                }
-            }),
-            (0, P.jsx)("div", { className: "grid-bg" }),
-            (0, P.jsxs)("div", {
-                className: "trusted-container",
-                children: [
-                    (0, P.jsxs)("div", {
-                        className: "left-content",
-                        children: [
-                            (0, P.jsx)("div", { className: "trusted-tag", children: "TRUSTED PARTNERS" }),
-                            (0, P.jsxs)("h2", {
-                                className: "trusted-title",
-                                children: [
-                                    "Trusted By Leading ",
-                                    (0, P.jsx)("span", { children: "Organizations" })
-                                ]
-                            }),
-                            (0, P.jsx)("p", {
-                                className: "trusted-desc",
-                                children: "We engineer seamless, ultra-premium travel operations for global industry pioneers. Empowering enterprises with bespoke execution and 24/7 VIP desk support."
-                            }),
-                            (0, P.jsxs)("div", {
-                                className: "preview-card",
-                                children: [
-                                    (0, P.jsx)("div", {
-                                        className: "preview-logo-wrapper",
-                                        children: (0, P.jsx)("img", {
-                                            className: "preview-logo",
-                                            src: active.logo,
-                                            alt: active.name
-                                        })
-                                    }),
-                                    (0, P.jsxs)("div", {
-                                        className: "preview-info",
-                                        children: [
-                                            (0, P.jsx)("div", { className: "preview-status", children: "VERIFIED PARTNER" }),
-                                            (0, P.jsx)("h3", {
-                                                className: "preview-title",
-                                                children: active.name
-                                            }),
-                                            (0, P.jsxs)("div", {
-                                                className: "preview-meta",
-                                                children: [
-                                                    (0, P.jsx)("span", { children: "> Status: Active Cooperation" }),
-                                                    (0, P.jsx)("span", { children: "> Priority: 24/7 VIP Desk Support" })
-                                                ]
-                                            })
-                                        ]
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    (0, P.jsx)("div", {
-                        className: "company-grid",
-                        children: companies.map((company, index) => (
-                            (0, P.jsx)("div", {
-                                key: index,
-                                className: `company-card ${active.name === company.name ? "active" : ""}`,
-                                onMouseEnter: () => setActive(company),
-                                onClick: () => setActive(company),
-                                children: (0, P.jsx)("img", {
-                                    src: company.logo,
-                                    alt: company.name
-                                })
-                            })
-                        ))
-                    })
-                ]
-            })
-        ]
-    });
-})(),
+(0, P.jsx)(TrustedSection, { content: n, resolver: S }),
       (0, P.jsxs)(`section`, {
         className: `py-12 mobile:py-16 md:py-24 bg-white overflow-hidden`,
         children: [

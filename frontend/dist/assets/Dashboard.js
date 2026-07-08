@@ -856,9 +856,30 @@ var M = e(r(), 1),
       [p, m] = (0, M.useState)(!1),
       [h, g] = (0, M.useState)(null),
       [O, k] = (0, M.useState)({ id: ``, name: ``, text: `` }),
-      [A, j] = (0, M.useState)(!1);
+      [A, j] = (0, M.useState)(!1),
+      [companyIdx, setCompanyIdx] = (0, M.useState)(null),
+      [companyForm, setCompanyForm] = (0, M.useState)({ name: ``, logo: `` }),
+      [showCompanyForm, setShowCompanyForm] = (0, M.useState)(!1);
     (0, M.useEffect)(() => {
-      r(e);
+      if (e) {
+        let initializedHome = { ...e };
+        if (!initializedHome.trustedCompanies) {
+          initializedHome.trustedTitle = e.trustedTitle || `Trusted By Leading Organizations`;
+          initializedHome.trustedSubtitle = e.trustedSubtitle || `We engineer seamless, ultra-premium travel operations for global industry pioneers. Empowering enterprises with bespoke execution and 24/7 VIP desk support.`;
+          initializedHome.trustedCompanies = [
+            { name: "ARUTHRS NATYALAYA", logo: "/assets/images/arudhes.png" },
+            { name: "ASK JEWELLERY", logo: "/assets/images/ask_jewellery.png" },
+            { name: "DIVA SECRET INTERNATIONAL", logo: "/assets/images/diva_secret.png" },
+            { name: "DR AGARWALS HOSPITALS", logo: "/assets/images/images-removebg-preview.png" },
+            { name: "GVG INFRASTRUCTURE", logo: "/assets/images/image.png" },
+            { name: "GWC DATA AI", logo: "/assets/images/gwc_data ai.png" },
+            { name: "NEW TECH CHENNAI", logo: "/assets/images/new_tech_chennai.png" },
+            { name: "SUPREME ELECTRO CONTROL", logo: "/assets/images/supreme_electro_control.png" },
+            { name: "ZOHO", logo: "/assets/images/zoho.png" }
+          ];
+        }
+        r(initializedHome);
+      }
     }, [e]);
     let P = (e) => {
       let { name: t, value: n } = e.target;
@@ -1631,6 +1652,212 @@ var M = e(r(), 1),
                                       variant: `destructive`,
                                       size: `sm`,
                                       onClick: () => U(t),
+                                      children: [
+                                        (0, N.jsx)(u, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Delete`,
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            },
+                            t,
+                          ),
+                        ),
+                  }),
+                ],
+              }),
+              (0, N.jsxs)(`div`, {
+                className: `space-y-4 border-t pt-6`,
+                children: [
+                  (0, N.jsxs)(`div`, {
+                    className: `flex items-center justify-between`,
+                    children: [
+                      (0, N.jsx)(`h3`, {
+                        className: `text-lg font-semibold`,
+                        children: `Trusted By Section`,
+                      }),
+                      !showCompanyForm &&
+                      (0, N.jsxs)(i, {
+                        type: `button`,
+                        onClick: () => {
+                          setCompanyIdx(null);
+                          setCompanyForm({ name: ``, logo: `` });
+                          setShowCompanyForm(!0);
+                        },
+                        size: `sm`,
+                        children: [
+                          (0, N.jsx)(_, { className: `mr-2 h-4 w-4` }),
+                          ` Add Trusted Partner`,
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, N.jsxs)(`div`, {
+                    className: `space-y-2`,
+                    children: [
+                      (0, N.jsx)(x, {
+                        htmlFor: `trustedTitle`,
+                        children: `Section Title`,
+                      }),
+                      (0, N.jsx)(v, {
+                        id: `trustedTitle`,
+                        name: `trustedTitle`,
+                        value: n.trustedTitle || ``,
+                        onChange: P,
+                      }),
+                    ],
+                  }),
+                  (0, N.jsxs)(`div`, {
+                    className: `space-y-2`,
+                    children: [
+                      (0, N.jsx)(x, {
+                        htmlFor: `trustedSubtitle`,
+                        children: `Section Subtitle`,
+                      }),
+                      (0, N.jsx)(D, {
+                        id: `trustedSubtitle`,
+                        name: `trustedSubtitle`,
+                        value: n.trustedSubtitle || ``,
+                        onChange: P,
+                        rows: 3,
+                      }),
+                    ],
+                  }),
+                  showCompanyForm &&
+                  (0, N.jsxs)(E, {
+                    className: `border-2 border-primary/20 bg-muted/30`,
+                    children: [
+                      (0, N.jsx)(T, {
+                        children: (0, N.jsx)(C, {
+                          className: `text-base font-bold`,
+                          children: companyIdx === null ? `Add Trusted Partner` : `Edit Trusted Partner`,
+                        }),
+                      }),
+                      (0, N.jsxs)(w, {
+                        className: `space-y-4`,
+                        children: [
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, {
+                                htmlFor: `partner-name`,
+                                children: `Organization Name *`,
+                              }),
+                              (0, N.jsx)(v, {
+                                id: `partner-name`,
+                                value: companyForm.name || ``,
+                                onChange: (e) =>
+                                  setCompanyForm((t) => ({ ...t, name: e.target.value })),
+                                placeholder: `e.g. ZOHO`,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `space-y-2`,
+                            children: [
+                              (0, N.jsx)(x, { children: `Logo *` }),
+                              (0, N.jsx)(F, {
+                                onUpload: (e) => setCompanyForm((t) => ({ ...t, logo: e })),
+                                defaultImage: companyForm.logo ? y(companyForm.logo) : null,
+                                folder: `planet_life/trusted`,
+                              }),
+                            ],
+                          }),
+                          (0, N.jsxs)(`div`, {
+                            className: `flex gap-2 justify-end pt-2`,
+                            children: [
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                variant: `outline`,
+                                onClick: () => setShowCompanyForm(!1),
+                                children: `Cancel`,
+                              }),
+                              (0, N.jsx)(i, {
+                                type: `button`,
+                                onClick: (e) => {
+                                  e.preventDefault();
+                                  if (!companyForm.name || !companyForm.logo) {
+                                    alert(`Please fill in both name and upload a logo.`);
+                                    return;
+                                  }
+                                  let list = [...(n.trustedCompanies || [])];
+                                  if (companyIdx === null) {
+                                    list.push(companyForm);
+                                  } else {
+                                    list[companyIdx] = companyForm;
+                                  }
+                                  r((prev) => ({ ...prev, trustedCompanies: list }));
+                                  setShowCompanyForm(!1);
+                                  setCompanyIdx(null);
+                                },
+                                children: companyIdx === null ? `Add Partner` : `Update Partner`,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, N.jsx)(`div`, {
+                    className: `grid gap-4 mt-2`,
+                    children:
+                      (n.trustedCompanies || []).length === 0
+                        ? (0, N.jsx)(`p`, {
+                          className: `text-sm text-muted-foreground py-4 text-center`,
+                          children: `No trusted partners customized. Default partners list will be shown.`,
+                        })
+                        : (n.trustedCompanies || []).map((e, t) =>
+                          (0, N.jsxs)(
+                            `div`,
+                            {
+                              className: `flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm`,
+                              children: [
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex items-center gap-4`,
+                                  children: [
+                                    (0, N.jsx)(`img`, {
+                                      src: y(e.logo),
+                                      alt: e.name,
+                                      className: `w-12 h-12 object-contain bg-muted p-1 rounded border`,
+                                    }),
+                                    (0, N.jsx)(`h4`, {
+                                      className: `font-bold text-sm`,
+                                      children: e.name,
+                                    }),
+                                  ],
+                                }),
+                                (0, N.jsxs)(`div`, {
+                                  className: `flex gap-2 ml-4 flex-shrink-0`,
+                                  children: [
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `outline`,
+                                      size: `sm`,
+                                      onClick: () => {
+                                        setCompanyIdx(t);
+                                        setCompanyForm(e);
+                                        setShowCompanyForm(!0);
+                                      },
+                                      children: [
+                                        (0, N.jsx)(d, {
+                                          className: `h-4 w-4 mr-1`,
+                                        }),
+                                        ` Edit`,
+                                      ],
+                                    }),
+                                    (0, N.jsxs)(i, {
+                                      type: `button`,
+                                      variant: `destructive`,
+                                      size: `sm`,
+                                      onClick: () => {
+                                        if (window.confirm(`Are you sure you want to delete this organization?`)) {
+                                          let list = (n.trustedCompanies || []).filter((_, idx) => idx !== t);
+                                          r((prev) => ({ ...prev, trustedCompanies: list }));
+                                        }
+                                      },
                                       children: [
                                         (0, N.jsx)(u, {
                                           className: `h-4 w-4 mr-1`,

@@ -114,6 +114,19 @@ const defaultHomeContent = {
             status: "upcoming",
             link: "/destination/malaysia?pkg=malaysia-3n4d-kl-adventurers"
         }
+    ],
+    trustedTitle: "Trusted By Leading Organizations",
+    trustedSubtitle: "We engineer seamless, ultra-premium travel operations for global industry pioneers. Empowering enterprises with bespoke execution and 24/7 VIP desk support.",
+    trustedCompanies: [
+        { name: "ARUTHRS NATYALAYA", logo: "/assets/images/arudhes.png" },
+        { name: "ASK JEWELLERY", logo: "/assets/images/ask_jewellery.png" },
+        { name: "DIVA SECRET INTERNATIONAL", logo: "/assets/images/diva_secret.png" },
+        { name: "DR AGARWALS HOSPITALS", logo: "/assets/images/images-removebg-preview.png" },
+        { name: "GVG INFRASTRUCTURE", logo: "/assets/images/image.png" },
+        { name: "GWC DATA AI", logo: "/assets/images/gwc_data ai.png" },
+        { name: "NEW TECH CHENNAI", logo: "/assets/images/new_tech_chennai.png" },
+        { name: "SUPREME ELECTRO CONTROL", logo: "/assets/images/supreme_electro_control.png" },
+        { name: "ZOHO", logo: "/assets/images/zoho.png" }
     ]
 };
 const defaultAboutContent = {
